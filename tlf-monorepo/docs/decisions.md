@@ -5,6 +5,7 @@ design doc, just enough for future-us to understand a choice without
 re-deriving it.
 
 Format:
+
 ```
 ## YYYY-MM-DD — short title
 Decision: ...
@@ -42,3 +43,25 @@ alias/exact matching proves insufficient).
 Why: these are genuinely different problems (schema mapping vs. entity
 resolution) with different standard solutions; conflating them into one
 mechanism would make both harder to reason about.
+
+---
+
+## 2026-08-02 — Phase 1 complete: confirmed real data-quality problems
+
+Decision: treat Phase 1 (manual exploration, no code) as done after finding
+four distinct, independently-sourced consistency problems: casing
+(Open Data Nepal), language (Bharatpur ward profiles), numeral system
+(Pokhara staff directory), and date format/calendar system (BS vs AD, mixed
+formats). See `docs/data_quality_checklist.md` for full detail and the two
+unexplored dimensions (completeness, validity) flagged for later.
+
+Why stop here rather than searching further: four distinct problem types
+from independent sources is enough diversity to build Phase 2/3
+against with confidence; further searching would likely surface variations
+of the same buckets rather than new categories, with diminishing
+returns relative to just starting to build.
+
+Note: the date/calendar finding (BS vs AD) is the most Nepal-specific and
+technically hardest of the four — it needs a lookup table or conversion
+library, not just reformatting, since BS month lengths vary year to year and
+aren't computable by a fixed formula.
