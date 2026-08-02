@@ -1,0 +1,15 @@
+# Shared dev environment for the monorepo (Phase 1-3).
+# Once packages are split into independent repos, each gets its own
+# pyproject.toml with only what it actually needs.
+
+pandas>=2.2
+pyyaml>=6.0
+jupyter>=1.0
+notebook>=7.0
+
+# Phase 4+ (uncomment when needed)
+# pypdf>=4.0          # PDF collector
+# pdfplumber>=0.11    # PDF table extraction, likely better than pypdf for tables
+
+# Phase 5+ (uncomment when needed)
+# recordlinkage>=0.16 # fuzzy entity matching for cross-domain joins

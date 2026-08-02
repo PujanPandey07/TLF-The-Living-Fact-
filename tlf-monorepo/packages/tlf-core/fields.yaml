@@ -1,0 +1,9 @@
+# Canonical field registry (the "crosswalk").
+# Populated during Phase 3, from real fields encountered in Phase 1/2 exploration.
+# Each entry: canonical_name -> { description, aliases, data_type }
+
+# Example (uncomment and adapt once real data is explored):
+# citizenship_id:
+#   description: "National citizenship certificate number"
+#   aliases: ["c.id", "c_no", "citizenship_number"]
+#   data_type: string
