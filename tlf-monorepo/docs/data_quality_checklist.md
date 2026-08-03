@@ -82,6 +82,24 @@ important, because it means normalization can't be one generic function.
   ~56-57 years. Fields need to record _which calendar_ alongside the date
   itself, not just the date.
 
+### 5. Categorical value abbreviation inconsistency
+
+- **Source:** a Ministry of Education Flash Report PDF (text-based, not
+  scanned)
+- **Example:** sex recorded as `"M"`/`"F"` in some tables and `"Male"`/
+  `"Female"` in other tables — **within the same PDF report**, not even
+  across different documents
+- **Fix type:** neither casing normalization nor the header `FieldResolver`
+  fixes this — those operate on column names, not values inside a column.
+  Needs a new, sibling mechanism: a value-level alias map (e.g. a
+  `ValueResolver`), structurally similar to `FieldResolver` but resolving
+  categorical _values_ (`"m"`, `"male"` → canonical `"male"`) instead of
+  column headers. Not yet built.
+- **Why this one stands out:** it's the first finding where even a single
+  author/publisher wasn't internally consistent with themselves, across
+  tables in one document — a notch worse than the Bharatpur finding (which
+  was at least explainable as different wards / different offices).
+
 ## Not yet explored
 
 - Completeness (missing value conventions)
