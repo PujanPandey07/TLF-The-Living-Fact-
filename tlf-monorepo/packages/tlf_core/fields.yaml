@@ -1,0 +1,23 @@
+# Canonical field registry (the "crosswalk").
+# Two kinds of entries live here, for two different problems (see decisions.md):
+#   1. Column HEADER aliases  -> fixed by tlf_core.registry.FieldResolver
+#   2. Value-level normalization notes -> fixed by tlf_core.normalizers functions
+# This file only handles (1). Value normalization functions are plain code,
+# not registry-driven, since "lowercase this" doesn't need a lookup table.
+
+area_sex:
+  description: "The 'Area/Sex' column from CBS census tables — location + sex breakdown combined in one field"
+  aliases: ["Area/Sex"]
+  data_type: string
+  # Note: identical across all 3 Phase 1 files so far — no real aliasing
+  # needed yet for this field. Kept as the first real (if trivial) entry to
+  # prove the resolver works against real files, not invented data.
+
+citizenship_id:
+  description: "National citizenship certificate number"
+  aliases: ["c.id", "c_no", "citizenship_number"]
+  data_type: string
+  unconfirmed: true
+  # Not yet seen in a real file — carried over from early design discussion
+  # as a placeholder example. Mark resolved once actually confirmed against
+  # a real source (see CONTRIBUTING.md review process).

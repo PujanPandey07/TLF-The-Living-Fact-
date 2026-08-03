@@ -1,0 +1,18 @@
+[project]
+name = "tlf-collect-csv"
+version = "0.1.0"
+description = "TLF collector: reads CSV files into a DataFrame + basic metadata. No field normalization yet (Phase 2)."
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2",
+    # tlf-core is a monorepo sibling, not yet published to PyPI.
+    # Install it first: pip install -e ../tlf-core
+    # (see root README.md environment setup)
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
