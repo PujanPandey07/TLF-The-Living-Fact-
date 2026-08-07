@@ -1,23 +1,138 @@
-# Canonical field registry (the "crosswalk").
-# Two kinds of entries live here, for two different problems (see decisions.md):
-#   1. Column HEADER aliases  -> fixed by tlf_core.registry.FieldResolver
-#   2. Value-level normalization notes -> fixed by tlf_core.normalizers functions
-# This file only handles (1). Value normalization functions are plain code,
-# not registry-driven, since "lowercase this" doesn't need a lookup table.
-
 area_sex:
   description: "The 'Area/Sex' column from CBS census tables — location + sex breakdown combined in one field"
   aliases: ["Area/Sex"]
   data_type: string
-  # Note: identical across all 3 Phase 1 files so far — no real aliasing
-  # needed yet for this field. Kept as the first real (if trivial) entry to
-  # prove the resolver works against real files, not invented data.
 
 citizenship_id:
   description: "National citizenship certificate number"
   aliases: ["c.id", "c_no", "citizenship_number"]
   data_type: string
   unconfirmed: true
-  # Not yet seen in a real file — carried over from early design discussion
-  # as a placeholder example. Mark resolved once actually confirmed against
-  # a real source (see CONTRIBUTING.md review process).
+
+serial_number:
+  description: "Row sequence or serial number indicator"
+  aliases: ["s.n.", "sn", "स.नं.", "क्र.सं."]
+  data_type: integer
+
+district:
+  description: "District administrative division name"
+  aliases: ["district", "जिल्ला"]
+  data_type: string
+
+province:
+  description: "Province administrative division name or number"
+  aliases: ["province", "प्रदेश"]
+  data_type: string
+
+municipality:
+  description: "Local level administrative unit name (Municipality or Rural Municipality)"
+  aliases:
+    - "municipality"
+    - "rular municipality"
+    - "गाउँपालिका"
+    - "नगरपालिका"
+    - "gaunpalika"
+    - "n.pa."
+    - "ga.pa."
+  data_type: string
+
+ward:
+  description: "Ward number within a municipality"
+  aliases:
+    ["ward", "वडा", "वडा नं", "वडा नम्बर", "ward no.", "ward number", "wada"]
+  data_type: integer
+
+household:
+  description: "Household count or identification"
+  aliases: ["household", "घरधुरी", "गृहधुरी"]
+  data_type: integer
+
+population:
+  description: "Total population count"
+  aliases: ["population", "जनसंख्या"]
+  data_type: integer
+
+sex:
+  description: "Gender breakdown field"
+  aliases: ["sex", "gender", "लिङ्ग"]
+  data_type: string
+
+male:
+  description: "Male count or value"
+  aliases: ["male", "पुरुष"]
+  data_type: integer
+
+female:
+  description: "Female count or value"
+  aliases: ["female", "महिला"]
+  data_type: integer
+
+total:
+  description: "Aggregated sum or total row count"
+  aliases: ["total", "जम्मा", "कुल"]
+  data_type: integer
+
+count:
+  description: "General numerical count"
+  aliases: ["count", "number", "संख्या"]
+  data_type: integer
+
+percent:
+  description: "Percentage ratio value"
+  aliases: ["percent", "%", "प्रतिशत"]
+  data_type: float
+
+mother_tongue:
+  description: "Primary native language spoken"
+  aliases: ["mother tongue", "मातृभाषा"]
+  data_type: string
+
+caste_ethnicity:
+  description: "Caste or ethnic identity classification"
+  aliases: ["caste", "ethnicity", "caste/ethnicity", "जात", "जाति", "जात/जाति"]
+  data_type: string
+
+religion:
+  description: "Religious affiliation"
+  aliases: ["religion", "धर्म"]
+  data_type: string
+
+age:
+  description: "Age in years or age range category"
+  aliases: ["age", "उमेर"]
+  data_type: string
+
+literacy:
+  description: "Literacy status or count"
+  aliases: ["literacy", "साक्षरता"]
+  data_type: string
+
+education:
+  description: "Educational attainment level"
+  aliases: ["education", "शिक्षा"]
+  data_type: string
+
+occupation:
+  description: "Primary profession or field of employment"
+  aliases: ["occupation", "पेशा", "व्यवसाय"]
+  data_type: string
+
+name:
+  description: "Individual or entity name"
+  aliases: ["name", "नाम"]
+  data_type: string
+
+address:
+  description: "Physical location or residential address details"
+  aliases: ["address", "ठेगाना"]
+  data_type: string
+
+marital_status:
+  description: "Marital or union status"
+  aliases: ["marital status", "वैवाहिक स्थिति"]
+  data_type: string
+
+disability:
+  description: "Disability status or disability category"
+  aliases: ["disability", "अपाङ्गता"]
+  data_type: string

@@ -1,0 +1,176 @@
+# Category VALUE registry — resolves values INSIDE a column, not headers.
+# Separate from fields.yaml on purpose: fields.yaml maps column names,
+# this maps the actual data values within a column (finding #5: M/F vs
+# Male/Female; also covers Nepali/English category words like पुरुष/Male —
+# see docs/decisions.md 2026-08-07).
+#
+# Shape: category -> canonical_value -> [aliases]
+
+sex:
+  male: ["m", "male", "पुरुष"]
+  female: ["f", "female", "महिला"]
+# values.yaml additions — extracted and visually verified from
+# Suddhodha Gaunpalika municipality profile PDF (Session 3, 2026-08-07).
+# Text was NOT trusted from pdftotext/pdfplumber output — this PDF uses
+# legacy non-Unicode-safe Nepali fonts (see data_quality_checklist.md
+# finding #12). Every entry below was read directly off a rasterized
+# page image, not extracted programmatically.
+#
+# Merge these blocks into your existing values.yaml (which already has
+# `sex` and `mother_tongue` from earlier sessions).
+
+# ── Already in your file from earlier — repeated here only for
+#    reference, not meant to be duplicated on merge ──
+# sex:
+#   male: ["m", "male", "पुरुष"]
+#   female: ["f", "female", "महिला"]
+# mother_tongue: (see earlier session — 24 languages)
+
+caste_ethnicity:
+  tharu: ["tharu", "थारु"]
+  brahmin_hill: ["brahmin-pahad", "brahman-pahad", "ब्राह्मण - पहाड"]
+  lodh: ["lodh", "लोध"]
+  chhetri: ["chhetri", "क्षेत्री"]
+  mallaha: ["mallaha", "mallah", "मल्लाह"]
+  yadav: ["yadav", "यादव"]
+  magar: ["magar", "मगर"]
+  bishwakarma_kami: ["bishwakarma", "kami", "विश्वकर्मा/कामी"]
+  kewat: ["kewat", "केवट"]
+  nuniya: ["nuniya", "नुनिया"]
+  muslim: ["muslim", "मुसलमान"]
+  chamar_harijan_ram: ["chamar", "harijan", "ram", "चमार/हरिजन/राम"]
+  dusadh_paswan_pasi: ["dusadh", "paswan", "pasi", "दुसाध/पासवान/पासी"]
+  koiri_kushwaha: ["koiri", "kushwaha", "कोइरी/कुसवाहा"]
+  teli: ["teli", "तेली"]
+  gaderi_bhediyar: ["gaderi", "bhediyar", "गडेरी/भेडियार"]
+  pariyar_damai: ["pariyar", "damai", "परियार/दमाई"]
+  rajput: ["rajput", "राजपूत"]
+  rajbhar: ["rajbhar", "राजभर"]
+  kumal: ["kumal", "कुमाल"]
+  kahar: ["kahar", "कहर"]
+  mijar_sarki: ["mijar", "sarki", "मिजार/सार्की"]
+  brahmin_terai: ["brahmin-terai", "ब्राह्मण-तराई"]
+  hajam_thakur: ["hajam", "thakur", "हजाम/ठाकुर"]
+  newar: ["newa", "newar", "नेवाः (नेवार)"]
+  kurmi: ["kurmi", "कुर्मी"]
+  baniya: ["baniya", "बनियाँ"]
+  dhobi: ["dhobi", "धोबी"]
+  gurung: ["gurung", "गुरुङ"]
+  sanyasi_dasnami: ["sanyasi", "dasnami", "सन्यासी/दसनामी"]
+  barai: ["barai", "बरई"]
+  thakuri: ["thakuri", "ठकुरी"]
+  kanu: ["kanu", "कानु"]
+  kumhar: ["kumhar", "कुम्हार"]
+  lohar: ["lohar", "लोहार"]
+  uraw_kudukh: ["uraw", "kudukh", "उराँव/कुडुख"]
+  foreign: ["videshi", "विदेशी"]
+  gharti_bhujel: ["gharti", "bhujel", "घर्ती/भुजेल"]
+  other: ["anya", "other", "अन्य"]
+  kathbaniya: ["kathbaniya", "कथबनियाँ"]
+  sonar: ["sonar", "सोनार"]
+  musahar: ["musahar", "मुसहर"]
+  natuwa: ["natuwa", "नटुवा"]
+  sunuwar: ["sunuwar", "सुनुवार"]
+  majhi: ["majhi", "माझी"]
+  nakhuleko: ["nakhuleko", "नखुलेको"]
+  rajbanshi: ["rajbanshi", "राजवंशी"]
+  # Note: this covers the 52 groups present in THIS municipality's data,
+  # not Nepal's full national list of 142 official castes/ethnicities.
+
+religion:
+  hindu: ["hindu", "हिन्दु"]
+  buddhist: ["baudha", "buddhist", "बौद्ध"]
+  islam: ["islam", "इस्लाम"]
+  kirat: ["kirant", "kirat", "किराँत"]
+  christian: ["christian", "क्रिस्चियन"]
+  nature: ["prakriti", "nature", "animist", "प्रकृति"]
+
+disability_type:
+  physical: ["sharirik apangata", "physical", "शारीरिक अपाङ्गता"]
+  low_vision: ["nyoon drishtiyukta", "low vision", "न्यून दृष्टियुक्त"]
+  blind: ["purna drishtiheen", "blind", "पूर्ण दृष्टिविहीन"]
+  deaf: ["bahirapan", "deaf", "बहिरोपन"]
+  # INCOMPLETE — official NPHC classification has 12 categories, this
+  # table only showed 4 on the page captured. Needs revisiting.
+
+toilet_type:
+  flush: ["flus bhayeko", "flush", "फ्लस भएको"]
+  ordinary: ["sadharan", "ordinary", "pit", "साधारण"]
+  public: ["sarwajanik", "public", "सार्वजनिक"]
+  none: ["charpi nabhayeko", "no toilet", "चर्पी नभएको"]
+
+occupation:
+  army_officer: ["sainik adhikari", "army officer", "सैनिक अधिकारी"]
+  manager: ["vyavasthapak", "manager", "व्यवस्थापक"]
+  professional: ["pesabid", "professional", "पेसाविद्"]
+  technician_associate:
+    ["pravidhik", "technician", "प्राविधिक तथा सहायक पेसाविद्"]
+  clerical_support: ["karyalaya sahayak", "clerical support", "कार्यालय सहायक"]
+  service_sales_worker:
+    [
+      "seva tatha vastu bikri",
+      "service and sales worker",
+      "सेवा तथा वस्तु बिक्री गर्ने कामदार",
+    ]
+  agriculture_forestry_fishery_worker:
+    [
+      "krishi ban machhapalan",
+      "agriculture forestry fishery worker",
+      "कृषि, वन र माछापालन कार्यका दक्ष कामदार",
+    ]
+  craft_trade_worker:
+    [
+      "shilpakala kaligadh",
+      "craft and related trades worker",
+      "शिल्पकला तथा कालिगढ र यससम्बन्धी व्यापार गर्ने कामदार",
+    ]
+  plant_machine_operator:
+    [
+      "yantra machine operator",
+      "plant and machine operator",
+      "यन्त्र तथा मेसिन अपरेटर र जडान गर्ने कामदार",
+    ]
+  elementary_occupation:
+    [
+      "samanya prathamik pesa",
+      "elementary occupation",
+      "सामान्य वा प्राथमिक पेसाका कामदार",
+    ]
+  not_stated: ["ullekh nabhayeka", "not stated", "उल्लेख नभएका"]
+
+water_source:
+  piped_inside:
+    [
+      "dhara paip ghar parisarbhitra",
+      "piped water inside premises",
+      "धारा/पाइप (घर परिसरभित्र)",
+    ]
+  piped_outside:
+    [
+      "dhara paip ghar parisar bahira",
+      "piped water outside premises",
+      "धारा/पाइप (घर परिसर बाहिर)",
+    ]
+  tubewell_handpump:
+    ["tubewell hatepump", "tubewell/handpump", "ट्युबवेल/हातेपम्प"]
+  other: ["anya", "other", "अन्य"]
+
+cooking_fuel:
+  firewood: ["kath dauraa", "firewood", "काठ/दाउरा"]
+  lp_gas: ["lp gas", "एल.पी.ग्यास"]
+  cow_dung_cake: ["guintha gorha", "cow dung cake", "गुइँठा/गोरहा"]
+  biogas: ["biogas", "बायोग्यास"]
+  other: ["anya", "other", "अन्य"]
+
+lighting_source:
+  electricity: ["bijuli", "electricity", "बिजुली"]
+  solar: ["solar saurya urja", "solar", "सोलार/सौर्य ऊर्जा"]
+  other: ["anya", "other", "अन्य"]
+
+marital_status:
+  unmarried: ["vivaha nabhayeko", "unmarried", "विवाह नभएको"]
+  married: ["vivahit", "married", "विवाहित"]
+  widowed: ["vidhur vidhava", "widowed", "विधुर/विधवा"]
+  separated_by_agreement:
+    ["parpachuke", "separated by mutual agreement", "पारपाचुके"]
+  divorced_deserted: ["chhuttiyeko", "divorced/deserted", "छुट्टिएको"]
