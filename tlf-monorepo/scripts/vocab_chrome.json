@@ -1,0 +1,927 @@
+[
+  {
+    "en": "Cookie Policy",
+    "np": "कुकीसम्बन्धी नीति",
+    "source_keys": [
+      "footer.cookie_policy"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Copyright Policy",
+    "np": "प्रतिलिपि नीति",
+    "source_keys": [
+      "footer.copyright_policy"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Download data",
+    "np": "डाटा डाउनलोड गर्नुहोस्",
+    "source_keys": [
+      "footer.download_btn"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Downloading...",
+    "np": "डाउनलोड हुदैँछ.......",
+    "source_keys": [
+      "footer.downloading"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "This project is pilot initiative of the D4D, the Asia Foundation and Young Innovations with guidance and support from CBS.",
+    "np": "याे परियाेजना  D4D,  The Asia Foundation र याेंग ईन्नाेभेसन्स् काे सहकार्य एवं केन्द्रिय तथ्यांक विभागकाे मार्गदर्शनसहितकाे एक साझा प्रयास हाे।",
+    "source_keys": [
+      "footer.footer_info"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Save as PDF",
+    "np": "PDF मा सेभ गर्नुहोस्",
+    "source_keys": [
+      "footer.pdf_btn"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Saving as PDF...",
+    "np": "PDF मा सेभ हुदैँछ.....",
+    "source_keys": [
+      "footer.printing"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Privacy Rights",
+    "np": "गोप्यतासम्बन्धी अधिकार",
+    "source_keys": [
+      "footer.privacy_rights"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Security",
+    "np": "सुरक्षा",
+    "source_keys": [
+      "footer.security"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Terms of Use",
+    "np": "प्रयोगका शर्तहरु",
+    "source_keys": [
+      "footer.terms_of_use"
+    ],
+    "namespaces": [
+      "footer"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select District",
+    "np": "जिल्ला छान्नुहोस्",
+    "source_keys": [
+      "form.district"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select Province",
+    "np": "प्रदेश छान्नुहोस्",
+    "source_keys": [
+      "form.province"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select age group",
+    "np": "उमेर समुहको छनोट गर्नुहोस्।",
+    "source_keys": [
+      "form.select_age_group"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select a data type",
+    "np": "तथ्यांकको छनौट गर्नुहोस्",
+    "source_keys": [
+      "form.select_data_type"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select a district",
+    "np": "जिल्ला छान्नुहोस्",
+    "source_keys": [
+      "form.select_district"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select gender",
+    "np": "लिङ्गको छनोट गर्नुहोस्।",
+    "source_keys": [
+      "form.select_gender"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select a map style",
+    "np": "नक्साको प्रकार छान्नुहोस्",
+    "source_keys": [
+      "form.select_map_style"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select a municipality",
+    "np": "स्थानिय तह छान्नुहोस्",
+    "source_keys": [
+      "form.select_municipality"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select a province",
+    "np": "प्रदेश छान्नुहोस्",
+    "source_keys": [
+      "form.select_province"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Select a ward",
+    "np": "वडा छनौट गर्नुहोस्",
+    "source_keys": [
+      "form.select_ward"
+    ],
+    "namespaces": [
+      "form"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Absent",
+    "np": "अनुपस्थित",
+    "source_keys": [
+      "header.absent"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Demographic Info",
+    "np": "जनसाङ्ख्यिक सुचक",
+    "source_keys": [
+      "header.browse_by_topics"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Caste/ethnicity",
+    "np": "जात जाति",
+    "source_keys": [
+      "header.cast-ethnicity"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Caste/ Ethnicity Report",
+    "np": "जात/ जाति रिपोर्ट",
+    "source_keys": [
+      "header.caste-ethnicity-report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "National Statistics Office",
+    "np": "राष्ट्रिय तथ्याङ्क कार्यालय",
+    "source_keys": [
+      "header.cbs_nepal"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Census Newsletter",
+    "np": "मासिक जनसंख्या बुलेटिन",
+    "source_keys": [
+      "header.census-newsletter",
+      "header.census_newsletter"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 2
+  },
+  {
+    "en": "Census Dataset",
+    "np": "जनगणना डाटासेट",
+    "source_keys": [
+      "header.census_dataset"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Census in Nepal",
+    "np": "नेपालमा जनगणना",
+    "source_keys": [
+      "header.census_in_nepal"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Child Statistics",
+    "np": "बालबालिका तथ्याङ्क",
+    "source_keys": [
+      "header.child_statistics_report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Community Report",
+    "np": "समुदाय रिपोर्ट",
+    "source_keys": [
+      "header.community_report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Cross Tabulation",
+    "np": "अन्तर-तालिका",
+    "source_keys": [
+      "header.cross-tabulation"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Dalit statistics",
+    "np": "Dalit statistics",
+    "source_keys": [
+      "header.dalit-statistics-report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Data",
+    "np": "डाटा",
+    "source_keys": [
+      "header.data"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Degurba",
+    "np": "देगुर्ब",
+    "source_keys": [
+      "header.degurba-report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Degurba Merge (Excel) File",
+    "np": "देगुर्ब मर्ज (एक्सेल) फाइल",
+    "source_keys": [
+      "header.degurba_report_file"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Downloads",
+    "np": "डाउनलोड",
+    "source_keys": [
+      "header.downloads"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Government of Nepal",
+    "np": "नेपाल सरकार",
+    "source_keys": [
+      "header.gov_of_nepal"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Home",
+    "np": "गृह पृष्ठ",
+    "source_keys": [
+      "header.home"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "House and Household Listing Results",
+    "np": "घर तथा घरपरिवार सूचीकरण अन्तर्गतका नतिजाहरु",
+    "source_keys": [
+      "header.house_and_household_listing_results"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Household",
+    "np": "घरपरिवार",
+    "source_keys": [
+      "header.household"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Language",
+    "np": "भाषा",
+    "source_keys": [
+      "header.language"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Local",
+    "np": "स्थानीय",
+    "source_keys": [
+      "header.local"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Local Level",
+    "np": "स्थानीय तह",
+    "source_keys": [
+      "header.local level"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Local Level Demographic Profile",
+    "np": "स्थानिय तहको जनसाङ्ख्यिक प्रतिवेदन",
+    "source_keys": [
+      "header.local-level"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Local Level Report",
+    "np": "स्थानीय तह रिपोर्ट",
+    "source_keys": [
+      "header.local-level-report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Migration",
+    "np": "बसाईँसराईँ",
+    "source_keys": [
+      "header.migration"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Mobile app",
+    "np": "मोबाईल एप",
+    "source_keys": [
+      "header.mobile_app"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "National",
+    "np": "राष्ट्रिय",
+    "source_keys": [
+      "header.national"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "National Report",
+    "np": "राष्ट्रिय रिपोर्ट",
+    "source_keys": [
+      "header.national report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Office of the Prime Minister and Council of Ministers",
+    "np": "प्रधानमन्त्री तथा मन्त्रीपरिषद्को कार्यालय",
+    "source_keys": [
+      "header.office_of_pri_minister"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Population projection",
+    "np": "जनसंख्या प्रक्षेपण",
+    "source_keys": [
+      "header.population-projection"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Post Enumeration Survey Report",
+    "np": "गणना जाँच सर्वेक्षण २०७८ प्रतिवेदन",
+    "source_keys": [
+      "header.post-enumeration-report-survey"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Provincial",
+    "np": "प्रदेश",
+    "source_keys": [
+      "header.provincial"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Province/ District/ Local Level",
+    "np": "प्रदेश/ जिल्ला/ स्थानीय तह",
+    "source_keys": [
+      "header.provincial/ district/ local level"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Province/ District/ Local Report",
+    "np": "प्रदेश/ जिल्ला/ स्थानीय तह",
+    "source_keys": [
+      "header.provincial/ district/ local report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Religion",
+    "np": "धर्म",
+    "source_keys": [
+      "header.religion"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Report",
+    "np": "रिपोर्ट",
+    "source_keys": [
+      "header.report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Report on Degree of Urbanization in Nepal",
+    "np": "नेपालमा ग्रामीण तथा शहरी क्षेत्रको श्रेणीगत वर्गीकरण प्रतिवेदन",
+    "source_keys": [
+      "header.report_on_degree_of_urbanization_in_nepal"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Results",
+    "np": "नतिजा",
+    "source_keys": [
+      "header.results"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Tools",
+    "np": "उपकरणहरू",
+    "source_keys": [
+      "header.tools"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Urban/ Rural Level",
+    "np": "शहरी/ ग्रामीण तह",
+    "source_keys": [
+      "header.urban/rural level"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Urban/ Rural Report",
+    "np": "शहरी/ ग्रामीण रिपोर्ट",
+    "source_keys": [
+      "header.urban/rural report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Ward Level",
+    "np": "वडा तह",
+    "source_keys": [
+      "header.ward level"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Ward Report",
+    "np": "वडा रिपोर्ट",
+    "source_keys": [
+      "header.ward report"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "2021",
+    "np": "२०७८",
+    "source_keys": [
+      "header.year"
+    ],
+    "namespaces": [
+      "header"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Browse by thematic areas",
+    "np": "विषयगत क्षेत्रका आधारमा खोज्नुहोस्",
+    "source_keys": [
+      "home.browse_by_thematic_areas"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "The 2021 NPHC will help to better incorporate changes in population dynamics and social characteristics into policies, development programmes and plans.",
+    "np": "राष्ट्रिय जनगणना २०७८ ले जनसङ्ख्याको अवस्था र सामाजिक विशेषताहरुमा आएका परिवर्तनहरुलाई नीति, विकास कार्यक्रम तथा योजनाहरुमा समावेश गर्न मदत गर्दछ।",
+    "source_keys": [
+      "home.census_desc"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "About National Population and Housing Census 2021",
+    "np": "राष्ट्रिय जनगणना २०७८ को बारेमा",
+    "source_keys": [
+      "home.census_title"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Click here to update",
+    "np": "अपडेट गर्नका लागि यहाँ थिच्नुहोस्।",
+    "source_keys": [
+      "home.click_here_to_update"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Featured Reports",
+    "np": "विशेष प्रतिवेदनहरु",
+    "source_keys": [
+      "home.featured_reports"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Household Highlights",
+    "np": "पारिवारिक झलक",
+    "source_keys": [
+      "home.household_highlight"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Learn how to navigate around this website and perform actions such as download data and export visualizations in the form of popular image formats.",
+    "np": "यस वेबसाईटको प्रयोग गरी कसरी त्यसमा समावेश डाटा, चार्ट, ग्राफ़ आदि हेर्न र डाउनलोड गरी प्रयोग गर्ने भन्ने बारेमा जान्नुहोस्।",
+    "source_keys": [
+      "home.how_to_use_desc"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "How to use this website?",
+    "np": "यो वेबसाईटको प्रयोग कसरी गर्ने ?",
+    "source_keys": [
+      "home.how_to_use_website"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Internal Migration",
+    "np": "आन्तरिक बसाईँसराईँ",
+    "source_keys": [
+      "home.internal_migration"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Latest newsletter",
+    "np": "नवीनतम समाचारपत्र",
+    "source_keys": [
+      "home.latest_newsletter"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Literacy and Educational attainment",
+    "np": "साक्षरता तथा शैक्षिक उपलब्धि",
+    "source_keys": [
+      "home.literacy_and_edu_attainment"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Population Highlights",
+    "np": "जनसंख्याको हाइलाइट",
+    "source_keys": [
+      "home.population_highlight"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Today's population",
+    "np": "आजको जनसङ्ख्या",
+    "source_keys": [
+      "home.todays_population"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Please update the app to the latest version from the Google Play Store.",
+    "np": "कृपया Google Play Store बाट एपलाई अपडेट गर्नुहोस्। ",
+    "source_keys": [
+      "home.update_the_app"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "View all Households Data",
+    "np": "सम्पूर्ण घरपरिवारको डाटा हेर्नुहोस्",
+    "source_keys": [
+      "home.view_all_household_data"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "View all newsletters",
+    "np": "सबै समाचारहरू हेर्नुहोस्",
+    "source_keys": [
+      "home.view_all_newsletters"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "View all Population Data",
+    "np": "सम्पूर्ण जनसांख्यिकीय डाटा हेर्नुहोस्",
+    "source_keys": [
+      "home.view_all_population_data"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "View more",
+    "np": "थप हेर्नुहोस",
+    "source_keys": [
+      "home.view_more"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  },
+  {
+    "en": "Ward Report",
+    "np": "नयाँ के छ ?",
+    "source_keys": [
+      "home.whats_new"
+    ],
+    "namespaces": [
+      "home"
+    ],
+    "n_duplicates": 1
+  }
+]

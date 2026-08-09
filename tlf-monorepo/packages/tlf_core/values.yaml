@@ -79,19 +79,30 @@ caste_ethnicity:
 
 religion:
   hindu: ["hindu", "हिन्दु"]
-  buddhist: ["baudha", "buddhist", "बौद्ध"]
+  buddhist: ["baudha", "buddhist", "bouddha", "बौद्ध"]
   islam: ["islam", "इस्लाम"]
-  kirat: ["kirant", "kirat", "किराँत"]
-  christian: ["christian", "क्रिस्चियन"]
-  nature: ["prakriti", "nature", "animist", "प्रकृति"]
-
+  kirat: ["kirant", "kirat", "किरात"]
+  christian: ["christian", "क्रिश्चियन"]
+  nature: ["prakriti", "nature", "प्रकृति"]
+  bon: ["bon", "बोन"]
+  jain: ["jain", "जैन"]
+  bahai: ["bahai", "बहाई"]
+  sikh: ["sikha", "sikh", "सिख"]
 disability_type:
-  physical: ["sharirik apangata", "physical", "शारीरिक अपाङ्गता"]
-  low_vision: ["nyoon drishtiyukta", "low vision", "न्यून दृष्टियुक्त"]
-  blind: ["purna drishtiheen", "blind", "पूर्ण दृष्टिविहीन"]
-  deaf: ["bahirapan", "deaf", "बहिरोपन"]
-  # INCOMPLETE — official NPHC classification has 12 categories, this
-  # table only showed 4 on the page captured. Needs revisiting.
+  physical: ["physical", "sharirik apangata", "शारीरिक अपाङ्गता"]
+  low_vision: ["low vision", "nyoon drishtiyukta", "न्यून दृष्टियुक्त"]
+  blind: ["blind", "purna drishtiheen", "पूर्ण दृष्टिविहीन", "दृष्टिविहीन"]
+  deaf: ["deaf", "bahirapan", "बहिरोपन", "बहिरापन"]
+  hard_of_hearing: ["hard of hearing", "न्यून श्रवणशक्ति", "श्रवण दृष्टिविहीन"]
+  deaf_blind:
+    ["deaf and blind", "बहिरोपन एवं दृष्टिविहीन", "श्रवण - दृष्टिविहीन"]
+  speech: ["speech impairment", "स्वर बोलाई सम्बन्धि"]
+  intellectual: ["intellectual disability", "बौद्धिक अपाङ्गता"]
+  mental_psychosocial:
+    ["psycho-social disability", "मानसिक अपाङ्गता", "मनोसामाजिक अपाङ्गता"]
+  multiple: ["multiple disability", "बहुअपाङ्गता", "बहु अपाङ्गता"]
+  autism: ["autism", "अटिजम्", "अटिजम्ब"]
+  hemophilia: ["hemophilia", "अनुवंशीय रक्तश्राव (हेमोफेलिया)"]
 
 toilet_type:
   flush: ["flus bhayeko", "flush", "फ्लस भएको"]
@@ -168,9 +179,16 @@ lighting_source:
   other: ["anya", "other", "अन्य"]
 
 marital_status:
-  unmarried: ["vivaha nabhayeko", "unmarried", "विवाह नभएको"]
-  married: ["vivahit", "married", "विवाहित"]
-  widowed: ["vidhur vidhava", "widowed", "विधुर/विधवा"]
-  separated_by_agreement:
-    ["parpachuke", "separated by mutual agreement", "पारपाचुके"]
-  divorced_deserted: ["chhuttiyeko", "divorced/deserted", "छुट्टिएको"]
+  unmarried: ["never married", "aviwahit", "अविवाहित"]
+  married: ["married", "vivahit", "विवाहित"]
+  widowed:
+    [
+      "widow",
+      "widower",
+      "vidhur",
+      "vidhava",
+      "विधुर/विधवा",
+      "एकल (विधुर/विधवा)",
+    ]
+  divorced: ["divorced", "parpachuke", "पारपाचुके"]
+  separated: ["separated", "chhuttiyeko", "छुट्टिएको"]
