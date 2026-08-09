@@ -99,3 +99,81 @@ Related but separate: general Nepali/English category-value translation
 belongs in `tlf-core`'s planned `ValueResolver`, not `tlf-geo`. See
 docs/data_quality_checklist.md "Anticipated but UNCONFIRMED problems" for
 the full distinction.
+
+---
+
+## 2026-08-09 — Vocabulary source upgraded: census site's own translation JSON, not just COD-AB
+
+Decision: use censusresults.nsonepal.gov.np's internal next-i18next
+translation JSON (captured via browser devtools, per-namespace: `chart`,
+`chart-title`, `common`, `population`, `header`, `footer`, `form`, `home`)
+as the primary vocabulary source going forward, rather than relying only
+on the COD-AB / shapefile mirror from the 08-07 decision.
+
+Why: the COD-AB GitHub mirror confirmed on 08-07 only had English/Roman
+names — Devanagari pairing was unverified. This source pairs official
+English and Devanagari labels directly by matching key, confirmed by
+actually capturing and inspecting real JSON (not just documentation), and
+covers far more than place names: religions, disability types, castes,
+occupations, industries, marital status, and the full province/district/
+municipality list all come from the same mechanism. Supersedes nothing —
+COD-AB may still matter for `tlf-geo` if geometry/shapefile data is ever
+needed, not just names.
+
+Related: confirmed the source is not internally consistent (e.g.
+`chart.Total female`/`chart.Total male` swapped, a stray Devanagari digit
+typo) — reinforces the 08-02 decision that vocabulary can't be trusted
+verbatim from any single source, authoritative or not.
+
+---
+
+## 2026-08-09 — `extract_vocab.py` is generic; filtering stays a manual review step
+
+Decision: `scripts/extract_vocab.py` pairs matching keys across an en/np
+locale JSON with no topic-specific logic — it doesn't try to guess which
+entries are "real vocabulary" vs UI chrome (button labels, page copy).
+That judgment stays a manual step, done after extraction, not built into
+the extractor.
+
+Why: namespace alone is a decent but imperfect signal (`footer`/`form`/
+`home` are almost all chrome; `chart`/`population` are almost all real
+vocab; `common` and `header` are mixed) — automating the split risked
+silently dropping real vocabulary or keeping chrome. Keeping the
+extractor dumb and doing the split as a reviewable, visible step (see
+next decision) was judged safer than folding heuristics into the tool.
+
+---
+
+## 2026-08-09 — Dedup-by-value is a required step between extraction and review
+
+Decision: after generic extraction, run a dedup pass that groups entries
+by their actual `(english, nepali)` value pair (not by key), collapsing
+duplicate keys into one row with a list of source keys and namespaces.
+This dedup output — not the raw extraction — is what gets manually
+reviewed before anything is merged into `values.yaml` or `tlf-geo`.
+
+Why: merging multiple namespace JSONs produces heavy duplication (the
+same value under a semantic key in one namespace and a raw-English-as-key
+entry in another, e.g. 5+ separate keys all meaning "05-09 years old").
+Reviewing ~900 raw keys by hand isn't necessary once true duplicates
+collapse to unique value pairs; the `source_keys`/`namespaces` fields
+preserved on each row also make namespace-based triage (see next
+decision) possible without re-deriving it later.
+
+---
+
+## 2026-08-09 — Vocabulary review triage: split by namespace before human review, not during
+
+Decision: split deduped vocabulary into three files before manual review
+— `vocab_geo_candidates.json` (place names, provinces/districts — feeds
+`tlf-geo`), `vocab_chrome.json` (UI labels — archived, not reviewed
+further), `vocab_review.json` (everything else — the actual `values.yaml`
+candidates). Numeric/age-range entries (bare numbers, age bands) are
+dropped entirely at this stage, not reviewed — they're a normalizer's job,
+not a value-vocabulary problem.
+
+Why: with ~900+ deduped entries mixing municipality names, category
+vocab, UI chrome, and numeric noise in one flat list, a single manual
+pass would waste effort re-deciding "is this even worth looking at" for
+every row. Splitting by namespace first (a cheap, mechanical step) lets
+the actual judgment-requiring review focus only on `vocab_review.json`.
