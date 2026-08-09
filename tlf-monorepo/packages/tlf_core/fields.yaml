@@ -16,24 +16,27 @@ serial_number:
 
 district:
   description: "District administrative division name"
-  aliases: ["district", "जिल्ला"]
+  aliases: ["district", "जिल्ला", "dist", "dname"]
   data_type: string
 
 province:
   description: "Province administrative division name or number"
-  aliases: ["province", "प्रदेश"]
+  aliases: ["province", "प्रदेश", "prov", "provname"]
   data_type: string
 
 municipality:
   description: "Local level administrative unit name (Municipality or Rural Municipality)"
   aliases:
-    - "municipality"
-    - "rular municipality"
-    - "गाउँपालिका"
-    - "नगरपालिका"
-    - "gaunpalika"
-    - "n.pa."
-    - "ga.pa."
+    [
+      "municipality",
+      "गाउँपालिका",
+      "नगरपालिका",
+      "gaunpalika",
+      "n.pa.",
+      "ga.pa.",
+      "gapa",
+      "gapaname",
+    ]
   data_type: string
 
 ward:
@@ -69,7 +72,7 @@ female:
 
 total:
   description: "Aggregated sum or total row count"
-  aliases: ["total", "जम्मा", "कुल"]
+  aliases: ["total", "जम्मा", "कुल", "rowtotal"]
   data_type: integer
 
 count:
