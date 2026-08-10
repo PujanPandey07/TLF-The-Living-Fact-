@@ -105,14 +105,14 @@ age:
   aliases: ["age", "उमेर"]
   data_type: string
 
-literacy:
+literacy_status:
   description: "Literacy status or count"
-  aliases: ["literacy", "साक्षरता"]
+  aliases: ["literacy", "literacy status", "साक्षरता", "साक्षरता स्थिति"]
   data_type: string
 
-education:
+education_level:
   description: "Educational attainment level"
-  aliases: ["education", "शिक्षा"]
+  aliases: ["education", "education level", "शिक्षा", "तह"]
   data_type: string
 
 occupation:
@@ -135,7 +135,176 @@ marital_status:
   aliases: ["marital status", "वैवाहिक स्थिति"]
   data_type: string
 
-disability:
+disability_type:
   description: "Disability status or disability category"
-  aliases: ["disability", "अपाङ्गता"]
+  aliases: ["disability", "disability type", "अपाङ्गता", "अपाङ्गताको प्रकार"]
+  data_type: string
+
+water_source:
+  description: "Primary source of drinking water for the household"
+  aliases:
+    [
+      "water source",
+      "drinking water source",
+      "खानेपानीको श्रोत",
+      "पानीको मुहान",
+      "खानेपानीको मुख्य श्रोत",
+      "खाने पानीको मुख्य श्रोतको आधार",
+    ]
+  data_type: string
+
+cooking_fuel:
+  description: "Primary fuel type used for cooking"
+  aliases:
+    [
+      "cooking fuel",
+      "fuel used for cooking",
+      "इन्धनको प्रकार",
+      "खाना पकाउने इन्धन",
+      "खाना पकाउन प्रयोग गरिने मुख्य इन्धन",
+    ]
+  data_type: string
+
+lighting_source:
+  description: "Primary source of lighting for the household"
+  aliases:
+    [
+      "lighting source",
+      "source of light",
+      "बत्तिको श्रोत",
+      "बत्ति बल्न प्रयोग गरिने मुख्य स्रोत",
+    ]
+  data_type: string
+
+toilet_type:
+  description: "Type of toilet facility used by the household"
+  aliases:
+    [
+      "toilet type",
+      "toilet facility",
+      "शौचालयको किसिम",
+      "चर्पीको प्रकार",
+      "शौचालय सुविधा",
+    ]
+  data_type: string
+
+roof_type:
+  description: "Construction material of the roof"
+  aliases:
+    [
+      "roof type",
+      "roof of house",
+      "roofofhouse",
+      "छानाको प्रकार",
+      "घरको छानामा प्रयोग गरिएको सामग्री",
+    ]
+  data_type: string
+
+wall_material:
+  description: "Construction material of the outer walls"
+  aliases:
+    [
+      "wall material",
+      "wall type",
+      "wallofhouse",
+      "गारो/भित्ताको प्रकार",
+      "घरको बाहिरी गारोमा प्रयोग गरिएको सामग्री",
+    ]
+  data_type: string
+
+floor_type:
+  description: "Construction material of the floor"
+  aliases:
+    [
+      "floor type",
+      "floor material",
+      "floorofhouse",
+      "भुँइको प्रकार",
+      "घरको भुँईको प्रकार",
+    ]
+  data_type: string
+
+foundation_type:
+  description: "Construction material of the building foundation"
+  aliases: ["foundation type", "foundationofhouse", "जगको प्रकार"]
+  data_type: string
+
+house_ownership:
+  description: "Ownership status of the housing unit and/or land it sits on"
+  aliases: ["house ownership", "ownership status", "घरको स्वामित्व"]
+  data_type: string
+
+industry:
+  description: "Economic sector / industry classification (ISIC-style) of employment"
+  aliases: ["industry", "economic sector", "उद्योग"]
+  data_type: string
+
+employment_status:
+  description: "Employment status classification (employee, employer, own-account, etc.)"
+  aliases: ["employment status", "रोजगारीको हैसियत"]
+  data_type: string
+
+household_amenities:
+  description: "Household ownership of durable goods/amenities (radio, TV, internet, etc.)"
+  aliases:
+    [
+      "household amenities",
+      "household facilities",
+      "घरायसी सुविधा",
+      "परिवारमा उपलब्ध साधन तथा सुविधा",
+    ]
+  data_type: string
+
+family_structure:
+  description: "Household family type (nuclear vs. extended)"
+  aliases:
+    ["family structure", "family type", "परिवारको किसिम", "पारिवारिक संरचना"]
+  data_type: string
+
+relationship_to_household_head:
+  description: "Relationship of an individual member to the household head"
+  aliases:
+    [
+      "relationship to head",
+      "relationship with household head",
+      "घरमूलीसंगको नाता",
+    ]
+  data_type: string
+
+wealth_quintile:
+  description: "Household wealth ranking bucket (poorest to richest)"
+  aliases:
+    [
+      "wealth quintile",
+      "wealth ranking",
+      "आर्थिक अवस्था",
+      "सम्पन्नताको वर्गीकरण",
+    ]
+  data_type: string
+
+housing_adequacy:
+  description: "Composite adequacy rating of housing conditions"
+  aliases:
+    ["housing adequacy", "आवास पर्याप्तता", "quality of house", "घरको गुणस्तर"]
+  data_type: string
+
+school_attendance_status:
+  description: "Current or past school/college attendance status"
+  aliases: ["school attendance", "attendance status", "विद्यालय उपस्थिति"]
+  data_type: string
+
+birth_registration_status:
+  description: "Whether a birth has been officially registered"
+  aliases: ["birth registration", "जन्मदर्ता स्थिति", "जन्म दर्ता"]
+  data_type: string
+foreign_country_region:
+  description: "Region/country grouping for absentee population or migration destination"
+  aliases:
+    [
+      "foreign country",
+      "destination country",
+      "absentee country",
+      "बसाई गएको देश",
+      "विदेशमा जन्मिएका व्यक्तिको जन्म भएको देश/क्षेत्र",
+    ]
   data_type: string
