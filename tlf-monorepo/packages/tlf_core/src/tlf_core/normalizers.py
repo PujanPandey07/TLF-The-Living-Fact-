@@ -150,3 +150,104 @@ def normalize_column_date(series: pd.Series) -> pd.Series:
     return series.apply(
         lambda val: normalize_date(val) if pd.notna(val) else val
     )
+
+
+# ---------------------------------------------------------------------------
+# 4. WHITESPACE & UNICODE ARTIFACTS
+# ---------------------------------------------------------------------------
+# Matches zero-width joiners/non-joiners, non-breaking spaces, and BOMs
+INVISIBLE_CHARS_PATTERN = re.compile(r"[\u200b\u200c\u200d\ufeff\xa0]")
+MULTI_SPACE_PATTERN = re.compile(r"\s+")
+
+
+def normalize_whitespace_artifacts(value: str) -> str:
+    """Single-value normalizer: strips invisible Unicode artifacts (ZWJ/ZWNJ/NBSP)
+
+    and squashes multiple internal spaces down to a single space.
+    """
+    if value is None:
+        return value
+    clean = INVISIBLE_CHARS_PATTERN.sub("", str(value))
+    clean = MULTI_SPACE_PATTERN.sub(" ", clean)
+    return clean.strip()
+
+
+def normalize_column_whitespace_artifacts(series: pd.Series) -> pd.Series:
+    """Column-level normalizer: cleans invisible artifacts across a pandas Series."""
+    return series.apply(
+        lambda val: normalize_whitespace_artifacts(
+            val) if pd.notna(val) else val
+    )
+
+
+# ---------------------------------------------------------------------------
+# 5. CHROME & FOOTNOTE SYMBOLS
+# ---------------------------------------------------------------------------
+
+# Strips leading list enumerators like "1.", "a)", "01 - ", or "(1)"
+PREFIX_ENUM_PATTERN = re.compile(r"^(\(?\d+\)?|\(?[a-zA-Z]\)?|\d+\s*[-_–])\s*")
+# Strips trailing footnote marks like "*", "#", or lingering punctuation
+TRAILING_CHROME_PATTERN = re.compile(r"[*#,.]$")
+
+
+def normalize_chrome_symbols(value: str) -> str:
+    """Single-value normalizer: strips list indices (e.g. '01 - Koshi' -> 'Koshi')
+
+    and trailing footnote marks (e.g. 'Kathmandu*' -> 'Kathmandu').
+    """
+    if value is None:
+        return value
+    clean = str(value).strip()
+    clean = PREFIX_ENUM_PATTERN.sub("", clean)
+    clean = TRAILING_CHROME_PATTERN.sub("", clean)
+    return clean.strip()
+
+
+def normalize_column_chrome_symbols(series: pd.Series) -> pd.Series:
+    """Column-level normalizer: strips list indices and footnotes across a pandas Series."""
+    return series.apply(
+        lambda val: normalize_chrome_symbols(val) if pd.notna(val) else val
+    )
+
+
+# ---------------------------------------------------------------------------
+# 6. PHONE NUMBERS
+# ---------------------------------------------------------------------------
+
+
+def normalize_phone_number(value: str) -> str:
+    """Single-value normalizer: standardizes Nepali landline and mobile numbers.
+
+    - Translates Devanagari digits to Arabic (e.g. ०६१-५२२१११ -> 061-522111)
+    - Strips +977 or 977 country code prefixes
+    - Formats 9-digit landlines with standard area-code hyphens (e.g. 061-522111)
+    """
+    if value is None or not str(value).strip():
+        return value
+
+    # Step 1: Clean Devanagari numerals
+    clean_val = normalize_devanagari_digits(str(value))
+
+    # Step 2: Strip all non-digit characters
+    digits_only = re.sub(r"\D", "", clean_val)
+
+    # Step 3: Strip leading country code (+977 / 977)
+    if digits_only.startswith("977") and len(digits_only) > 10:
+        digits_only = digits_only[3:]
+
+    # Step 4: Standard 10-digit mobile number (starts with 97 or 98)
+    if len(digits_only) == 10 and digits_only.startswith(("97", "98")):
+        return digits_only
+
+    # Step 5: Standard 9-digit landline with 3-digit area code (e.g., 061522111 -> 061-522111)
+    if len(digits_only) == 9 and digits_only.startswith("0"):
+        return f"{digits_only[:3]}-{digits_only[3:]}"
+
+    return digits_only
+
+
+def normalize_column_phone_number(series: pd.Series) -> pd.Series:
+    """Column-level normalizer: standardizes phone numbers across a pandas Series."""
+    return series.apply(
+        lambda val: normalize_phone_number(val) if pd.notna(val) else val
+    )
