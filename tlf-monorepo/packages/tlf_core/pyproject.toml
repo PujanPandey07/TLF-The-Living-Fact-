@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tlf-core"
+version = "0.1.0"
+description = "Shared field registry and value normalizers for TLF"
+dependencies = [
+    "pandas",
+    "pyyaml",
+]
+
+[project.scripts]
+tlf-review = "tlf_core.review_queue:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+tlf_core = ["data/*.yaml"]

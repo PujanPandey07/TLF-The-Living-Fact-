@@ -1,11 +1,31 @@
 area_sex:
   description: "The 'Area/Sex' column from CBS census tables — location + sex breakdown combined in one field"
-  aliases: ["Area/Sex"]
+  aliases: [
+      "Area/Sex",
+      "क्षेत्र/लिङ्ग",
+      "क्षेत्र / लिङ्ग", # spaces around slash — whitespace normalizer catches this, but alias it anyway
+      "क्षेत्र तथा लिङ्ग",
+      "क्षेत्र",
+      "लिङ्ग",
+      "Area",
+      "Sex",
+    ]
   data_type: string
 
 citizenship_id:
   description: "National citizenship certificate number"
-  aliases: ["c.id", "c_no", "citizenship_number"]
+  aliases:
+    [
+      "c.id",
+      "c_no",
+      "citizenship_number",
+      "नागरिकता नं",
+      "नागरिकता नं.",
+      "नागरिकता नम्बर",
+      "नागरिकता प्रमाणपत्र नं",
+      "नागरिकता प्रमाणपत्र नम्बर",
+      "ना.नं",
+    ]
   data_type: string
   unconfirmed: true
 

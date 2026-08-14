@@ -13,7 +13,7 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
-from normalizers import normalize_devanagari_digits, normalize_whitespace_artifacts
+from .normalizers import normalize_devanagari_digits, normalize_whitespace_artifacts
 
 
 def _clean_key(val: str) -> str:

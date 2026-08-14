@@ -10,7 +10,7 @@ This module does NOT resolve cell contents (see `value_registry.py`).
 from pathlib import Path
 import yaml
 
-from normalizers import normalize_whitespace_artifacts
+from .normalizers import normalize_whitespace_artifacts
 
 
 def _clean_header(header: str) -> str:
