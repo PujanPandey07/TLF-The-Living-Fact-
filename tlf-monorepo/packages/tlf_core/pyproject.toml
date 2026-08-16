@@ -6,13 +6,36 @@ build-backend = "setuptools.build_meta"
 name = "tlf-core"
 version = "0.1.0"
 description = "Shared field registry and value normalizers for TLF"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]                  # ← ADD: pick your license
+authors = [
+    {name = "Pujan Pandey", email = "your.email@example.com"}  # ← ADD
+]
+keywords = ["nepal", "civic-data", "normalization", "data-interoperability"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
 dependencies = [
     "pandas",
     "pyyaml",
 ]
 
+[project.optional-dependencies]
+dev = ["pytest", "build", "twine"]
+
 [project.scripts]
 tlf-review = "tlf_core.review_queue:main"
+
+[project.urls]
+Homepage = "https://github.com/PujanPandey07/tlf-monorepo"  # ← ADD (or your repo URL)
+Issues = "https://github.com/PujanPandey07/tlf-monorepo/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

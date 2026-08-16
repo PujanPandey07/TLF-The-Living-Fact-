@@ -3,7 +3,7 @@ area_sex:
   aliases: [
       "Area/Sex",
       "क्षेत्र/लिङ्ग",
-      "क्षेत्र / लिङ्ग", # spaces around slash — whitespace normalizer catches this, but alias it anyway
+      "क्षेत्र / लिङ्ग", 
       "क्षेत्र तथा लिङ्ग",
       "क्षेत्र",
       "लिङ्ग",
