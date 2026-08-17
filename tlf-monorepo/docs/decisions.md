@@ -177,3 +177,76 @@ vocab, UI chrome, and numeric noise in one flat list, a single manual
 pass would waste effort re-deciding "is this even worth looking at" for
 every row. Splitting by namespace first (a cheap, mechanical step) lets
 the actual judgment-requiring review focus only on `vocab_review.json`.
+
+## 2026-08-1x — Stop hunting for new data-quality problems, start building
+
+Decision: treat the exploration phase as sufficiently complete a second
+time (echoing the 2026-08-02 Phase 1 decision) and shift primary effort
+to building rather than continued manual data auditing.
+
+Why: `values.yaml` had reached ~25 categories with broad real coverage;
+the last two "new findings" before this decision were confirmed one-off
+facts, not new problem categories — a sign of diminishing returns. The
+unmapped-queue mechanism designed into `ValueResolver.resolve_column()`
+exists specifically to let vocabulary keep growing from real pipeline
+runs instead of continued upfront manual sourcing — this is judged to
+be the point where that mechanism takes over.
+
+Alternatives considered: continuing to manually audit more CBS/NSO
+files before building anything — rejected as diminishing-returns
+exploration.
+
+---
+
+## Session 7 — tlf-geo: places.yaml shape resolved pragmatically, not definitively
+
+Decision: build `places.yaml` as a flat `level -> canonical_key ->
+[aliases]` structure (matching `values.yaml`'s shape) rather than
+resolving the flat-vs-hierarchical design question up front.
+
+Why: real collisions (Bagmati Municipality vs Bagmati Gaunpalika, Byas
+Gaunpalika vs Byas Municipality, Madi Gaunpalika vs Madi Municipality)
+confirm the hierarchy problem is real, but a flat structure is
+immediately useful and doesn't block on that harder question. Real NSO
+xlsx exports (checklist #16) confirmed the government's own admin-code
+scheme is inherently hierarchical — the strongest evidence yet for
+eventually needing a hierarchical shape — but that's deferred to when
+`PlaceResolver` is actually built.
+
+Alternatives considered: designing the full hierarchical shape before
+writing any code — rejected in favor of building the immediately-useful
+flat structure first.
+
+---
+
+## Session 7 — Provinces hand-authored directly, not extracted
+
+Decision: for Nepal's 7 provinces (missing from the census site's
+vocabulary — checklist #17), write the `province:` block directly into
+`places.yaml` by hand rather than chasing why extraction missed them.
+
+Why: only 7 entries, stable since the 2017 restructuring, both old
+numbered (Province 1-7) and new named (Koshi, Madhesh, etc.) forms
+needed as aliases. Small and stable enough to trust hand-authorship at
+this scale, unlike the 753-entry local-level list explicitly rejected
+for hand-building on 2026-08-07.
+
+---
+
+## Session 8 — tlf-core packaged and published to PyPI; v0.1.x scope locked
+
+Decision: package `tlf-core` properly (src/ layout, bundled YAML data,
+`tlf-review` CLI) and publish to PyPI (0.1.1). Lock in for this version
+line: exact-only resolution (no fuzzy/`suggest()` fallback), pure
+resolvers (no file I/O), local-first proposal queue with no automatic
+reporting — contributions happen only via voluntary GitHub issue/PR.
+
+Why: fuzzy matching and automatic reporting are both useful ideas, but
+each trades away a property (determinism, privacy) worth protecting in
+the foundational package rather than baking in early. Both stay
+addable later in `tlf-geo`/`tlf-cleaning` without breaking `tlf-core`'s
+existing contract.
+
+Alternatives considered: adding a `suggest()`/fuzzy fallback directly
+to `ValueResolver` for convenience — rejected for this version to keep
+the resolver simple and deterministic.

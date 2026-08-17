@@ -282,3 +282,104 @@ running against a real batch of files. Validity and uniqueness checks are
 much easier to catch automatically inside a running pipeline than to hunt
 for by eye — unlike findings #1-12, which needed manual checking to spot in
 the first place.
+
+### 13. Wide-format "spine" width isn't fixed across files
+
+- **Where:** CBS curated CSVs on data.nsonepal.gov.np
+  (NR_Indv29_PopulationByEcoActivity.csv vs NR_Indv22_PopulationByCountryOfStay.csv)
+- **Example:** File 1's spine is `area, prov, dist, area_name` (4 cols)
+  before payload; File 2's spine is `area, prov, dist, sex, area_name,
+sexname, rowtotal` (7 cols) — extra `sex`/`sexname` columns spliced
+  into the middle of the spine, not appended after it.
+- **Why this matters:** assuming a fixed column offset ("everything
+  after column N is payload") breaks silently on File 2 — you'd either
+  melt real spine columns as if they were payload, or miss melting real
+  payload columns.
+- **Fix:** spine width/composition must be detected per file, not
+  assumed from one example. Not yet built — leaning toward this living
+  in `tlf-cleaning` rather than `tlf-core`, since it needs detection
+  logic, not a static lookup.
+
+### 14. One column mixes multiple geographic granularities
+
+- **Where:** same CBS curated CSVs, the `area` column specifically
+- **Example:** one file's `area` column contains national-level rows
+  (code 10), urban/rural aggregate rows (21/22), ecological-zone rows
+  (31/32/33), province rows (40), and district rows (50) — all in the
+  same column, distinguished only by numeric code range.
+- **Why this matters:** naively summing a payload column without first
+  filtering to one `area` code range would massively overcount — a
+  province's total would get added on top of the district totals that
+  already sum to it.
+- **Fix:** needs a row-filtering step (based on the area-code range)
+  before any melt or aggregation runs. Doesn't fit `FieldResolver` or
+  `ValueResolver` — needs its own filter step, likely in `tlf-cleaning`.
+
+### 15. Payload header abbreviations split into two genuinely different problem types
+
+- **Where:** same CBS curated CSVs' payload columns
+- **Example — Type A (opaque, no algorithmic shortcut):**
+  `nua_male`/`nua_feml`, `nea_male`/`nea_feml`, `notstd_male`/`notstd_feml`.
+  No official CBS data dictionary found published alongside the raw
+  CSVs. Best-guess meanings (`nea` = not economically active, `nua` =
+  not usually active, `notstd` = not stated) are plausible but
+  **unconfirmed**.
+  **Example — Type B (fuzzy-matchable):** `a_india`, `b_saarc`,
+  `c_asean`, `d_midleast`, `e_othrasian`, `f_eucntry`, `g_othreuropn`,
+  `h_northamericn`, `i_southamericn`, `j_african`, `k_pacific`,
+  `l_other`, `m_notstd` — same 13-item list, same order, as the
+  `foreign_country_region` category already in `values.yaml`.
+- **Why this matters:** these need different fixes. Type A has no
+  shared substring to fuzzy-match against — Levenshtein/rapidfuzz finds
+  nothing useful against an opaque initialism. Type B's abbreviations
+  contain recognizable substrings (`india`, `midleast`≈"middle east")
+  and CAN be fuzzy-suggested for human confirmation.
+- **Fix:** Type A — one-time manual lookup, then a permanent
+  `fields.yaml` entry, no shortcut possible. Type B — fuzzy/substring
+  match against existing `values.yaml` aliases to auto-suggest
+  candidates, human confirms. CBS's internal category ordering leaking
+  into column names (Type B) is a reusable pattern worth building a
+  lookup table from.
+
+### 16. Two incompatible ways of encoding geographic hierarchy across NSO's own xlsx exports
+
+- **Where:** two real NSO xlsx files (CRB_15_Children_by_occupation.xlsx,
+  WRD_Hhld06-SourceOfDrinkingWater.xlsx)
+- **Example:** File 1 uses explicit numeric composite codes
+  (`prov`/`dist`/`gapa`) where `dist` resets per province (`dist=1`
+  under `prov=1` is Taplejung, not necessarily `dist=1` under any other
+  province) and `0` at any level means "rollup total for everything
+  under it." File 2 has no codes at all — hierarchy is encoded purely
+  by column position plus blank-cell inheritance (a place name appears
+  only on the row where it starts; every row below inherits it until
+  the next name appears at that column) — and goes one level deeper
+  (ward) than File 1.
+- **Why this matters:** a single "parse the geography columns" function
+  can't handle both — these aren't variations of one format, they're
+  two different encoding mechanisms.
+- **Fix:** don't build one universal parser. Build one small,
+  config'd-per-file tool per pattern (a rollup filter for the
+  code-based format, a forward-fill "unstairs" utility for the
+  staircase format), and accept that surveying all ~71 files by hand
+  isn't feasible — apply the right tool as each new format is
+  encountered.
+
+### 17. An entire expected category can be missing from a source, not just individual entries
+
+- **Where:** censusresults.nsonepal.gov.np's `common` namespace
+  vocabulary (feeding `tlf-geo`'s `places.yaml`)
+- **Example:** the vocabulary capture has ~753 municipalities/
+  gaunpalikas and all 77 districts, but zero entries for Nepal's 7
+  provinces — not misfiled under a different namespace, genuinely
+  absent from the extracted JSON.
+- **Why this matters:** every earlier finding in this list is about
+  individual values being messy; this is about an entire expected
+  slice of data not existing in the source at all. Easy to miss if you
+  only check "does the data I have look clean" rather than "is there
+  data I'd expect that isn't here" — a **completeness**-dimension
+  finding, the first one on this list.
+- **Fix:** for a small, stable, well-known list (only 7 provinces,
+  unchanged since the 2017 restructuring), hand-authoring the missing
+  category is more sensible than chasing why extraction missed it.
+  Worth checking if the province selector routes through a different
+  mechanism than district/municipality dropdowns if this recurs.
