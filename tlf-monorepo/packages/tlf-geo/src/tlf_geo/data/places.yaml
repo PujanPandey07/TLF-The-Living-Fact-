@@ -1,2124 +1,4510 @@
-# places.yaml (DRAFT — review before treating as final)
-# Shape matches values.yaml: level -> canonical_key -> [aliases]
-# Canonical keys are auto-slugified from the shortest known en
-# spelling — rename any of them if you know a better official one.
-# Aliases mix en + np variants in one list, same as values.yaml.
-# Bare (no type-suffix) en+np variants were auto-added for
-# gaunpalika/municipality/metropolitan_city/sub_metropolitan_city
-# so real datasets that omit 'Municipality'/'नगरपालिका' etc still resolve.
+# places.yaml — Canonical name resolution for Nepal geographic entities
+# Generated: 2026-08-20
+# Verified against NSO locallevel_fullcode crosswalk (775 rows)
+#   - 753 local levels + 21 protected areas matched
+#   - 1 known crosswalk data error: [21514] Saptakoshi (type=Gaunpalika, actual=Nagarpalika)
+#
+# Shape: level -> canonical_key -> [aliases]
+# Canonical keys are auto-slugified. Aliases mix en + np variants.
+# Same name in different districts = ONE canonical key (disambiguation lives in codes.yaml).
+
 province:
-  koshi: [Koshi Province, Koshi, Province 1, कोशी प्रदेश, कोशी]
-  madhesh: [Madhesh Province, Madhesh, Province 2, मधेश प्रदेश, मधेश]
-  bagmati: [Bagmati Province, Bagmati, Province 3, बागमती प्रदेश, बागमती]
-  gandaki: [Gandaki Province, Gandaki, Province 4, गण्डकी प्रदेश, गण्डकी]
-  lumbini: [Lumbini Province, Lumbini, Province 5, लुम्बिनी प्रदेश, लुम्बिनी]
-  karnali: [Karnali Province, Karnali, Province 6, कर्णाली प्रदेश, कर्णाली]
+  bagmati:
+    - Bagmati Province
+    - Bagmati
+    - Province 3
+    - बागमती प्रदेश
+    - बागमती
+  gandaki:
+    - Gandaki Province
+    - Gandaki
+    - Province 4
+    - गण्डकी प्रदेश
+    - गण्डकी
+  karnali:
+    - Karnali Province
+    - Karnali
+    - Province 6
+    - कर्णाली प्रदेश
+    - कर्णाली
+  koshi:
+    - Koshi Province
+    - Koshi
+    - Province 1
+    - कोशी प्रदेश
+    - कोशी
+  lumbini:
+    - Lumbini Province
+    - Lumbini
+    - Province 5
+    - लुम्बिनी प्रदेश
+    - लुम्बिनी
+  madhesh:
+    - Madhesh Province
+    - Madhesh
+    - Province 2
+    - मधेश प्रदेश
+    - मधेश
   sudurpashchim:
-    [
-      Sudurpashchim Province,
-      Sudurpashchim,
-      Province 7,
-      सुदूरपश्चिम प्रदेश,
-      सुदूरपश्चिम,
-    ]
+    - Sudurpashchim Province
+    - Sudurpashchim
+    - Province 7
+    - सुदूरपश्चिम प्रदेश
+    - सुदूरपश्चिम
 district:
-  achham: [Achham, अछाम]
-  arghakhanchi: [Arghakhanchi, अर्घाखाँची]
-  baglung: [Baglung, बाग्लुङ्ग]
-  baitadi: [Baitadi, बैतडी]
-  bajhang: [Bajhang, बझाङ्ग]
-  bajura: [Bajura, बाजुरा]
-  banke: [Banke, बाकेँ]
-  bara: [Bara, बारा]
-  bardiya: [Bardiya, बर्दिया]
-  bhaktapur: [Bhaktapur, भक्तपुर]
-  bhojpur: [Bhojpur, भोजपुर]
-  chitawan: [Chitawan, चितवन]
-  dadeldhura: [Dadeldhura, डडेल्धुरा]
-  dailekh: [Dailekh, दैलेख]
-  dang: [Dang, दाङ्ग]
-  darchula: [Darchula, दार्चुला]
-  dhading: [Dhading, धादिङ्ग]
-  dhankuta: [Dhankuta, धनकुटा]
-  dhanusa: [Dhanusa, धनुषा]
-  dolakha: [Dolakha, दोलखा]
-  dolpa: [Dolpa, डोल्पा]
-  doti: [Doti, डोटी]
-  gorkha: [Gorkha, गोरखा]
-  gulmi: [Gulmi, गुल्मी]
-  humla: [Humla, हुम्ला]
-  ilam: [Ilam, इलाम]
-  jajarkot: [Jajarkot, जाजरकोट]
-  jhapa: [Jhapa, झापा]
-  jumla: [Jumla, जुम्ला]
-  kailali: [Kailali, कैलाली]
-  kalikot: [Kalikot, कालीकोट]
-  kanchanpur: [Kanchanpur, कञ्चनपुर]
-  kapilbastu: [Kapilbastu, कपिलबस्तु]
-  kaski: [Kaski, कास्की]
-  kathmandu: [Kathmandu, काठमाडौँ]
-  kavrepalanchok: [Kavrepalanchok, काभ्रेपलाञ्चोक]
-  khotang: [Khotang, खोटाङ्ग]
-  lalitpur: [Lalitpur, ललितपुर]
-  lamjung: [Lamjung, लमजुङ्ग]
-  mahottari: [Mahottari, महोत्तरी]
-  makwanpur: [Makwanpur, मकवानपुर]
-  manang: [Manang, मनाङ्ग]
-  morang: [Morang, मोरङ्ग]
-  mugu: [Mugu, मुगु]
-  mustang: [Mustang, मुस्ताङ्ग]
-  myagdi: [Myagdi, म्याग्दी]
-  nuwakot: [Nuwakot, नुवाकोट]
-  okhaldhunga: [Okhaldhunga, ओखलढुंगा]
-  palpa: [Palpa, पाल्पा]
-  panchthar: [Panchthar, पाँचथर]
-  parbat: [Parbat, पर्वत]
-  parsa: [Parsa, पर्सा]
-  persons: [Persons, व्यक्तिहरु]
-  pyuthan: [Pyuthan, प्युठान]
-  ramechhap: [Ramechhap, रामेछाप]
-  rasuwa: [Rasuwa, रसुवा]
-  rautahat: [Rautahat, रौतहट]
-  rented: [Rented, भाडामा लगाईएको]
-  rolpa: [Rolpa, रोल्पा]
-  rupandehi: [Rupandehi, रुपन्देही]
-  salyan: [Salyan, सल्यान]
-  sankhuwasabha: [Sankhuwasabha, संखुवासभा]
-  saptari: [Saptari, सप्तरी]
-  sarlahi: [Sarlahi, सर्लाही]
-  sindhuli: [Sindhuli, सिन्धुली]
-  sindhupalchok: [Sindhupalchok, सिन्धुपाल्चोक]
-  siraha: [Siraha, सिराहा]
-  solukhumbu: [Solukhumbu, सोलुखुम्बु]
-  sunsari: [Sunsari, सुनसरी]
-  surkhet: [Surkhet, सुर्खेत]
-  syangja: [Syangja, स्याङ्जा]
-  tanahu: [Tanahu, तनँहु]
-  taplejung: [Taplejung, ताप्लेजुङ्ग]
-  terhathum: [Terhathum, तेह्रथुम]
-  udayapur: [Udayapur, उदयपुर]
+  achham:
+    - Achham
+    - अछाम
+  arghakhanchi:
+    - Arghakhanchi
+    - अर्घाखाँची
+  baglung:
+    - Baglung
+    - बाग्लुङ्ग
+  baitadi:
+    - Baitadi
+    - बैतडी
+  bajhang:
+    - Bajhang
+    - बझाङ्ग
+  bajura:
+    - Bajura
+    - बाजुरा
+  banke:
+    - Banke
+    - बाकेँ
+  bara:
+    - Bara
+    - बारा
+  bardiya:
+    - Bardiya
+    - बर्दिया
+  bhaktapur:
+    - Bhaktapur
+    - भक्तपुर
+  bhojpur:
+    - Bhojpur
+    - भोजपुर
+  chitawan:
+    - Chitawan
+    - चितवन
+  dadeldhura:
+    - Dadeldhura
+    - डडेल्धुरा
+  dailekh:
+    - Dailekh
+    - दैलेख
+  dang:
+    - Dang
+    - दाङ्ग
+  darchula:
+    - Darchula
+    - दार्चुला
+  dhading:
+    - Dhading
+    - धादिङ्ग
+  dhankuta:
+    - Dhankuta
+    - धनकुटा
+  dhanusa:
+    - Dhanusa
+    - धनुषा
+  dolakha:
+    - Dolakha
+    - दोलखा
+  dolpa:
+    - Dolpa
+    - डोल्पा
+  doti:
+    - Doti
+    - डोटी
+  gorkha:
+    - Gorkha
+    - गोरखा
+  gulmi:
+    - Gulmi
+    - गुल्मी
+  humla:
+    - Humla
+    - हुम्ला
+  ilam:
+    - Ilam
+    - इलाम
+  jajarkot:
+    - Jajarkot
+    - जाजरकोट
+  jhapa:
+    - Jhapa
+    - झापा
+  jumla:
+    - Jumla
+    - जुम्ला
+  kailali:
+    - Kailali
+    - कैलाली
+  kalikot:
+    - Kalikot
+    - कालीकोट
+  kanchanpur:
+    - Kanchanpur
+    - कञ्चनपुर
+  kapilbastu:
+    - Kapilbastu
+    - कपिलबस्तु
+  kaski:
+    - Kaski
+    - कास्की
+  kathmandu:
+    - Kathmandu
+    - काठमाडौँ
+  kavrepalanchok:
+    - Kavrepalanchok
+    - काभ्रेपलाञ्चोक
+  khotang:
+    - Khotang
+    - खोटाङ्ग
+  lalitpur:
+    - Lalitpur
+    - ललितपुर
+  lamjung:
+    - Lamjung
+    - लमजुङ्ग
+  mahottari:
+    - Mahottari
+    - महोत्तरी
+  makwanpur:
+    - Makwanpur
+    - मकवानपुर
+  manang:
+    - Manang
+    - मनाङ्ग
+  morang:
+    - Morang
+    - मोरङ्ग
+  mugu:
+    - Mugu
+    - मुगु
+  mustang:
+    - Mustang
+    - मुस्ताङ्ग
+  myagdi:
+    - Myagdi
+    - म्याग्दी
+  nawalparasi_east:
+    - Nawalparasi East
+    - नवलपरासी पूर्व
+  nawalparasi_west:
+    - Nawalparasi West
+    - नवलपरासी पश्चिम
+  nuwakot:
+    - Nuwakot
+    - नुवाकोट
+  okhaldhunga:
+    - Okhaldhunga
+    - ओखलढुंगा
+  palpa:
+    - Palpa
+    - पाल्पा
+  panchthar:
+    - Panchthar
+    - पाँचथर
+  parbat:
+    - Parbat
+    - पर्वत
+  parsa:
+    - Parsa
+    - पर्सा
+  pyuthan:
+    - Pyuthan
+    - प्युठान
+  ramechhap:
+    - Ramechhap
+    - रामेछाप
+  rasuwa:
+    - Rasuwa
+    - रसुवा
+  rautahat:
+    - Rautahat
+    - रौतहट
+  rolpa:
+    - Rolpa
+    - रोल्पा
+  rukum_east:
+    - Rukum East
+    - रुकुम पूर्व
+  rukum_west:
+    - Rukum West
+    - रुकुम पश्चिम
+  rupandehi:
+    - Rupandehi
+    - रुपन्देही
+  salyan:
+    - Salyan
+    - सल्यान
+  sankhuwasabha:
+    - Sankhuwasabha
+    - संखुवासभा
+  saptari:
+    - Saptari
+    - सप्तरी
+  sarlahi:
+    - Sarlahi
+    - सर्लाही
+  sindhuli:
+    - Sindhuli
+    - सिन्धुली
+  sindhupalchok:
+    - Sindhupalchok
+    - सिन्धुपाल्चोक
+  siraha:
+    - Siraha
+    - सिराहा
+  solukhumbu:
+    - Solukhumbu
+    - सोलुखुम्बु
+  sunsari:
+    - Sunsari
+    - सुनसरी
+  surkhet:
+    - Surkhet
+    - सुर्खेत
+  syangja:
+    - Syangja
+    - स्याङ्जा
+  tanahu:
+    - Tanahu
+    - तनँहु
+  taplejung:
+    - Taplejung
+    - ताप्लेजुङ्ग
+  terhathum:
+    - Terhathum
+    - तेह्रथुम
+  udayapur:
+    - Udayapur
+    - उदयपुर
 gaunpalika:
   aadarsh:
-    [
-      Aadarsh Gaunpalika,
-      आदर्श  गाउँपालिका,
-      Aadarsha Gaunpalika,
-      Aadarsh,
-      आदर्श,
-      Aadarsha,
-    ]
+    - Aadarsh Gaunpalika
+    - आदर्श  गाउँपालिका
+    - Aadarsha Gaunpalika
+    - Aadarsh
+    - आदर्श
+    - Aadarsha
+    - Adharsha
   aadarsh_kotwal:
-    [
-      Aadarsh Kotwal Gaunpalika,
-      आदर्श कोटवाल गाउँपालिका,
-      Aadarsha Kotwal Gaunpalika,
-      Aadarsh Kotwal,
-      आदर्श कोटवाल,
-      Aadarsha Kotwal,
-    ]
-  aalital: [Aalital Gaunpalika, आलिताल  गाउँपालिका, Aalital, आलिताल]
+    - Aadarsh Kotwal Gaunpalika
+    - आदर्श कोटवाल गाउँपालिका
+    - Aadarsha Kotwal Gaunpalika
+    - Aadarsh Kotwal
+    - आदर्श कोटवाल
+    - Aadarsha Kotwal
+    - Adarshkotwal
+  aalital:
+    - Aalital Gaunpalika
+    - आलिताल  गाउँपालिका
+    - Aalital
+    - आलिताल
+    - Alital
   aamachhodingmo:
-    [
-      Aamachhodingmo Gaunpalika,
-      आमाछोदिङमो गाउँपालिका,
-      Aamachhodingmo,
-      आमाछोदिङमो,
-    ]
-  aamchowk: [Aamchowk Gaunpalika, आमचोक  गाउँपालिका, Aamchowk, आमचोक]
+    - Aamachhodingmo Gaunpalika
+    - आमाछोदिङमो गाउँपालिका
+    - Aamachhodingmo
+    - आमाछोदिङमो
+  aamchowk:
+    - Aamchowk Gaunpalika
+    - आमचोक  गाउँपालिका
+    - Aamchowk
+    - आमचोक
   aanbookhaireni:
-    [
-      Aanbookhaireni Gaunpalika,
-      आँबुखैरेनी गाउँपालिका,
-      Aanbu Khaireni Gaunpalika,
-      Aanbookhaireni,
-      आँबुखैरेनी,
-      Aanbu Khaireni,
-    ]
+    - Aanbookhaireni Gaunpalika
+    - आँबुखैरेनी गाउँपालिका
+    - Aanbu Khaireni Gaunpalika
+    - Aanbookhaireni
+    - आँबुखैरेनी
+    - Aanbu Khaireni
+    - Anbukhaireni
   aandhikhola:
-    [Aandhikhola Gaunpalika, आँधिखोला  गाउँपालिका, Aandhikhola, आँधिखोला]
-  aarughat: [Aarughat Gaunpalika, आरुघाट  गाउँपालिका, Aarughat, आरुघाट]
+    - Aandhikhola Gaunpalika
+    - आँधिखोला  गाउँपालिका
+    - Aandhikhola
+    - आँधिखोला
+  aarughat:
+    - Aarughat Gaunpalika
+    - आरुघाट  गाउँपालिका
+    - Aarughat
+    - आरुघाट
   aathrai:
-    [
-      Aatharai Gaunpalika,
-      आठराई  गाउँपालिका,
-      Aathrai Gaunpalika,
-      Aatharai,
-      आठराई,
-      Aathrai,
-    ]
+    - Aatharai Gaunpalika
+    - आठराई  गाउँपालिका
+    - Aathrai Gaunpalika
+    - Aatharai
+    - आठराई
+    - Aathrai
   aathrai_tribeni:
-    [
-      Aatharai Tribeni Gaunpalika,
-      आठराई त्रिवेणी  गाउँपालिका,
-      Aathrai Tribeni Gaunpalika,
-      Aatharai Tribeni,
-      आठराई त्रिवेणी,
-      Aathrai Tribeni,
-    ]
-  adanchuli: [Adanchuli Gaunpalika, अदानचुली  गाउँपालिका, Adanchuli, अदानचुली]
+    - Aatharai Tribeni Gaunpalika
+    - आठराई त्रिवेणी  गाउँपालिका
+    - Aathrai Tribeni Gaunpalika
+    - Aatharai Tribeni
+    - आठराई त्रिवेणी
+    - Aathrai Tribeni
+  adanchuli:
+    - Adanchuli Gaunpalika
+    - अदानचुली  गाउँपालिका
+    - Adanchuli
+    - अदानचुली
   agnisair_krishna_sabaran:
-    [
-      Agnisair Krishna Sabaran Gaunpalika,
-      अग्निसाइर कृष्ण सवरन  गाउँपालिका,
-      Agnisair Krishna Sabaran,
-      अग्निसाइर कृष्ण सवरन,
-    ]
+    - Agnisair Krishna Sabaran Gaunpalika
+    - अग्निसाइर कृष्ण सवरन  गाउँपालिका
+    - Agnisair Krishna Sabaran
+    - अग्निसाइर कृष्ण सवरन
+  agnisair_krishna_savaran:
+    - Agnisair Krishna Savaran Gaunpalika
+    - अग्निसाइर कृष्णासवरन गाउँपालिका
+    - Agnisair Krishna Savaran
+    - अग्निसाइर कृष्णासवरन
   airawati:
-    [
-      Aairawati Gaunpalika,
-      ऐरावती  गाउँपालिका,
-      Airawati Gaunpalika,
-      Aairawati,
-      ऐरावती,
-      Airawati,
-    ]
+    - Aairawati Gaunpalika
+    - ऐरावती  गाउँपालिका
+    - Airawati Gaunpalika
+    - Aairawati
+    - ऐरावती
+    - Airawati
+    - Ayirabati
   aiselukharka:
-    [Aiselukharka Gaunpalika, ऐसेलुखर्क  गाउँपालिका, Aiselukharka, ऐसेलुखर्क]
+    - Aiselukharka Gaunpalika
+    - ऐसेलुखर्क  गाउँपालिका
+    - Aiselukharka
+    - ऐसेलुखर्क
+    - Ainselukhark
   ajaymeru:
-    [
-      Ajayameru Gaunpalika,
-      अजयमेरु  गाउँपालिका,
-      Ajaymeru Gaunpalika,
-      Ajayameru,
-      अजयमेरु,
-      Ajaymeru,
-    ]
-  ajirkot: [Ajirkot Gaunpalika, अजिरकोट  गाउँपालिका, Ajirkot, अजिरकोट]
-  annapurna: [Annapurna Gaunpalika, अन्नपूर्ण  गाउँपालिका, Annapurna, अन्नपूर्ण]
-  apihimal: [Apihimal Gaunpalika, अपिहिमाल  गाउँपालिका, Apihimal, अपिहिमाल]
+    - Ajayameru Gaunpalika
+    - अजयमेरु  गाउँपालिका
+    - Ajaymeru Gaunpalika
+    - Ajayameru
+    - अजयमेरु
+    - Ajaymeru
+  ajirkot:
+    - Ajirkot Gaunpalika
+    - अजिरकोट  गाउँपालिका
+    - Ajirkot
+    - अजिरकोट
+  annapurna:
+    - Annapurna Gaunpalika
+    - अन्नपूर्ण  गाउँपालिका
+    - Annapurna
+    - अन्नपूर्ण
+  apihimal:
+    - Apihimal Gaunpalika
+    - अपिहिमाल  गाउँपालिका
+    - Apihimal
+    - अपिहिमाल
   arjunchaupari:
-    [
-      Arjun Choupari Gaunpalika,
-      अर्जुनचौपारी  गाउँपालिका,
-      Arjunchaupari Gaunpalika,
-      Arjun Choupari,
-      अर्जुनचौपारी,
-      Arjunchaupari,
-    ]
-  arnama: [Arnama Gaunpalika, अर्नमा  गाउँपालिका, Arnama, अर्नमा]
-  arun: [Arun Gaunpalika, अरुण  गाउँपालिका, Arun, अरुण]
-  aurahi: [Aurahi Gaunpalika, औरही  गाउँपालिका, Aurahi, औरही]
-  babai: [Babai Gaunpalika, बबई  गाउँपालिका, Babai, बबई]
+    - Arjun Choupari Gaunpalika
+    - अर्जुनचौपारी  गाउँपालिका
+    - Arjunchaupari Gaunpalika
+    - Arjun Choupari
+    - अर्जुनचौपारी
+    - Arjunchaupari
+  arnama:
+    - Arnama Gaunpalika
+    - अर्नमा  गाउँपालिका
+    - Arnama
+    - अर्नमा
+  arun:
+    - Arun Gaunpalika
+    - अरुण  गाउँपालिका
+    - Arun
+    - अरुण
+  aurahi:
+    - Aurahi Gaunpalika
+    - औरही  गाउँपालिका
+    - Aurahi
+    - औरही
+    - Aaurahi
+  babai:
+    - Babai Gaunpalika
+    - बबई  गाउँपालिका
+    - Babai
+    - बबई
   badhaiyatal:
-    [Badhaiyatal Gaunpalika, बढैयाताल  गाउँपालिका, Badhaiyatal, बढैयाताल]
-  badigad: [Badigad Gaunpalika, बडिगाड  गाउँपालिका, Badigad, बडिगाड]
+    - Badhaiyatal Gaunpalika
+    - बढैयाताल  गाउँपालिका
+    - Badhaiyatal
+    - बढैयाताल
+  badigad:
+    - Badigad Gaunpalika
+    - बडिगाड  गाउँपालिका
+    - Badigad
+    - बडिगाड
   badikedar:
-    [
-      Badi Kedar Gaunpalika,
-      बडीकेदार  गाउँपालिका,
-      Badikedar Gaunpalika,
-      Badi Kedar,
-      बडीकेदार,
-      Badikedar,
-    ]
+    - Badi Kedar Gaunpalika
+    - बडीकेदार  गाउँपालिका
+    - Badikedar Gaunpalika
+    - Badi Kedar
+    - बडीकेदार
+    - Badikedar
   baganaskali:
-    [Baganaskali Gaunpalika, बगनासकाली  गाउँपालिका, Baganaskali, बगनासकाली]
-  bagmati: [Bagmati Gaunpalika, बाग्मती  गाउँपालिका, Bagmati, बाग्मती]
-  baijanath: [Baijanath Gaunpalika, बैजनाथ  गाउँपालिका, Baijanath, बैजनाथ]
-  bakaiya: [Bakaiya Gaunpalika, बकैया  गाउँपालिका, Bakaiya, बकैया]
+    - Baganaskali Gaunpalika
+    - बगनासकाली  गाउँपालिका
+    - Baganaskali
+    - बगनासकाली
+    - Bagnaskali
+  bagmati:
+    - Bagmati Gaunpalika
+    - बाग्मती  गाउँपालिका
+    - Bagmati
+    - बाग्मती
+  baijanath:
+    - Baijanath Gaunpalika
+    - बैजनाथ  गाउँपालिका
+    - Baijanath
+    - बैजनाथ
+  bakaiya:
+    - Bakaiya Gaunpalika
+    - बकैया  गाउँपालिका
+    - Bakaiya
+    - बकैया
   balan_bihul:
-    [Balan-Bihul Gaunpalika, बलान बिहुल  गाउँपालिका, Balan-Bihul, बलान बिहुल]
-  balephi: [Balephi Gaunpalika, बलेफी  गाउँपालिका, Balephi, बलेफी]
-  bandipur: [Bandipur Gaunpalika, बन्दिपुर  गाउँपालिका, Bandipur, बन्दिपुर]
+    - Balan-Bihul Gaunpalika
+    - बलान बिहुल  गाउँपालिका
+    - Balan-Bihul
+    - बलान बिहुल
+  balephi:
+    - Balephi Gaunpalika
+    - बलेफी  गाउँपालिका
+    - Balephi
+    - बलेफी
+    - Balefi
+  bandipur:
+    - Bandipur Gaunpalika
+    - बन्दिपुर  गाउँपालिका
+    - Bandipur
+    - बन्दिपुर
   bangalachuli:
-    [Bangalachuli Gaunpalika, बंगलाचुली  गाउँपालिका, Bangalachuli, बंगलाचुली]
+    - Bangalachuli Gaunpalika
+    - बंगलाचुली  गाउँपालिका
+    - Bangalachuli
+    - बंगलाचुली
+    - Banglachuli
   bannigadhi_jayagadh:
-    [Bannigadhi Jayagadh Gaunpalika, बान्नीगढी जयगढ, Bannigadhi Jayagadh]
-  banphikot: [Banphikot Gaunpalika, बाँफिकोट  गाउँपालिका, Banphikot, बाँफिकोट]
-  baragadhi: [Baragadhi Gaunpalika, बारागढी  गाउँपालिका, Baragadhi, बारागढी]
+    - Bannigadhi Jayagadh Gaunpalika
+    - बान्नीगढी जयगढ
+    - Bannigadhi Jayagadh
+  banphikot:
+    - Banphikot Gaunpalika
+    - बाँफिकोट  गाउँपालिका
+    - Banphikot
+    - बाँफिकोट
+    - Banfikot
+  baragadhi:
+    - Baragadhi Gaunpalika
+    - बारागढी  गाउँपालिका
+    - Baragadhi
+    - बारागढी
   barahapokhari:
-    [
-      Baraha Pokhari Gaunpalika,
-      बराहपोखरी  गाउँपालिका,
-      Barahapokhari Gaunpalika,
-      Baraha Pokhari,
-      बराहपोखरी,
-      Barahapokhari,
-    ]
-  barahatal: [Barahatal Gaunpalika, बराहताल  गाउँपालिका, Barahatal, बराहताल]
+    - Baraha Pokhari Gaunpalika
+    - बराहपोखरी  गाउँपालिका
+    - Barahapokhari Gaunpalika
+    - Baraha Pokhari
+    - बराहपोखरी
+    - Barahapokhari
+  barahatal:
+    - Barahatal Gaunpalika
+    - बराहताल  गाउँपालिका
+    - Barahatal
+    - बराहताल
+    - Barahtal
   bardagoriya:
-    [Bardagoriya Gaunpalika, बर्दगोरिया  गाउँपालिका, Bardagoriya, बर्दगोरिया]
-  barekot: [Barekot Gaunpalika, बारेकोट  गाउँपालिका, Barekot, बारेकोट]
-  bareng: [Bareng Gaunpalika, बरेङ  गाउँपालिका, Bareng, बरेङ]
+    - Bardagoriya Gaunpalika
+    - बर्दगोरिया  गाउँपालिका
+    - Bardagoriya
+    - बर्दगोरिया
+  barekot:
+    - Barekot Gaunpalika
+    - बारेकोट  गाउँपालिका
+    - Barekot
+    - बारेकोट
+  bareng:
+    - Bareng Gaunpalika
+    - बरेङ  गाउँपालिका
+    - Bareng
+    - बरेङ
   barhadashi:
-    [Barhadashi Gaunpalika, बाह्रदशी  गाउँपालिका, Barhadashi, बाह्रदशी]
+    - Barhadashi Gaunpalika
+    - बाह्रदशी  गाउँपालिका
+    - Barhadashi
+    - बाह्रदशी
+  barhagaun_muktikhsetra:
+    - Barhagaun Muktikhsetra Gaunpalika
+    - वाह्रगाउँ मुक्तिक्षेत्र गाउँपालिका
+    - Barhagaun Muktikhsetra
+    - वाह्रगाउँ मुक्तिक्षेत्र
   bariyarpatti:
-    [
-      Bariyarpatti Gaunpalika,
-      बरियारपट्टी  गाउँपालिका,
-      Bariyarpatti,
-      बरियारपट्टी,
-    ]
-  barju: [Barju Gaunpalika, बर्जु  गाउँपालिका, Barju, बर्जु]
+    - Bariyarpatti Gaunpalika
+    - बरियारपट्टी  गाउँपालिका
+    - Bariyarpatti
+    - बरियारपट्टी
+  barju:
+    - Barju Gaunpalika
+    - बर्जु  गाउँपालिका
+    - Barju
+    - बर्जु
   barpak_sulikot:
-    [
-      Barpak Sulikot Gaunpalika,
-      बारपाक सुलिकोट गाउँपालिका,
-      Barpak Sulikot,
-      बारपाक सुलिकोट,
-    ]
-  basbariya: [Basbariya Gaunpalika, बसबरिया  गाउँपालिका, Basbariya, बसबरिया]
+    - Barpak Sulikot Gaunpalika
+    - बारपाक सुलिकोट गाउँपालिका
+    - Barpak Sulikot
+    - बारपाक सुलिकोट
+    - Sulikot
+    - सुलीकोट गाउँपालिका
+  basbariya:
+    - Basbariya Gaunpalika
+    - बसबरिया  गाउँपालिका
+    - Basbariya
+    - बसबरिया
   bateshwor:
-    [
-      Baiteshwor Gaunpalika,
-      बैतेश्वर गाउँपालिका,
-      Bateshwor Gaunpalika,
-      बटेश्वर  गाउँपालिका,
-      Baiteshwor,
-      बैतेश्वर,
-      Bateshwor,
-      बटेश्वर,
-    ]
-  baudikali: [Baudikali Gaunpalika, बौदीकाली गाउँपालिका, Baudikali, बौदीकाली]
-  beldandi: [Beldandi Gaunpalika, बेलडाँडी  गाउँपालिका, Beldandi, बेलडाँडी]
+    - Baiteshwor Gaunpalika
+    - बैतेश्वर गाउँपालिका
+    - Bateshwor Gaunpalika
+    - बटेश्वर  गाउँपालिका
+    - Baiteshwor
+    - बैतेश्वर
+    - Bateshwor
+    - बटेश्वर
+  baudikali:
+    - Baudikali Gaunpalika
+    - बौदीकाली गाउँपालिका
+    - Baudikali
+    - बौदीकाली
+  beldandi:
+    - Beldandi Gaunpalika
+    - बेलडाँडी  गाउँपालिका
+    - Beldandi
+    - बेलडाँडी
+  belhi_chapena:
+    - Belhi Chapena Gaunpalika
+    - बेल्ही चपेना गाउँपालिका
+    - Belhi Chapena
+    - बेल्ही चपेना
   benighat_rorang:
-    [
-      Benighat Rorang Gaunpalika,
-      बेनीघाट रोराङ्ग  गाउँपालिका,
-      Benighat Rorang,
-      बेनीघाट रोराङ्ग,
-    ]
+    - Benighat Rorang Gaunpalika
+    - बेनीघाट रोराङ्ग  गाउँपालिका
+    - Benighat Rorang
+    - बेनीघाट रोराङ्ग
   bethanchowk:
-    [Bethanchowk Gaunpalika, बेथानचोक  गाउँपालिका, Bethanchowk, बेथानचोक]
+    - Bethanchowk Gaunpalika
+    - बेथानचोक  गाउँपालिका
+    - Bethanchowk
+    - बेथानचोक
   bhagawanpur:
-    [Bhagawanpur Gaunpalika, भगवानपुर  गाउँपालिका, Bhagawanpur, भगवानपुर]
+    - Bhagawanpur Gaunpalika
+    - भगवानपुर  गाउँपालिका
+    - Bhagawanpur
+    - भगवानपुर
   bhagawatimai:
-    [Bhagawatimai Gaunpalika, भगवतीमाई  गाउँपालिका, Bhagawatimai, भगवतीमाई]
+    - Bhagawatimai Gaunpalika
+    - भगवतीमाई  गाउँपालिका
+    - Bhagawatimai
+    - भगवतीमाई
   bhageshwor:
-    [Bhageshwor Gaunpalika, भागेश्वर  गाउँपालिका, Bhageshwor, भागेश्वर]
-  bhairabi: [Bhairabi Gaunpalika, भैरवी  गाउँपालिका, Bhairabi, भैरवी]
-  bhimphedi: [Bhimphedi Gaunpalika, भिमफेदी गाउँपालिका, Bhimphedi, भिमफेदी]
+    - Bhageshwor Gaunpalika
+    - भागेश्वर  गाउँपालिका
+    - Bhageshwor
+    - भागेश्वर
+    - Bhageshwar
+  bhairabi:
+    - Bhairabi Gaunpalika
+    - भैरवी  गाउँपालिका
+    - Bhairabi
+    - भैरवी
+  bhimphedi:
+    - Bhimphedi Gaunpalika
+    - भिमफेदी गाउँपालिका
+    - Bhimphedi
+    - भिमफेदी
   bhimsenthapa:
-    [Bhimsenthapa Gaunpalika, भिमसेनथापा गाउँपालिका, Bhimsenthapa, भिमसेनथापा]
+    - Bhimsenthapa Gaunpalika
+    - भिमसेनथापा गाउँपालिका
+    - Bhimsenthapa
+    - भिमसेनथापा
+    - Bhimsen
+    - भिमसेन गाउँपालिका
+    - भिमसेन
   bhokraha_narsingh:
-    [
-      Bhokraha Narsingh Gaunpalika,
-      भोक्राहा  गाउँपालिका,
-      Bhokraha Narsingh,
-      भोक्राहा,
-    ]
-  bhoome: [Bhoome Gaunpalika, भूमे  गाउँपालिका, Bhoome, भूमे]
+    - Bhokraha Narsingh Gaunpalika
+    - भोक्राहा नरसिंह गाउँपालिका
+    - भोक्राहा नरसिंह
+    - Bhokraha Narsingh
+    - भोक्राहा
+    - Bhokraha
+  bhoome:
+    - Bhoome Gaunpalika
+    - भूमे  गाउँपालिका
+    - Bhoome
+    - भूमे
+    - Bhume Gaunpalika
+    - भूमे गाउँपालिका
+    - Bhume
   bhotekoshi:
-    [Bhotekoshi Gaunpalika, भोटेकोशी  गाउँपालिका, Bhotekoshi, भोटेकोशी]
-  bhotkhola: [Bhotkhola Gaunpalika, भोटखोला  गाउँपालिका, Bhotkhola, भोटखोला]
-  bhume: [Bhume Gaunpalika, भूमे गाउँपालिका, Bhume, भूमे]
-  bhumlu: [Bhumlu Gaunpalika, भुम्लु  गाउँपालिका, Bhumlu, भुम्लु]
-  bigu: [Bigu Gaunpalika, बिगु  गाउँपालिका, Bigu, बिगु]
-  bihadi: [Bihadi Gaunpalika, बिहादी  गाउँपालिका, Bihadi, बिहादी]
+    - Bhotekoshi Gaunpalika
+    - भोटेकोशी  गाउँपालिका
+    - Bhotekoshi
+    - भोटेकोशी
+  bhotkhola:
+    - Bhotkhola Gaunpalika
+    - भोटखोला  गाउँपालिका
+    - Bhotkhola
+    - भोटखोला
+  bhumlu:
+    - Bhumlu Gaunpalika
+    - भुम्लु  गाउँपालिका
+    - Bhumlu
+    - भुम्लु
+  bigu:
+    - Bigu Gaunpalika
+    - बिगु  गाउँपालिका
+    - Bigu
+    - बिगु
+  bihadi:
+    - Bihadi Gaunpalika
+    - बिहादी  गाउँपालिका
+    - Bihadi
+    - बिहादी
   bijayanagar:
-    [Bijayanagar Gaunpalika, बिजयनगर  गाउँपालिका, Bijayanagar, बिजयनगर]
+    - Bijayanagar Gaunpalika
+    - बिजयनगर  गाउँपालिका
+    - Bijayanagar
+    - बिजयनगर
   binayi_tribeni:
-    [
-      Binayi Tribeni Gaunpalika,
-      बिनयी त्रिवेणी  गाउँपालिका,
-      Binayi Tribeni,
-      बिनयी त्रिवेणी,
-    ]
+    - Binayi Tribeni Gaunpalika
+    - बिनयी त्रिवेणी  गाउँपालिका
+    - Binayi Tribeni
+    - बिनयी त्रिवेणी
+    - विनयी त्रिवेणी
+    - binayee tribeni
   bindabasini:
-    [Bindabasini Gaunpalika, बिन्दबासिनी  गाउँपालिका, Bindabasini, बिन्दबासिनी]
-  biruwa: [Biruwa Gaunpalika, बिरुवा  गाउँपालिका, Biruwa, बिरुवा]
-  bishnu: [Bishnu Gaunpalika, विष्णु  गाउँपालिका, Bishnu, विष्णु]
-  bishnupur: [Bishnupur Gaunpalika, बिष्णुपुर  गाउँपालिका, Bishnupur, बिष्णुपुर]
+    - Bindabasini Gaunpalika
+    - बिन्दबासिनी  गाउँपालिका
+    - Bindabasini
+    - बिन्दबासिनी
+  biruwa:
+    - Biruwa Gaunpalika
+    - बिरुवा  गाउँपालिका
+    - Biruwa
+    - बिरुवा
+  bishnu:
+    - Bishnu Gaunpalika
+    - विष्णु  गाउँपालिका
+    - Bishnu
+    - विष्णु
+  bishnupur:
+    - Bishnupur Gaunpalika
+    - बिष्णुपुर  गाउँपालिका
+    - Bishnupur
+    - बिष्णुपुर
   bishrampur:
-    [Bishrampur Gaunpalika, विश्रामपुर  गाउँपालिका, Bishrampur, विश्रामपुर]
+    - Bishrampur Gaunpalika
+    - विश्रामपुर  गाउँपालिका
+    - Bishrampur
+    - विश्रामपुर
+  bithadchir:
+    - Bithadchir Gaunpalika
+    - वित्थडचिर गाउँपालिका
+    - Bithadchir
+    - वित्थडचिर
   bitthadchir:
-    [Bitthadchir Gaunpalika, बित्थडचिर  गाउँपालिका, Bitthadchir, बित्थडचिर]
+    - Bitthadchir Gaunpalika
+    - बित्थडचिर  गाउँपालिका
+    - Bitthadchir
+    - बित्थडचिर
   bogatan_phudsil:
-    [Bogatan Phudsil Gaunpalika, बोगटान  गाउँपालिका, Bogatan Phudsil, बोगटान]
+    - Bogatan Phudsil Gaunpalika
+    - बोगटान  गाउँपालिका
+    - Bogatan Phudsil
+    - बोगटान
+    - Bogtan
   brahmapuri:
-    [Brahmapuri Gaunpalika, ब्रह्मपुरी  गाउँपालिका, Brahmapuri, ब्रह्मपुरी]
+    - Brahmapuri Gaunpalika
+    - ब्रह्मपुरी  गाउँपालिका
+    - Brahmapuri
+    - ब्रह्मपुरी
+    - Bramhapuri
   buddhashanti:
-    [
-      Buddhashanti Gaunpalika,
-      बुद्धशान्ति  गाउँपालिका,
-      Buddhashanti,
-      बुद्धशान्ति,
-    ]
+    - Buddhashanti Gaunpalika
+    - बुद्धशान्ति  गाउँपालिका
+    - Buddhashanti
+    - बुद्धशान्ति
   budhiganga:
-    [Budhiganga Gaunpalika, बुढीगंगा  गाउँपालिका, Budhiganga, बुढीगंगा]
+    - Budhiganga Gaunpalika
+    - बुढीगंगा  गाउँपालिका
+    - Budhiganga
+    - बुढीगंगा
   bulingtar:
-    [Bulingtar Gaunpalika, बुलिङ्गटार  गाउँपालिका, Bulingtar, बुलिङ्गटार]
-  byas: [Byas Gaunpalika, ब्याँस  गाउँपालिका, Byas, ब्याँस]
+    - Bulingtar Gaunpalika
+    - बुलिङ्गटार  गाउँपालिका
+    - Bulingtar
+    - बुलिङ्गटार
+  bungdikali:
+    - Bungdikali Gaunpalika
+    - बुङ्दीकाली गाउँपालिका
+    - Bungdikali
+    - बुङ्दीकाली
+  byas:
+    - Byas Gaunpalika
+    - ब्याँस  गाउँपालिका
+    - Byas
+    - ब्याँस
+    - Vyas Gaunpalika
+    - ब्याँस गाउँपालिका
+    - Vyas
+  chabispathivera:
+    - Chabispathivera Gaunpalika
+    - छबिसपाथिभेरा गाउँपालिका
+    - Chabispathivera
+    - छबिसपाथिभेरा
+    - chabispathivara
+    - छबिसपाथिवरा
+    - छबिसपाथिवरा गाउँपालिका
   chakraghatta:
-    [Chakraghatta Gaunpalika, चक्रघट्टा  गाउँपालिका, Chakraghatta, चक्रघट्टा]
-  chame: [Chame Gaunpalika, चामे  गाउँपालिका, Chame, चामे]
+    - Chakraghatta Gaunpalika
+    - चक्रघट्टा  गाउँपालिका
+    - Chakraghatta
+    - चक्रघट्टा
+  chame:
+    - Chame Gaunpalika
+    - चामे  गाउँपालिका
+    - Chame
+    - चामे
   champadevi:
-    [Champadevi Gaunpalika, चम्पादेवी  गाउँपालिका, Champadevi, चम्पादेवी]
+    - Champadevi Gaunpalika
+    - चम्पादेवी  गाउँपालिका
+    - Champadevi
+    - चम्पादेवी
   chandrakot:
-    [Chandrakot Gaunpalika, चन्द्रकोट  गाउँपालिका, Chandrakot, चन्द्रकोट]
+    - Chandrakot Gaunpalika
+    - चन्द्रकोट  गाउँपालिका
+    - Chandrakot
+    - चन्द्रकोट
   chandranagar:
-    [Chandranagar Gaunpalika, चन्द्रनगर  गाउँपालिका, Chandranagar, चन्द्रनगर]
-  chankheli: [Chankheli Gaunpalika, चंखेली  गाउँपालिका, Chankheli, चंखेली]
-  chaubise: [Chaubise Gaunpalika, चौविसे  गाउँपालिका, Chaubise, चौविसे]
-  chaukune: [Chaukune Gaunpalika, चौकुने  गाउँपालिका, Chaukune, चौकुने]
+    - Chandranagar Gaunpalika
+    - चन्द्रनगर  गाउँपालिका
+    - Chandranagar
+    - चन्द्रनगर
+  chankheli:
+    - Chankheli Gaunpalika
+    - चंखेली  गाउँपालिका
+    - Chankheli
+    - चंखेली
+  chaubise:
+    - Chaubise Gaunpalika
+    - चौविसे  गाउँपालिका
+    - Chaubise
+    - चौविसे
+  chaukune:
+    - Chaukune Gaunpalika
+    - चौकुने  गाउँपालिका
+    - Chaukune
+    - चौकुने
   chaurideurali:
-    [
-      Chauri Deurali Gaunpalika,
-      चौरीदेउराली  गाउँपालिका,
-      Chaurideurali Gaunpalika,
-      Chauri Deurali,
-      चौरीदेउराली,
-      Chaurideurali,
-    ]
-  chaurpati: [Chaurpati Gaunpalika, चौरपाटी  गाउँपालिका, Chaurpati, चौरपाटी]
+    - Chauri Deurali Gaunpalika
+    - चौरीदेउराली  गाउँपालिका
+    - Chaurideurali Gaunpalika
+    - Chauri Deurali
+    - चौरीदेउराली
+    - Chaurideurali
+  chaurpati:
+    - Chaurpati Gaunpalika
+    - चौरपाटी  गाउँपालिका
+    - Chaurpati
+    - चौरपाटी
   chhabispathibhera:
-    [
-      Chhabis Pathibhara Gaunpalika,
-      छबिस पाथिभरा  गाउँपालिका,
-      Chhabispathibhera Gaunpalika,
-      Chhabis Pathibhara,
-      छबिस पाथिभरा,
-      Chhabispathibhera,
-    ]
+    - Chhabis Pathibhara Gaunpalika
+    - छबिस पाथिभरा  गाउँपालिका
+    - Chhabispathibhera Gaunpalika
+    - Chhabis Pathibhara
+    - छबिस पाथिभरा
+    - Chhabispathibhera
   chharka_tangsong:
-    [
-      Chharka Tangsong Gaunpalika,
-      छार्का ताङसोङ  गाउँपालिका,
-      Chharka Tangsong,
-      छार्का ताङसोङ,
-    ]
-  chhathar: [Chhathar Gaunpalika, छथर  गाउँपालिका, Chhathar, छथर]
+    - Chharka Tangsong Gaunpalika
+    - छार्का ताङसोङ  गाउँपालिका
+    - Chharka Tangsong
+    - छार्का ताङसोङ
+  chhathar:
+    - Chhathar Gaunpalika
+    - छथर  गाउँपालिका
+    - Chhathar
+    - छथर
   chhathar_jorpati:
-    [
-      Chhathar Jorpati Gaunpalika,
-      छथर जोरपाटी  गाउँपालिका,
-      Chhathar Jorpati,
-      छथर जोरपाटी,
-    ]
-  chhatradev: [Chhatradev Gaunpalika, छत्रदेव  गाउँपालिका, Chhatradev, छत्रदेव]
-  chhatrakot: [Chhatrakot Gaunpalika, छत्रकोट  गाउँपालिका, Chhatrakot, छत्रकोट]
+    - Chhathar Jorpati Gaunpalika
+    - छथर जोरपाटी  गाउँपालिका
+    - Chhathar Jorpati
+    - छथर जोरपाटी
+  chhatradev:
+    - Chhatradev Gaunpalika
+    - छत्रदेव  गाउँपालिका
+    - Chhatradev
+    - छत्रदेव
+  chhatrakot:
+    - Chhatrakot Gaunpalika
+    - छत्रकोट  गाउँपालिका
+    - Chhatrakot
+    - छत्रकोट
+    - Chatrakot
   chhatreshwori:
-    [
-      Chhatreshwori Gaunpalika,
-      छत्रेश्वरी  गाउँपालिका,
-      Chhatreshwori,
-      छत्रेश्वरी,
-    ]
+    - Chhatreshwori Gaunpalika
+    - छत्रेश्वरी  गाउँपालिका
+    - Chhatreshwori
+    - छत्रेश्वरी
   chhinnamasta:
-    [Chhinnamasta Gaunpalika, छिन्नमस्ता  गाउँपालिका, Chhinnamasta, छिन्नमस्ता]
+    - Chhinnamasta Gaunpalika
+    - छिन्नमस्ता  गाउँपालिका
+    - Chhinnamasta
+    - छिन्नमस्ता
   chhipaharmai:
-    [Chhipaharmai Gaunpalika, छिपहरमाई  गाउँपालिका, Chhipaharmai, छिपहरमाई]
-  chichila: [Chichila Gaunpalika, चिचिला  गाउँपालिका, Chichila, चिचिला]
-  chingad: [Chingad Gaunpalika, चिङ्गगाड  गाउँपालिका, Chingad, चिङ्गगाड]
+    - Chhipaharmai Gaunpalika
+    - छिपहरमाई  गाउँपालिका
+    - Chhipaharmai
+    - छिपहरमाई
+  chichila:
+    - Chichila Gaunpalika
+    - चिचिला  गाउँपालिका
+    - Chichila
+    - चिचिला
+  chingad:
+    - Chingad Gaunpalika
+    - चिङ्गगाड  गाउँपालिका
+    - Chingad
+    - चिङ्गगाड
   chishankhugadhi:
-    [
-      Chishankhu Gadhi Gaunpalika,
-      चिशंखुगढी  गाउँपालिका,
-      Chishankhugadhi Gaunpalika,
-      Chishankhu Gadhi,
-      चिशंखुगढी,
-      Chishankhugadhi,
-    ]
+    - Chishankhu Gadhi Gaunpalika
+    - चिशंखुगढी  गाउँपालिका
+    - Chishankhugadhi Gaunpalika
+    - Chishankhu Gadhi
+    - चिशंखुगढी
+    - Chishankhugadhi
+    - Chisankhugadhi
   chulachuli:
-    [Chulachuli Gaunpalika, चुलाचुली  गाउँपालिका, Chulachuli, चुलाचुली]
+    - Chulachuli Gaunpalika
+    - चुलाचुली  गाउँपालिका
+    - Chulachuli
+    - चुलाचुली
+  chum_nubri:
+    - Chum Nubri Gaunpalika
+    - चुमनुव्री गाउँपालिका
+    - Chum Nubri
+    - चुमनुव्री
   chumanubri:
-    [Chumanubri Gaunpalika, चुमनुब्री  गाउँपालिका, Chumanubri, चुमनुब्री]
-  chure: [Chure Gaunpalika, चुरे  गाउँपालिका, Chure, चुरे]
+    - Chumanubri Gaunpalika
+    - चुमनुब्री  गाउँपालिका
+    - Chumanubri
+    - चुमनुब्री
+  chure:
+    - Chure Gaunpalika
+    - चुरे  गाउँपालिका
+    - Chure
+    - चुरे
+  dalome:
+    - Dalome Gaunpalika
+    - दालोमे गाउँपालिका
+    - Dalome
+    - दालोमे
   dangisharan:
-    [Dangisharan Gaunpalika, दंगीशरण  गाउँपालिका, Dangisharan, दंगीशरण]
-  darma: [Darma Gaunpalika, दार्मा  गाउँपालिका, Darma, दार्मा]
-  devghat: [Devghat Gaunpalika, देवघाट  गाउँपालिका, Devghat, देवघाट]
-  devtal: [Devtal Gaunpalika, देवताल  गाउँपालिका, Devtal, देवताल]
-  dewangunj: [Dewangunj Gaunpalika, देवानगन्ज  गाउँपालिका, Dewangunj, देवानगन्ज]
-  dhakari: [Dhakari Gaunpalika, ढकारी  गाउँपालिका, Dhakari, ढकारी]
-  dhanakaul: [Dhanakaul Gaunpalika, धनकौल  गाउँपालिका, Dhanakaul, धनकौल]
+    - Dangisharan Gaunpalika
+    - दंगीशरण  गाउँपालिका
+    - Dangisharan
+    - दंगीशरण
+  darma:
+    - Darma Gaunpalika
+    - दार्मा  गाउँपालिका
+    - Darma
+    - दार्मा
+  devghat:
+    - Devghat Gaunpalika
+    - देवघाट  गाउँपालिका
+    - Devghat
+    - देवघाट
+  devtal:
+    - Devtal Gaunpalika
+    - देवताल  गाउँपालिका
+    - Devtal
+    - देवताल
+  dewangunj:
+    - Dewangunj Gaunpalika
+    - देवानगन्ज  गाउँपालिका
+    - Dewangunj
+    - देवानगन्ज
+    - Dewanganj
+    - देवानगञ्ज
+    - Dewanganj Gaunpalika
+    - देवानगञ्ज गाउँपालिका
+  dhakari:
+    - Dhakari Gaunpalika
+    - ढकारी  गाउँपालिका
+    - Dhakari
+    - ढकारी
+  dhanakaul:
+    - Dhanakaul Gaunpalika
+    - धनकौल  गाउँपालिका
+    - Dhanakaul
+    - धनकौल
+    - Dhankaul
   dhanapalthan:
-    [Dhanapalthan Gaunpalika, धनपालथान  गाउँपालिका, Dhanapalthan, धनपालथान]
-  dhanauji: [Dhanauji Gaunpalika, धनौजी  गाउँपालिका, Dhanauji, धनौजी]
-  dharche: [Dharche Gaunpalika, धार्चे  गाउँपालिका, Dharche, धार्चे]
+    - Dhanapalthan Gaunpalika
+    - धनपालथान  गाउँपालिका
+    - Dhanapalthan
+    - धनपालथान
+    - Dhanpalthan
+  dhanauji:
+    - Dhanauji Gaunpalika
+    - धनौजी  गाउँपालिका
+    - Dhanauji
+    - धनौजी
+  dharche:
+    - Dharche Gaunpalika
+    - धार्चे  गाउँपालिका
+    - Dharche
+    - धार्चे
   dhawalagiri:
-    [Dhawalagiri Gaunpalika, धवलागिरी  गाउँपालिका, Dhawalagiri, धवलागिरी]
-  dhobini: [Dhobini Gaunpalika, धोबीनी  गाउँपालिका, Dhobini, धोबीनी]
-  dhurkot: [Dhurkot Gaunpalika, धुर्कोट  गाउँपालिका, Dhurkot, धुर्कोट]
-  dilasaini: [Dilasaini Gaunpalika, डीलासैनी  गाउँपालिका, Dilasaini, डीलासैनी]
+    - Dhawalagiri Gaunpalika
+    - धवलागिरी  गाउँपालिका
+    - Dhawalagiri
+    - धवलागिरी
+    - Dhaulagiri
+  dhobini:
+    - Dhobini Gaunpalika
+    - धोबीनी  गाउँपालिका
+    - Dhobini
+    - धोबीनी
+  dhorchaur:
+    - Dhorchaur Gaunpalika
+    - ढोरचौर गाउँपालिका
+    - Dhorchaur
+    - ढोरचौर
+  dhurkot:
+    - Dhurkot Gaunpalika
+    - धुर्कोट  गाउँपालिका
+    - Dhurkot
+    - धुर्कोट
+  dilasaini:
+    - Dilasaini Gaunpalika
+    - डीलासैनी  गाउँपालिका
+    - Dilasaini
+    - डीलासैनी
   diprung_chuichumma:
-    [
-      Diprung Chuichumma Gaunpalika,
-      दिप्रुङ्ग  गाउँपालिका,
-      Diprung Chuichumma,
-      दिप्रुङ्ग,
-    ]
+    - Diprung Chuichumma Gaunpalika
+    - दिप्रुङ्ग  गाउँपालिका
+    - Diprung Chuichumma
+    - दिप्रुङ्ग
+    - Diprung
+    - दिप्रुङ गाउँपालिका
   dogadakedar:
-    [
-      Dogada Kedar Gaunpalika,
-      दोगडाकेदार  गाउँपालिका,
-      Dogadakedar Gaunpalika,
-      Dogada Kedar,
-      दोगडाकेदार,
-      Dogadakedar,
-    ]
+    - Dogada Kedar Gaunpalika
+    - दोगडाकेदार  गाउँपालिका
+    - Dogadakedar Gaunpalika
+    - Dogada Kedar
+    - दोगडाकेदार
+    - Dogadakedar
   dolpo_buddha:
-    [
-      Dolpo Buddha Gaunpalika,
-      डोल्पो बुद्ध  गाउँपालिका,
-      Dolpo Buddha,
-      डोल्पो बुद्ध,
-    ]
-  doramba: [Doramba Gaunpalika, दोरम्बा  गाउँपालिका, Doramba, दोरम्बा]
+    - Dolpo Buddha Gaunpalika
+    - डोल्पो बुद्ध  गाउँपालिका
+    - Dolpo Buddha
+    - डोल्पो बुद्ध
+  doramba:
+    - Doramba Gaunpalika
+    - दोरम्बा  गाउँपालिका
+    - Doramba
+    - दोरम्बा
   doramba_shailung:
-    [
-      Doramba Shailung Gaunpalika,
-      दोरम्बा शैलुङ गाउँपालिका,
-      Doramba Shailung,
-      दोरम्बा शैलुङ,
-    ]
-  dordi: [Dordi Gaunpalika, दोर्दी  गाउँपालिका, Dordi, दोर्दी]
+    - Doramba Shailung Gaunpalika
+    - दोरम्बा शैलुङ गाउँपालिका
+    - Doramba Shailung
+    - दोरम्बा शैलुङ
+  dordi:
+    - Dordi Gaunpalika
+    - दोर्दी  गाउँपालिका
+    - Dordi
+    - दोर्दी
   dudhapokhari:
-    [Dudhapokhari Gaunpalika, दुधपोखरी  गाउँपालिका, Dudhapokhari, दुधपोखरी]
-  duduwa: [Duduwa Gaunpalika, डुडुवा  गाउँपालिका, Duduwa, डुडुवा]
-  duhun: [Duhun Gaunpalika, दुहुँ  गाउँपालिका, Duhun, दुहुँ]
+    - Dudhapokhari Gaunpalika
+    - दुधपोखरी  गाउँपालिका
+    - Dudhapokhari
+    - दुधपोखरी
+  dudhkaushika:
+    - Dudhkaushika Gaunpalika
+    - दुधकौशिका गाउँपालिका
+    - Dudhkaushika
+    - दुधकौशिका
+  dudhkoshi:
+    - Dudhkoshi Gaunpalika
+    - दुधकोसी गाउँपालिका
+    - Dudhkoshi
+    - दुधकोसी
+  dudhpokhari:
+    - Dudhpokhari Gaunpalika
+    - दूधपोखरी गाउँपालिका
+    - Dudhpokhari
+    - दूधपोखरी
+  duduwa:
+    - Duduwa Gaunpalika
+    - डुडुवा  गाउँपालिका
+    - Duduwa
+    - डुडुवा
+  duhun:
+    - Duhun Gaunpalika
+    - दुहुँ  गाउँपालिका
+    - Duhun
+    - दुहुँ
+    - Dunhu
+  duikholi:
+    - Duikholi Gaunpalika
+    - दुईखोली गाउँपालिका
+    - Duikholi
+    - दुईखोली
   dungeshwor:
-    [Dungeshwor Gaunpalika, डुङ्गेश्वर  गाउँपालिका, Dungeshwor, डुङ्गेश्वर]
+    - Dungeshwor Gaunpalika
+    - डुङ्गेश्वर  गाउँपालिका
+    - Dungeshwor
+    - डुङ्गेश्वर
   dupcheshwor:
-    [Dupcheshwor Gaunpalika, दुप्चेश्वर  गाउँपालिका, Dupcheshwor, दुप्चेश्वर]
+    - Dupcheshwor Gaunpalika
+    - दुप्चेश्वर  गाउँपालिका
+    - Dupcheshwor
+    - दुप्चेश्वर
+    - Dupcheshwar
   durga_bhagawati:
-    [
-      Durga Bhagawati Gaunpalika,
-      दुर्गा भगवती  गाउँपालिका,
-      Durga Bhagawati,
-      दुर्गा भगवती,
-    ]
+    - Durga Bhagawati Gaunpalika
+    - दुर्गा भगवती  गाउँपालिका
+    - Durga Bhagawati
+    - दुर्गा भगवती
+    - Durga Bhagwati
   durgathali:
-    [Durgathali Gaunpalika, दुर्गाथली  गाउँपालिका, Durgathali, दुर्गाथली]
-  ekadara: [Ekadara Gaunpalika, एकडारा  गाउँपालिका, Ekadara, एकडारा]
+    - Durgathali Gaunpalika
+    - दुर्गाथली  गाउँपालिका
+    - Durgathali
+    - दुर्गाथली
+  ekadara:
+    - Ekadara Gaunpalika
+    - एकडारा  गाउँपालिका
+    - Ekadara
+    - एकडारा
+    - Ekdanra
   fakfokathum:
-    [Fakfokathum Gaunpalika, फाकफोकथुम  गाउँपालिका, Fakfokathum, फाकफोकथुम]
-  falelung: [Falelung Gaunpalika, फालेलुङ्ग  गाउँपालिका, Falelung, फालेलुङ्ग]
+    - Fakfokathum Gaunpalika
+    - फाकफोकथुम  गाउँपालिका
+    - Fakfokathum
+    - फाकफोकथुम
+    - Fakphokthum
+    - Phakphokathum Gaunpalika
+    - फाकफोकथुम गाउँपालिका
+    - Phakphokathum
+  falelung:
+    - Falelung Gaunpalika
+    - फालेलुङ्ग  गाउँपालिका
+    - Falelung
+    - फालेलुङ्ग
+    - Phalelung Gaunpalika
+    - Phalelung
   falgunanda:
-    [
-      Falgunanda Gaunpalika,
-      फाल्गुनन्द  गाउँपालिका,
-      Phalgunanda Gaunpalika,
-      Falgunanda,
-      फाल्गुनन्द,
-      Phalgunanda,
-    ]
+    - Falgunanda Gaunpalika
+    - फाल्गुनन्द  गाउँपालिका
+    - Phalgunanda Gaunpalika
+    - Falgunanda
+    - फाल्गुनन्द
+    - Phalgunanda
   gadhawa:
-    [
-      Gadhawa Gaunpalika,
-      गढवा  गाउँपालिका,
-      Gaidahawa Gaunpalika,
-      गैडहवा  गाउँपालिका,
-      Gadhawa,
-      गढवा,
-      Gaidahawa,
-      गैडहवा,
-    ]
-  gadhi: [Gadhi Gaunpalika, गढी  गाउँपालिका, Gadhi, गढी]
-  gajuri: [Gajuri Gaunpalika, गजुरी  गाउँपालिका, Gajuri, गजुरी]
-  galchhi: [Galchhi Gaunpalika, गल्छी  गाउँपालिका, Galchhi, गल्छी]
-  gandaki: [Gandaki Gaunpalika, गण्डकी  गाउँपालिका, Gandaki, गण्डकी]
+    - Gadhawa Gaunpalika
+    - गढवा  गाउँपालिका
+    - Gaidahawa Gaunpalika
+    - गैडहवा  गाउँपालिका
+    - Gadhawa
+    - गढवा
+    - Gaidahawa
+    - गैडहवा
+  gadhi:
+    - Gadhi Gaunpalika
+    - गढी  गाउँपालिका
+    - Gadhi
+    - गढी
+  gajuri:
+    - Gajuri Gaunpalika
+    - गजुरी  गाउँपालिका
+    - Gajuri
+    - गजुरी
+  galchhi:
+    - Galchhi Gaunpalika
+    - गल्छी  गाउँपालिका
+    - Galchhi
+    - गल्छी
+    - Galchi
+  gandaki:
+    - Gandaki Gaunpalika
+    - गण्डकी  गाउँपालिका
+    - Gandaki
+    - गण्डकी
   ganga_jamuna:
-    [
-      Ganga Jamuna Gaunpalika,
-      गंङ्गा जमुना  गाउँपालिका,
-      Ganga Jamuna,
-      गंङ्गा जमुना,
-    ]
-  gangadev: [Gangadev Gaunpalika, गंगादेव गाउँपालिका, Gangadev, गंगादेव]
+    - Ganga Jamuna Gaunpalika
+    - गंङ्गा जमुना  गाउँपालिका
+    - Ganga Jamuna
+    - गंङ्गा जमुना
+  gangadev:
+    - Gangadev Gaunpalika
+    - गंगादेव गाउँपालिका
+    - Gangadev
+    - गंगादेव
   ganyapdhura:
-    [Ganyapdhura Gaunpalika, गन्यापधुरा  गाउँपालिका, Ganyapdhura, गन्यापधुरा]
-  gaumukhi: [Gaumukhi Gaunpalika, गौमुखी  गाउँपालिका, Gaumukhi, गौमुखी]
-  gaumul: [Gaumul Gaunpalika, गौमुल  गाउँपालिका, Gaumul, गौमुल]
-  gauriganj: [Gauriganj Gaunpalika, गौरिगञ्ज  गाउँपालिका, Gauriganj, गौरिगञ्ज]
+    - Ganyapdhura Gaunpalika
+    - गन्यापधुरा  गाउँपालिका
+    - Ganyapdhura
+    - गन्यापधुरा
+    - Ganayapdhura
+  gaumukhi:
+    - Gaumukhi Gaunpalika
+    - गौमुखी  गाउँपालिका
+    - Gaumukhi
+    - गौमुखी
+  gaumul:
+    - Gaumul Gaunpalika
+    - गौमुल  गाउँपालिका
+    - Gaumul
+    - गौमुल
+  gauriganj:
+    - Gauriganj Gaunpalika
+    - गौरिगञ्ज  गाउँपालिका
+    - Gauriganj
+    - गौरिगञ्ज
   gaurishankar:
-    [Gaurishankar Gaunpalika, गौरिशंकर  गाउँपालिका, Gaurishankar, गौरिशंकर]
-  geruwa: [Geruwa Gaunpalika, गेरुवा  गाउँपालिका, Geruwa, गेरुवा]
-  gharpajhong: [Gharpajhong Gaunpalika, घरपझोङ  गाउँपालिका, Gharpajhong, घरपझोङ]
-  ghiring: [Ghiring Gaunpalika, घिरिङ्ग  गाउँपालिका, Ghiring, घिरिङ्ग]
+    - Gaurishankar Gaunpalika
+    - गौरिशंकर  गाउँपालिका
+    - Gaurishankar
+    - गौरिशंकर
+  geruwa:
+    - Geruwa Gaunpalika
+    - गेरुवा  गाउँपालिका
+    - Geruwa
+    - गेरुवा
+  ghanglekh:
+    - Ghanglekh Gaunpalika
+    - घ्याङलेख गाउँपालिका
+    - Ghanglekh
+    - घ्याङलेख
+  gharpajhong:
+    - Gharpajhong Gaunpalika
+    - घरपझोङ  गाउँपालिका
+    - Gharpajhong
+    - घरपझोङ
+    - Gharapjhong
+  ghiring:
+    - Ghiring Gaunpalika
+    - घिरिङ्ग  गाउँपालिका
+    - Ghiring
+    - घिरिङ्ग
   ghyanglekha:
-    [Ghyanglekha Gaunpalika, ध्याङलेख  गाउँपालिका, Ghyanglekha, ध्याङलेख]
+    - Ghyanglekha Gaunpalika
+    - ध्याङलेख  गाउँपालिका
+    - Ghyanglekha
+    - ध्याङलेख
   gokulganga:
-    [Gokulganga Gaunpalika, गोकुलगङ्गा  गाउँपालिका, Gokulganga, गोकुलगङ्गा]
-  golanjor: [Golanjor Gaunpalika, गोलन्जोर  गाउँपालिका, Golanjor, गोलन्जोर]
+    - Gokulganga Gaunpalika
+    - गोकुलगङ्गा  गाउँपालिका
+    - Gokulganga
+    - गोकुलगङ्गा
+  golanjor:
+    - Golanjor Gaunpalika
+    - गोलन्जोर  गाउँपालिका
+    - Golanjor
+    - गोलन्जोर
   gosaikunda:
-    [Gosaikunda Gaunpalika, गोसाईकुण्ड  गाउँपालिका, Gosaikunda, गोसाईकुण्ड]
-  gramthan: [Gramthan Gaunpalika, ग्रामथान  गाउँपालिका, Gramthan, ग्रामथान]
+    - Gosaikunda Gaunpalika
+    - गोसाईकुण्ड  गाउँपालिका
+    - Gosaikunda
+    - गोसाईकुण्ड
+  gramthan:
+    - Gramthan Gaunpalika
+    - ग्रामथान  गाउँपालिका
+    - Gramthan
+    - ग्रामथान
   gulmi_durbar:
-    [
-      Gulmi Durbar Gaunpalika,
-      गुल्मी दरबार  गाउँपालिका,
-      Gulmi Durbar,
-      गुल्मी दरबार,
-    ]
-  gulmidarbar:
-    [Gulmidarbar Gaunpalika, गुल्मी दरबार गाउँपालिका, Gulmidarbar, गुल्मी दरबार]
-  gurans: [Gurans Gaunpalika, गुराँस  गाउँपालिका, Gurans, गुराँस]
-  guthichaur: [Guthichaur Gaunpalika, गुठिचौर  गाउँपालिका, Guthichaur, गुठिचौर]
-  haldibari: [Haldibari Gaunpalika, हल्दीबारी  गाउँपालिका, Haldibari, हल्दीबारी]
+    - Gulmi Durbar Gaunpalika
+    - गुल्मी दरबार  गाउँपालिका
+    - Gulmi Durbar
+    - गुल्मी दरबार
+    - Gulmidarbar Gaunpalika
+    - गुल्मी दरबार गाउँपालिका
+    - Gulmidarbar
+  gurans:
+    - Gurans Gaunpalika
+    - गुराँस  गाउँपालिका
+    - Gurans
+    - गुराँस
+  guthichaur:
+    - Guthichaur Gaunpalika
+    - गुठिचौर  गाउँपालिका
+    - Guthichaur
+    - गुठिचौर
+  haldibari:
+    - Haldibari Gaunpalika
+    - हल्दीबारी  गाउँपालिका
+    - Haldibari
+    - हल्दीबारी
   hariharpurgaghi:
-    [
-      Hariharpurgaghi Gaunpalika,
-      हरिहरपुरगढी  गाउँपालिका,
-      Hariharpurgaghi,
-      हरिहरपुरगढी,
-    ]
-  harinagar: [Harinagar Gaunpalika, हरिनगरा  गाउँपालिका, Harinagar, हरिनगरा]
-  harinas: [Harinas Gaunpalika, हरिनास  गाउँपालिका, Harinas, हरिनास]
+    - Hariharpurgaghi Gaunpalika
+    - हरिहरपुरगढी  गाउँपालिका
+    - Hariharpurgaghi
+    - हरिहरपुरगढी
+    - Hariharpurgadhi
+  harinagar:
+    - Harinagar Gaunpalika
+    - हरिनगरा  गाउँपालिका
+    - Harinagar
+    - हरिनगरा
+    - Harinagara
+  harinas:
+    - Harinas Gaunpalika
+    - हरिनास  गाउँपालिका
+    - Harinas
+    - हरिनास
   hatuwagadhi:
-    [Hatuwagadhi Gaunpalika, हतुवागढी  गाउँपालिका, Hatuwagadhi, हतुवागढी]
-  helambu: [Helambu Gaunpalika, हेलम्बु  गाउँपालिका, Helambu, हेलम्बु]
+    - Hatuwagadhi Gaunpalika
+    - हतुवागढी  गाउँपालिका
+    - Hatuwagadhi
+    - हतुवागढी
+  helambu:
+    - Helambu Gaunpalika
+    - हेलम्बु  गाउँपालिका
+    - Helambu
+    - हेलम्बु
   hilihan:
-    [
-      Hilihan Gaunpalika,
-      हिलिहाङ्ग  गाउँपालिका,
-      Hilihang Gaunpalika,
-      Hilihan,
-      हिलिहाङ्ग,
-      Hilihang,
-    ]
-  hima: [Hima Gaunpalika, हिमा  गाउँपालिका, Hima, हिमा]
-  himali: [Himali Gaunpalika, हिमाली  गाउँपालिका, Himali, हिमाली]
-  hupsekot: [Hupsekot Gaunpalika, हुप्सेकोट  गाउँपालिका, Hupsekot, हुप्सेकोट]
+    - Hilihan Gaunpalika
+    - हिलिहाङ्ग  गाउँपालिका
+    - Hilihang Gaunpalika
+    - Hilihan
+    - हिलिहाङ्ग
+    - Hilihang
+  hima:
+    - Hima Gaunpalika
+    - हिमा  गाउँपालिका
+    - Hima
+    - हिमा
+  himali:
+    - Himali Gaunpalika
+    - हिमाली  गाउँपालिका
+    - Himali
+    - हिमाली
+  hupsekot:
+    - Hupsekot Gaunpalika
+    - हुप्सेकोट  गाउँपालिका
+    - Hupsekot
+    - हुप्सेकोट
   ichchhakamana:
-    [
-      Ichchha Kamana Gaunpalika,
-      इच्छाकामना  गाउँपालिका,
-      Ichchhakamana Gaunpalika,
-      इच्छाकमाना  गाउँपालिका,
-      Ichchha Kamana,
-      इच्छाकामना,
-      Ichchhakamana,
-      इच्छाकमाना,
-    ]
+    - Ichchha Kamana Gaunpalika
+    - इच्छाकामना  गाउँपालिका
+    - Ichchhakamana Gaunpalika
+    - इच्छाकमाना  गाउँपालिका
+    - Ichchha Kamana
+    - इच्छाकामना
+    - Ichchhakamana
+    - इच्छाकमाना
+    - Ichchhyakamana
   indrasarowar:
-    [
-      Indrasarowar Gaunpalika,
-      ईन्द्रसरोवर  गाउँपालिका,
-      Indrasarowar,
-      ईन्द्रसरोवर,
-    ]
+    - Indrasarowar Gaunpalika
+    - ईन्द्रसरोवर  गाउँपालिका
+    - Indrasarowar
+    - ईन्द्रसरोवर
   indrawoti:
-    [Indrawoti Gaunpalika, ईन्द्रावती  गाउँपालिका, Indrawoti, ईन्द्रावती]
-  isma: [Isma Gaunpalika, ईस्मा  गाउँपालिका, Isma, ईस्मा]
-  jagadulla: [Jagadulla Gaunpalika, जगदुल्ला  गाउँपालिका, Jagadulla, जगदुल्ला]
-  jagannath: [Jagannath Gaunpalika, जगन्‍नाथ गाउँपालिका, Jagannath, जगन्‍नाथ]
+    - Indrawoti Gaunpalika
+    - ईन्द्रावती  गाउँपालिका
+    - Indrawoti
+    - ईन्द्रावती
+    - Indrawati
+  isma:
+    - Isma Gaunpalika
+    - ईस्मा  गाउँपालिका
+    - Isma
+    - ईस्मा
+  jagadulla:
+    - Jagadulla Gaunpalika
+    - जगदुल्ला  गाउँपालिका
+    - Jagadulla
+    - जगदुल्ला
+  jagannath:
+    - Jagannath Gaunpalika
+    - जगन्‍नाथ गाउँपालिका
+    - Jagannath
+    - जगन्‍नाथ
   jagarnathpur:
-    [Jagarnathpur Gaunpalika, जगरनाथपुर  गाउँपालिका, Jagarnathpur, जगरनाथपुर]
-  jahada: [Jahada Gaunpalika, जहदा  गाउँपालिका, Jahada, जहदा]
-  jaljala: [Jaljala Gaunpalika, जलजला  गाउँपालिका, Jaljala, जलजला]
+    - Jagarnathpur Gaunpalika
+    - जगरनाथपुर  गाउँपालिका
+    - Jagarnathpur
+    - जगरनाथपुर
+  jahada:
+    - Jahada Gaunpalika
+    - जहदा  गाउँपालिका
+    - Jahada
+    - जहदा
+  jaljala:
+    - Jaljala Gaunpalika
+    - जलजला  गाउँपालिका
+    - Jaljala
+    - जलजला
   janak_nandini:
-    [
-      Janak Nandini Gaunpalika,
-      जनक नन्दिनी  गाउँपालिका,
-      Janak Nandini,
-      जनक नन्दिनी,
-    ]
-  janaki: [Janaki Gaunpalika, जानकी  गाउँपालिका, Janaki, जानकी]
+    - Janak Nandini Gaunpalika
+    - जनक नन्दिनी  गाउँपालिका
+    - Janak Nandini
+    - जनक नन्दिनी
+    - Janaknandani
+  janaki:
+    - Janaki Gaunpalika
+    - जानकी  गाउँपालिका
+    - Janaki
+    - जानकी
+    - Janki
   jante_dhunga:
-    [
-      Jante Dhunga Gaunpalika,
-      जन्तेढुङ्गा  गाउँपालिका,
-      Jante Dhunga,
-      जन्तेढुङ्गा,
-    ]
-  jantedhunga:
-    [Jantedhunga Gaunpalika, जन्तेढुङ्गा  गाउँपालिका, Jantedhunga, जन्तेढुङ्गा]
-  jhapa: [Jhapa Gaunpalika, झापा  गाउँपालिका, Jhapa, झापा]
-  jhimaruk: [Jhimaruk Gaunpalika, झिमरुक  गाउँपालिका, Jhimaruk, झिमरुक]
+    - Jante Dhunga Gaunpalika
+    - जन्तेढुङ्गा  गाउँपालिका
+    - Jante Dhunga
+    - जन्तेढुङ्गा
+    - Jantedhunga Gaunpalika
+    - Jantedhunga
+  jhapa:
+    - Jhapa Gaunpalika
+    - झापा  गाउँपालिका
+    - Jhapa
+    - झापा
+  jhimaruk:
+    - Jhimaruk Gaunpalika
+    - झिमरुक  गाउँपालिका
+    - Jhimaruk
+    - झिमरुक
+    - Jhimruk
   jirabhawani:
-    [Jirabhawani Gaunpalika, जिराभवानी  गाउँपालिका, Jirabhawani, जिराभवानी]
-  jorayal: [Jorayal Gaunpalika, जोरायल  गाउँपालिका, Jorayal, जोरायल]
-  joshipur: [Joshipur Gaunpalika, जोशीपुर  गाउँपालिका, Joshipur, जोशीपुर]
-  jugal: [Jugal Gaunpalika, जुगल  गाउँपालिका, Jugal, जुगल]
+    - Jirabhawani Gaunpalika
+    - जिराभवानी  गाउँपालिका
+    - Jirabhawani
+    - जिराभवानी
+  jorayal:
+    - Jorayal Gaunpalika
+    - जोरायल  गाउँपालिका
+    - Jorayal
+    - जोरायल
+  joshipur:
+    - Joshipur Gaunpalika
+    - जोशीपुर  गाउँपालिका
+    - Joshipur
+    - जोशीपुर
+  jugal:
+    - Jugal Gaunpalika
+    - जुगल  गाउँपालिका
+    - Jugal
+    - जुगल
   junichande:
-    [Junichande Gaunpalika, जुनीचाँदे  गाउँपालिका, Junichande, जुनीचाँदे]
+    - Junichande Gaunpalika
+    - जुनीचाँदे  गाउँपालिका
+    - Junichande
+    - जुनीचाँदे
   jwalamukhi:
-    [Jwalamukhi Gaunpalika, ज्वालामुखी  गाउँपालिका, Jwalamukhi, ज्वालामुखी]
+    - Jwalamukhi Gaunpalika
+    - ज्वालामुखी  गाउँपालिका
+    - Jwalamukhi
+    - ज्वालामुखी
   k_i_singh:
-    [K.I. Singh Gaunpalika, के.आई.सिं.  गाउँपालिका, K.I. Singh, के.आई.सिं.]
+    - K.I. Singh Gaunpalika
+    - के.आई.सिं.  गाउँपालिका
+    - K.I. Singh
+    - के.आई.सिं.
   kachankawal:
-    [
-      Kachanakawal Gaunpalika,
-      कचनकवल  गाउँपालिका,
-      Kachankawal Gaunpalika,
-      Kachanakawal,
-      कचनकवल,
-      Kachankawal,
-    ]
-  kaike: [Kaike Gaunpalika, काइके  गाउँपालिका, Kaike, काइके]
-  kailari: [Kailari Gaunpalika, कैलारी  गाउँपालिका, Kailari, कैलारी]
-  kailash: [Kailash Gaunpalika, कैलाश  गाउँपालिका, Kailash, कैलाश]
-  kakani: [Kakani Gaunpalika, ककनी  गाउँपालिका, Kakani, ककनी]
+    - Kachanakawal Gaunpalika
+    - कचनकवल  गाउँपालिका
+    - Kachankawal Gaunpalika
+    - Kachanakawal
+    - कचनकवल
+    - Kachankawal
+  kaike:
+    - Kaike Gaunpalika
+    - काइके  गाउँपालिका
+    - Kaike
+    - काइके
+  kailari:
+    - Kailari Gaunpalika
+    - कैलारी  गाउँपालिका
+    - Kailari
+    - कैलारी
+  kailash:
+    - Kailash Gaunpalika
+    - कैलाश  गाउँपालिका
+    - Kailash
+    - कैलाश
+  kakani:
+    - Kakani Gaunpalika
+    - ककनी  गाउँपालिका
+    - Kakani
+    - ककनी
   kali_gandaki:
-    [Kali Gandaki Gaunpalika, कालिगण्डकी  गाउँपालिका, Kali Gandaki, कालिगण्डकी]
-  kaligandaki:
-    [Kaligandaki Gaunpalika, कालीगण्डकी  गाउँपालिका, Kaligandaki, कालीगण्डकी]
-  kalika: [Kalika Gaunpalika, कालिका  गाउँपालिका, Kalika, कालिका]
-  kalikamai: [Kalikamai Gaunpalika, कालिकामाई  गाउँपालिका, Kalikamai, कालिकामाई]
-  kalimati: [Kalimati Gaunpalika, कालिमाटी  गाउँपालिका, Kalimati, कालिमाटी]
+    - Kali Gandaki Gaunpalika
+    - कालिगण्डकी  गाउँपालिका
+    - Kali Gandaki
+    - कालिगण्डकी
+    - Kaligandaki Gaunpalika
+    - कालीगण्डकी  गाउँपालिका
+    - Kaligandaki
+    - कालीगण्डकी
+    - Kaligandagi
+  kalika:
+    - Kalika Gaunpalika
+    - कालिका  गाउँपालिका
+    - Kalika
+    - कालिका
+  kalikamai:
+    - Kalikamai Gaunpalika
+    - कालिकामाई  गाउँपालिका
+    - Kalikamai
+    - कालिकामाई
+  kalimati:
+    - Kalimati Gaunpalika
+    - कालिमाटी  गाउँपालिका
+    - Kalimati
+    - कालिमाटी
   kalinchowk:
-    [Kalinchowk Gaunpalika, कालिन्चोक  गाउँपालिका, Kalinchowk, कालिन्चोक]
-  kamal: [Kamal Gaunpalika, कमल  गाउँपालिका, Kamal, कमल]
+    - Kalinchowk Gaunpalika
+    - कालिन्चोक  गाउँपालिका
+    - Kalinchowk
+    - कालिन्चोक
+    - Kalinchok
+  kamal:
+    - Kamal Gaunpalika
+    - कमल  गाउँपालिका
+    - Kamal
+    - कमल
   kanakasundari:
-    [
-      Kanaka Sundari Gaunpalika,
-      कनका सुन्दरी  गाउँपालिका,
-      Kanakasundari Gaunpalika,
-      Kanaka Sundari,
-      कनका सुन्दरी,
-      Kanakasundari,
-    ]
-  kanchan: [Kanchan Gaunpalika, कन्चन  गाउँपालिका, Kanchan, कन्चन]
+    - Kanaka Sundari Gaunpalika
+    - कनका सुन्दरी  गाउँपालिका
+    - Kanakasundari Gaunpalika
+    - Kanaka Sundari
+    - कनका सुन्दरी
+    - Kanakasundari
+  kanchan:
+    - Kanchan Gaunpalika
+    - कन्चन  गाउँपालिका
+    - Kanchan
+    - कन्चन
+  kanda:
+    - Kanda Gaunpalika
+    - काँडा गाउँपालिका
+    - Kanda
+    - काँडा
+    - kada
+    - काडा
   kanepokhari:
-    [Kanepokhari Gaunpalika, कानेपोखरी  गाउँपालिका, Kanepokhari, कानेपोखरी]
-  kapurkot: [Kapurkot Gaunpalika, कपुरकोट  गाउँपालिका, Kapurkot, कपुरकोट]
+    - Kanepokhari Gaunpalika
+    - कानेपोखरी  गाउँपालिका
+    - Kanepokhari
+    - कानेपोखरी
+  kapurkot:
+    - Kapurkot Gaunpalika
+    - कपुरकोट  गाउँपालिका
+    - Kapurkot
+    - कपुरकोट
   karaiyamai:
-    [Karaiyamai Gaunpalika, करैयामाई  गाउँपालिका, Karaiyamai, करैयामाई]
-  katahari: [Katahari Gaunpalika, कटहरी  गाउँपालिका, Katahari, कटहरी]
+    - Karaiyamai Gaunpalika
+    - करैयामाई  गाउँपालिका
+    - Karaiyamai
+    - करैयामाई
+  katahari:
+    - Katahari Gaunpalika
+    - कटहरी  गाउँपालिका
+    - Katahari
+    - कटहरी
   kathekhola:
-    [Kathekhola Gaunpalika, काठेखोला  गाउँपालिका, Kathekhola, काठेखोला]
-  kaudena: [Kaudena Gaunpalika, कौडेना  गाउँपालिका, Kaudena, कौडेना]
+    - Kathekhola Gaunpalika
+    - काठेखोला  गाउँपालिका
+    - Kathekhola
+    - काठेखोला
+    - Kanthekhola
+  kaudena:
+    - Kaudena Gaunpalika
+    - कौडेना  गाउँपालिका
+    - Kaudena
+    - कौडेना
   kedarsyun:
-    [Kedarsyun Gaunpalika, केदारस्युँ  गाउँपालिका, Kedarsyun, केदारस्युँ]
+    - Kedarsyun Gaunpalika
+    - केदारस्युँ  गाउँपालिका
+    - Kedarsyun
+    - केदारस्युँ
+    - Kedarseu
   kepilasgadhi:
-    [Kepilasgadhi Gaunpalika, केपिलासगढी  गाउँपालिका, Kepilasgadhi, केपिलासगढी]
-  kerabari: [Kerabari Gaunpalika, केराबारी  गाउँपालिका, Kerabari, केराबारी]
-  khajura: [Khajura Gaunpalika, खजुरा  गाउँपालिका, Khajura, खजुरा]
+    - Kepilasgadhi Gaunpalika
+    - केपिलासगढी  गाउँपालिका
+    - Kepilasgadhi
+    - केपिलासगढी
+    - Kepilasagadhi
+  kerabari:
+    - Kerabari Gaunpalika
+    - केराबारी  गाउँपालिका
+    - Kerabari
+    - केराबारी
+  khajura:
+    - Khajura Gaunpalika
+    - खजुरा  गाउँपालिका
+    - Khajura
+    - खजुरा
   khandadevi:
-    [Khandadevi Gaunpalika, खाँडादेवी  गाउँपालिका, Khandadevi, खाँडादेवी]
+    - Khandadevi Gaunpalika
+    - खाँडादेवी  गाउँपालिका
+    - Khandadevi
+    - खाँडादेवी
+    - Khadadevi
   khanikhola:
-    [Khanikhola Gaunpalika, खानीखोला  गाउँपालिका, Khanikhola, खानीखोला]
+    - Khanikhola Gaunpalika
+    - खानीखोला  गाउँपालिका
+    - Khanikhola
+    - खानीखोला
   khaniyabas:
-    [Khaniyabas Gaunpalika, खनियाबास  गाउँपालिका, Khaniyabas, खनियाबास]
+    - Khaniyabas Gaunpalika
+    - खनियाबास  गाउँपालिका
+    - Khaniyabas
+    - खनियाबास
+    - Khaniyabash
   khaptad_chhanna:
-    [
-      Khaptad Chhanna Gaunpalika,
-      खप्तडछान्ना  गाउँपालिका,
-      Khaptad Chhanna,
-      खप्तडछान्ना,
-    ]
+    - Khaptad Chhanna Gaunpalika
+    - खप्तडछान्ना  गाउँपालिका
+    - Khaptad Chhanna
+    - खप्तडछान्ना
   khaptad_chhededaha:
-    [
-      Khaptad Chhededaha Gaunpalika,
-      खप्तड छेडेदह गाउँपालिका,
-      Khaptad Chhededaha,
-      खप्तड छेडेदह,
-    ]
+    - Khaptad Chhededaha Gaunpalika
+    - खप्तड छेडेदह गाउँपालिका
+    - Khaptad Chhededaha
+    - खप्तड छेडेदह
+    - Chhededaha
+    - छेडेदह गाउँपालिका
   kharpunath:
-    [Kharpunath Gaunpalika, खार्पुनाथ  गाउँपालिका, Kharpunath, खार्पुनाथ]
-  khatyad: [Khatyad Gaunpalika, खत्याड  गाउँपालिका, Khatyad, खत्याड]
+    - Kharpunath Gaunpalika
+    - खार्पुनाथ  गाउँपालिका
+    - Kharpunath
+    - खार्पुनाथ
+  khatyad:
+    - Khatyad Gaunpalika
+    - खत्याड  गाउँपालिका
+    - Khatyad
+    - खत्याड
   khiji_demba:
-    [Khiji Demba Gaunpalika, खिजीदेम्बा  गाउँपालिका, Khiji Demba, खिजीदेम्बा]
-  khijidemba:
-    [Khijidemba Gaunpalika, खिजीदेम्बा  गाउँपालिका, Khijidemba, खिजीदेम्बा]
-  khotehang: [Khotehang Gaunpalika, खोटेहाङ  गाउँपालिका, Khotehang, खोटेहाङ]
+    - Khiji Demba Gaunpalika
+    - खिजीदेम्बा  गाउँपालिका
+    - Khiji Demba
+    - खिजीदेम्बा
+    - Khijidemba Gaunpalika
+    - Khijidemba
+  khotehang:
+    - Khotehang Gaunpalika
+    - खोटेहाङ  गाउँपालिका
+    - Khotehang
+    - खोटेहाङ
   khumbu_pasang_lhamu:
-    [
-      Khumbu Pasang Lhamu Gaunpalika,
-      खुम्बु पासाङल्हामु गाउँपालिका,
-      Khumbu Pasang Lhamu,
-      खुम्बु पासाङल्हामु,
-    ]
-  khumbu_pasanglhamu:
-    [
-      Khumbu Pasanglhamu Gaunpalika,
-      खुम्बु पासाङल्हामु  गाउँपालिका,
-      Khumbu Pasanglhamu,
-      खुम्बु पासाङल्हामु,
-    ]
-  kispang: [Kispang Gaunpalika, किस्पाङ्ग  गाउँपालिका, Kispang, किस्पाङ्ग]
+    - Khumbu Pasang Lhamu Gaunpalika
+    - खुम्बु पासाङल्हामु गाउँपालिका
+    - Khumbu Pasang Lhamu
+    - खुम्बु पासाङल्हामु
+  khumbupasanglahmu:
+    - Khumbupasanglahmu Gaunpalika
+    - खुम्वु पासाङल्हमु गाउँपालिका
+    - Khumbupasanglahmu
+    - खुम्वु पासाङल्हमु
+  kispang:
+    - Kispang Gaunpalika
+    - किस्पाङ्ग  गाउँपालिका
+    - Kispang
+    - किस्पाङ्ग
   konjyosom:
-    [Konjyosom Gaunpalika, कोन्ज्योसोम  गाउँपालिका, Konjyosom, कोन्ज्योसोम]
-  koshi: [Koshi Gaunpalika, कोशी  गाउँपालिका, Koshi, कोशी]
-  kotahimai: [Kotahimai Gaunpalika, कोटहीमाई  गाउँपालिका, Kotahimai, कोटहीमाई]
-  kumakh: [Kumakh Gaunpalika, कुमाख गाउँपालिका, Kumakh, कुमाख]
-  kummayak: [Kummayak Gaunpalika, कुम्मायक  गाउँपालिका, Kummayak, कुम्मायक]
-  kuse: [Kuse Gaunpalika, कुसे  गाउँपालिका, Kushe Gaunpalika, Kuse, कुसे, Kushe]
+    - Konjyosom Gaunpalika
+    - कोन्ज्योसोम  गाउँपालिका
+    - Konjyosom
+    - कोन्ज्योसोम
+  koshi:
+    - Koshi Gaunpalika
+    - कोशी  गाउँपालिका
+    - Koshi
+    - कोशी
+  kotahimai:
+    - Kotahimai Gaunpalika
+    - कोटहीमाई  गाउँपालिका
+    - Kotahimai
+    - कोटहीमाई
+  kumakh:
+    - Kumakh Gaunpalika
+    - कुमाख गाउँपालिका
+    - Kumakh
+    - कुमाख
+    - Kumakhmalika
+    - कुमाखमालिका गाउँपालिका
+    - कुमाखमालिका
+  kummayak:
+    - Kummayak Gaunpalika
+    - कुम्मायक  गाउँपालिका
+    - Kummayak
+    - कुम्मायक
+  kuse:
+    - Kuse Gaunpalika
+    - कुसे  गाउँपालिका
+    - Kushe Gaunpalika
+    - Kuse
+    - कुसे
+    - Kushe
   kwholasothar:
-    [
-      Kwhola Sothar Gaunpalika,
-      क्ब्होलासोथार  गाउँपालिका,
-      Kwholasothar Gaunpalika,
-      Kwhola Sothar,
-      क्ब्होलासोथार,
-      Kwholasothar,
-    ]
-  laljhadi: [Laljhadi Gaunpalika, लालझाडी  गाउँपालिका, Laljhadi, लालझाडी]
+    - Kwhola Sothar Gaunpalika
+    - क्ब्होलासोथार  गाउँपालिका
+    - Kwholasothar Gaunpalika
+    - Kwhola Sothar
+    - क्ब्होलासोथार
+    - Kwholasothar
+  laljhadi:
+    - Laljhadi Gaunpalika
+    - लालझाडी  गाउँपालिका
+    - Laljhadi
+    - लालझाडी
+  lamidanda:
+    - Lamidanda Gaunpalika
+    - लामीडाँडा गाउँपालिका
+    - Lamidanda
+    - लामीडाँडा
   laxminiya:
-    [Laxminiya Gaunpalika, लक्ष्मीनिया  गाउँपालिका, Laxminiya, लक्ष्मीनिया]
+    - Laxminiya Gaunpalika
+    - लक्ष्मीनिया  गाउँपालिका
+    - Laxminiya
+    - लक्ष्मीनिया
+    - Lakshminiya
   laxmipur_patari:
-    [
-      Laxmipur Patari Gaunpalika,
-      लक्ष्मीपुर पतारी  गाउँपालिका,
-      Laxmipur Patari,
-      लक्ष्मीपुर पतारी,
-    ]
-  lekam: [Lekam Gaunpalika, लेकम  गाउँपालिका, Lekam, लेकम]
-  likhu: [Likhu Gaunpalika, लिखु  गाउँपालिका, Likhu, लिखु]
+    - Laxmipur Patari Gaunpalika
+    - लक्ष्मीपुर पतारी  गाउँपालिका
+    - Laxmipur Patari
+    - लक्ष्मीपुर पतारी
+  lekam:
+    - Lekam Gaunpalika
+    - लेकम  गाउँपालिका
+    - Lekam
+    - लेकम
+  likhu:
+    - Likhu Gaunpalika
+    - लिखु  गाउँपालिका
+    - Likhu
+    - लिखु
   likhu_pike:
-    [Likhu Pike Gaunpalika, लिखु पिके  गाउँपालिका, Likhu Pike, लिखु पिके]
+    - Likhu Pike Gaunpalika
+    - लिखु पिके  गाउँपालिका
+    - Likhu Pike
+    - लिखु पिके
   likhu_tamakoshi:
-    [Likhu Tamakoshi Gaunpalika, लिखु  गाउँपालिका, Likhu Tamakoshi, लिखु]
+    - Likhu Tamakoshi Gaunpalika
+    - Likhu Tamakoshi
   limchunbung:
-    [
-      Limchunbung Gaunpalika,
-      लिम्चुङबुङ गाउँपालिका,
-      Limchungbung Gaunpalika,
-      लिम्चुङबुङ्ग गाउँपालिका,
-      Limchunbung,
-      लिम्चुङबुङ,
-      Limchungbung,
-      लिम्चुङबुङ्ग,
-    ]
+    - Limchunbung Gaunpalika
+    - लिम्चुङबुङ गाउँपालिका
+    - Limchungbung Gaunpalika
+    - लिम्चुङबुङ्ग गाउँपालिका
+    - Limchunbung
+    - लिम्चुङबुङ
+    - Limchungbung
+    - लिम्चुङबुङ्ग
+  lisangkhu_pakhar:
+    - Lisangkhu Pakhar Gaunpalika
+    - लिसङ्खु पाखर गाउँपालिका
+    - Lisangkhu Pakhar
+    - लिसङ्खु पाखर
   lisankhu_pakhar:
-    [
-      Lisankhu Pakhar Gaunpalika,
-      लिसंखु पाखर  गाउँपालिका,
-      Lisankhu Pakhar,
-      लिसंखु पाखर,
-    ]
+    - Lisankhu Pakhar Gaunpalika
+    - लिसंखु पाखर  गाउँपालिका
+    - Lisankhu Pakhar
+    - लिसंखु पाखर
   lo_ghekar_damodarkunda:
-    [
-      Lo Ghekar Damodarkunda Gaunpalika,
-      लो-घेकर दामोदरकुण्ड गाउँपालिका,
-      Lo Ghekar Damodarkunda,
-      लो-घेकर दामोदरकुण्ड,
-    ]
+    - Lo Ghekar Damodarkunda Gaunpalika
+    - लो-घेकर दामोदरकुण्ड गाउँपालिका
+    - Lo Ghekar Damodarkunda
+    - लो-घेकर दामोदरकुण्ड
   lomanthang:
-    [Lomanthang Gaunpalika, लोमन्थाङ  गाउँपालिका, Lomanthang, लोमन्थाङ]
-  lungri: [Lungri Gaunpalika, लुङ्ग्री  गाउँपालिका, Lungri, लुङ्ग्री]
+    - Lomanthang Gaunpalika
+    - लोमन्थाङ  गाउँपालिका
+    - Lomanthang
+    - लोमन्थाङ
+  lungri:
+    - Lungri Gaunpalika
+    - लुङ्ग्री  गाउँपालिका
+    - Lungri
+    - लुङ्ग्री
   machhapuchchhre:
-    [
-      Machhapuchchhre Gaunpalika,
-      माछापुच्छ्र्े  गाउँपालिका,
-      Machhapuchchhre,
-      माछापुच्छ्र्े,
-    ]
-  madane: [Madane Gaunpalika, मदाने  गाउँपालिका, Madane, मदाने]
-  madi: [Madi Gaunpalika, मादी  गाउँपालिका, Madi, मादी]
-  mahabharat: [Mahabharat Gaunpalika, महाभारत  गाउँपालिका, Mahabharat, महाभारत]
-  mahabu: [Mahabu Gaunpalika, महाबु  गाउँपालिका, Mahabu, महाबु]
-  mahadewa: [Mahadewa Gaunpalika, महादेवा  गाउँपालिका, Mahadewa, महादेवा]
+    - Machhapuchchhre Gaunpalika
+    - माछापुच्छ्र्े  गाउँपालिका
+    - Machhapuchchhre
+    - माछापुच्छ्र्े
+  madane:
+    - Madane Gaunpalika
+    - मदाने  गाउँपालिका
+    - Madane
+    - मदाने
+  madi:
+    - Madi Gaunpalika
+    - मादी  गाउँपालिका
+    - Madi
+    - मादी
+  mahabharat:
+    - Mahabharat Gaunpalika
+    - महाभारत  गाउँपालिका
+    - Mahabharat
+    - महाभारत
+  mahabu:
+    - Mahabu Gaunpalika
+    - महाबु  गाउँपालिका
+    - Mahabu
+    - महाबु
+  mahadewa:
+    - Mahadewa Gaunpalika
+    - महादेवा  गाउँपालिका
+    - Mahadewa
+    - महादेवा
+    - Mahadeva
   mahakulung:
-    [Mahakulung Gaunpalika, माहाकुलुङ  गाउँपालिका, Mahakulung, माहाकुलुङ]
-  mahankal: [Mahankal Gaunpalika, महाङ्काल  गाउँपालिका, Mahankal, महाङ्काल]
-  mahashila: [Mahashila Gaunpalika, महाशिला  गाउँपालिका, Mahashila, महाशिला]
-  mahawai: [Mahawai Gaunpalika, महावै  गाउँपालिका, Mahawai, महावै]
-  mahottari: [Mahottari Gaunpalika, महोत्तरी  गाउँपालिका, Mahottari, महोत्तरी]
+    - Mahakulung Gaunpalika
+    - माहाकुलुङ  गाउँपालिका
+    - Mahakulung
+    - माहाकुलुङ
+  mahankal:
+    - Mahankal Gaunpalika
+    - महाङ्काल  गाउँपालिका
+    - Mahankal
+    - महाङ्काल
+  mahashila:
+    - Mahashila Gaunpalika
+    - महाशिला  गाउँपालिका
+    - Mahashila
+    - महाशिला
+  mahawai:
+    - Mahawai Gaunpalika
+    - महावै  गाउँपालिका
+    - Mahawai
+    - महावै
+  mahottari:
+    - Mahottari Gaunpalika
+    - महोत्तरी  गाउँपालिका
+    - Mahottari
+    - महोत्तरी
   mai_jogmai:
-    [Mai Jogmai Gaunpalika, माई जोगमाई  गाउँपालिका, Mai Jogmai, माई जोगमाई]
-  maijogmai:
-    [Maijogmai Gaunpalika, माई जोगमाई गाउँपालिका, Maijogmai, माई जोगमाई]
+    - Mai Jogmai Gaunpalika
+    - माई जोगमाई  गाउँपालिका
+    - Mai Jogmai
+    - माई जोगमाई
+    - Maijogmai Gaunpalika
+    - माई जोगमाई गाउँपालिका
+    - Maijogmai
   maiwakhola:
-    [
-      Maiwakhola Gaunpalika,
-      मैवाखोला  गाउँपालिका,
-      Mikwakhola Gaunpalika,
-      मिक्वाखोला  गाउँपालिका,
-      Maiwakhola,
-      मैवाखोला,
-      Mikwakhola,
-      मिक्वाखोला,
-    ]
-  makalu: [Makalu Gaunpalika, मकालु  गाउँपालिका, Makalu, मकालु]
+    - Maiwakhola Gaunpalika
+    - मैवाखोला  गाउँपालिका
+    - Mikwakhola Gaunpalika
+    - मिक्वाखोला  गाउँपालिका
+    - Maiwakhola
+    - मैवाखोला
+    - Mikwakhola
+    - मिक्वाखोला
+  makalu:
+    - Makalu Gaunpalika
+    - मकालु  गाउँपालिका
+    - Makalu
+    - मकालु
   makawanpurgadhi:
-    [
-      Makawanpurgadhi Gaunpalika,
-      मकवानपुरगढी गाउँपालिका,
-      Makawanpurgadhi,
-      मकवानपुरगढी,
-    ]
+    - Makawanpurgadhi Gaunpalika
+    - मकवानपुरगढी गाउँपालिका
+    - Makawanpurgadhi
+    - मकवानपुरगढी
   malarani:
-    [
-      Malarani Gaunpalika,
-      मालारानी  गाउँपालिका,
-      Mallarani Gaunpalika,
-      मल्लरानी  गाउँपालिका,
-      Malarani,
-      मालारानी,
-      Mallarani,
-      मल्लरानी,
-    ]
-  malika: [Malika Gaunpalika, मालिका  गाउँपालिका, Malika, मालिका]
+    - Malarani Gaunpalika
+    - मालारानी  गाउँपालिका
+    - Mallarani Gaunpalika
+    - मल्लरानी  गाउँपालिका
+    - Malarani
+    - मालारानी
+    - Mallarani
+    - मल्लरानी
+  malika:
+    - Malika Gaunpalika
+    - मालिका  गाउँपालिका
+    - Malika
+    - मालिका
   malikarjun:
-    [Malikarjun Gaunpalika, मालिकार्जुन  गाउँपालिका, Malikarjun, मालिकार्जुन]
-  manahari: [Manahari Gaunpalika, मनहरी  गाउँपालिका, Manahari, मनहरी]
+    - Malikarjun Gaunpalika
+    - मालिकार्जुन  गाउँपालिका
+    - Malikarjun
+    - मालिकार्जुन
+    - Malikaarjun
+  manahari:
+    - Manahari Gaunpalika
+    - मनहरी  गाउँपालिका
+    - Manahari
+    - मनहरी
   manang_ngisyang:
-    [
-      Manang Ngisyang Gaunpalika,
-      मनाङ ङिस्याङ गाउँपालिका,
-      Manang Ngisyang,
-      मनाङ ङिस्याङ,
-    ]
-  mandavi: [Mandavi Gaunpalika, माण्डवी  गाउँपालिका, Mandavi, माण्डवी]
+    - Manang Ngisyang Gaunpalika
+    - मनाङ ङिस्याङ गाउँपालिका
+    - Manang Ngisyang
+    - मनाङ ङिस्याङ
+  mandavi:
+    - Mandavi Gaunpalika
+    - माण्डवी  गाउँपालिका
+    - Mandavi
+    - माण्डवी
   manebhanjyang:
-    [
-      Manebhanjyang Gaunpalika,
-      मानेभन्ज्याङ्ग  गाउँपालिका,
-      Manebhanjyang,
-      मानेभन्ज्याङ्ग,
-    ]
-  mangala: [Mangala Gaunpalika, मंगला  गाउँपालिका, Mangala, मंगला]
+    - Manebhanjyang Gaunpalika
+    - मानेभन्ज्याङ्ग  गाउँपालिका
+    - Manebhanjyang
+    - मानेभन्ज्याङ्ग
+  mangala:
+    - Mangala Gaunpalika
+    - मंगला  गाउँपालिका
+    - Mangala
+    - मंगला
   mangsebung:
-    [Mangsebung Gaunpalika, माङसेबुङ  गाउँपालिका, Mangsebung, माङसेबुङ]
+    - Mangsebung Gaunpalika
+    - माङसेबुङ  गाउँपालिका
+    - Mangsebung
+    - माङसेबुङ
   mapya_dudhkoshi:
-    [
-      Mapya Dudhkoshi Gaunpalika,
-      माप्य दुधकोशी गाउँपालिका,
-      Mapya Dudhkoshi,
-      माप्य दुधकोशी,
-    ]
+    - Mapya Dudhkoshi Gaunpalika
+    - माप्य दुधकोशी गाउँपालिका
+    - Mapya Dudhkoshi
+    - माप्य दुधकोशी
   marchawari:
-    [Marchawari Gaunpalika, मर्चवारी  गाउँपालिका, Marchawari, मर्चवारी]
-  marin: [Marin Gaunpalika, मरिण  गाउँपालिका, Marin, मरिण]
-  marma: [Marma Gaunpalika, मार्मा  गाउँपालिका, Marma, मार्मा]
+    - Marchawari Gaunpalika
+    - मर्चवारी  गाउँपालिका
+    - Marchawari
+    - मर्चवारी
+  marin:
+    - Marin Gaunpalika
+    - मरिण  गाउँपालिका
+    - Marin
+    - मरिण
+  marma:
+    - Marma Gaunpalika
+    - मार्मा  गाउँपालिका
+    - Marma
+    - मार्मा
   marshyangdi:
-    [
-      Marshyangdi Gaunpalika,
-      मस्र्याङ्गदी  गाउँपालिका,
-      Marshyangdi,
-      मस्र्याङ्गदी,
-    ]
-  masta: [Masta Gaunpalika, मष्टा  गाउँपालिका, Masta, मष्टा]
-  mathagadhi: [Mathagadhi Gaunpalika, माथागढी  गाउँपालिका, Mathagadhi, माथागढी]
-  mayadevi: [Mayadevi Gaunpalika, मायादेवी  गाउँपालिका, Mayadevi, मायादेवी]
-  mellekh: [Mellekh Gaunpalika, मेल्लेख  गाउँपालिका, Mellekh, मेल्लेख]
-  melung: [Melung Gaunpalika, मेलुङ्ग  गाउँपालिका, Melung, मेलुङ्ग]
+    - Marshyangdi Gaunpalika
+    - मस्र्याङ्गदी  गाउँपालिका
+    - Marshyangdi
+    - मस्र्याङ्गदी
+  marsyangdi:
+    - Marsyangdi Gaunpalika
+    - मर्स्याङदी गाउँपालिका
+    - Marsyangdi
+    - मर्स्याङदी
+  masta:
+    - Masta Gaunpalika
+    - मष्टा  गाउँपालिका
+    - Masta
+    - मष्टा
+  mathagadhi:
+    - Mathagadhi Gaunpalika
+    - माथागढी  गाउँपालिका
+    - Mathagadhi
+    - माथागढी
+  mayadevi:
+    - Mayadevi Gaunpalika
+    - मायादेवी  गाउँपालिका
+    - Mayadevi
+    - मायादेवी
+  meghang:
+    - Meghang Gaunpalika
+    - मेघाङ गाउँपालिका
+    - Meghang
+    - मेघाङ
+  mellekh:
+    - Mellekh Gaunpalika
+    - मेल्लेख  गाउँपालिका
+    - Mellekh
+    - मेल्लेख
+  melung:
+    - Melung Gaunpalika
+    - मेलुङ्ग  गाउँपालिका
+    - Melung
+    - मेलुङ्ग
   menchhayayem:
-    [Menchhayayem Gaunpalika, मेन्छयायेम  गाउँपालिका, Menchhayayem, मेन्छयायेम]
+    - Menchhayayem Gaunpalika
+    - मेन्छयायेम  गाउँपालिका
+    - Menchhayayem
+    - मेन्छयायेम
+    - Menchayam
   meringden:
-    [Meringden Gaunpalika, मेरिङ्गदेन  गाउँपालिका, Meringden, मेरिङ्गदेन]
-  miklajung: [Miklajung Gaunpalika, मिक्लाजुङ  गाउँपालिका, Miklajung, मिक्लाजुङ]
-  modi: [Modi Gaunpalika, मोदी  गाउँपालिका, Modi, मोदी]
-  mohanyal: [Mohanyal Gaunpalika, मोहन्याल  गाउँपालिका, Mohanyal, मोहन्याल]
-  molung: [Molung Gaunpalika, मोलुङ्ग  गाउँपालिका, Molung, मोलुङ्ग]
+    - Meringden Gaunpalika
+    - मेरिङ्गदेन  गाउँपालिका
+    - Meringden
+    - मेरिङ्गदेन
+  miklajung:
+    - Miklajung Gaunpalika
+    - मिक्लाजुङ  गाउँपालिका
+    - Miklajung
+    - मिक्लाजुङ
+  modi:
+    - Modi Gaunpalika
+    - मोदी  गाउँपालिका
+    - Modi
+    - मोदी
+  mohanyal:
+    - Mohanyal Gaunpalika
+    - मोहन्याल  गाउँपालिका
+    - Mohanyal
+    - मोहन्याल
+  molung:
+    - Molung Gaunpalika
+    - मोलुङ्ग  गाउँपालिका
+    - Molung
+    - मोलुङ्ग
   mudkechula:
-    [Mudkechula Gaunpalika, मुड्केचुला  गाउँपालिका, Mudkechula, मुड्केचुला]
+    - Mudkechula Gaunpalika
+    - मुड्केचुला  गाउँपालिका
+    - Mudkechula
+    - मुड्केचुला
   mugum_karmarong:
-    [
-      Mugum Karmarong Gaunpalika,
-      मुगुमकार्मारोग गाउँपालिका,
-      Mugum Karmarong,
-      मुगुमकार्मारोग,
-      Mugumakarmarog Gaunpalika,
-      Mugumakarmarog,
-    ]
+    - Mugum Karmarong Gaunpalika
+    - मुगुमकार्मारोग गाउँपालिका
+    - Mugum Karmarong
+    - मुगुमकार्मारोग
+    - Mugumakarmarog Gaunpalika
+    - Mugumakarmarog
   mukhiyapatti_musaharmiya:
-    [
-      Mukhiyapatti Musaharmiya Gaunpalika,
-      मुखियापट्टी मुसहरमिया  गाउँपालिका,
-      Mukhiyapatti Musaharmiya,
-      मुखियापट्टी मुसहरमिया,
-    ]
-  myagang: [Myagang Gaunpalika, मेघाङ्ग  गाउँपालिका, Myagang, मेघाङ्ग]
-  myagde: [Myagde Gaunpalika, म्याग्दे  गाउँपालिका, Myagde, म्याग्दे]
-  namkha: [Namkha Gaunpalika, नाम्खा  गाउँपालिका, Namkha, नाम्खा]
-  naraha: [Naraha Gaunpalika, नरहा  गाउँपालिका, Naraha, नरहा]
+    - Mukhiyapatti Musaharmiya Gaunpalika
+    - मुखियापट्टी मुसहरमिया  गाउँपालिका
+    - Mukhiyapatti Musaharmiya
+    - मुखियापट्टी मुसहरमिया
+    - Mukhiyapatti Musarmiya
+  myagang:
+    - Myagang Gaunpalika
+    - मेघाङ्ग  गाउँपालिका
+    - Myagang
+    - मेघाङ्ग
+  myagde:
+    - Myagde Gaunpalika
+    - म्याग्दे  गाउँपालिका
+    - Myagde
+    - म्याग्दे
+  namkha:
+    - Namkha Gaunpalika
+    - नाम्खा  गाउँपालिका
+    - Namkha
+    - नाम्खा
+  naraha:
+    - Naraha Gaunpalika
+    - नरहा  गाउँपालिका
+    - Naraha
+    - नरहा
   naraharinath:
-    [Naraharinath Gaunpalika, नरहरिनाथ  गाउँपालिका, Naraharinath, नरहरिनाथ]
+    - Naraharinath Gaunpalika
+    - नरहरिनाथ  गाउँपालिका
+    - Naraharinath
+    - नरहरिनाथ
   narainapur:
-    [Narainapur Gaunpalika, नरैनापुर  गाउँपालिका, Narainapur, नरैनापुर]
+    - Narainapur Gaunpalika
+    - नरैनापुर  गाउँपालिका
+    - Narainapur
+    - नरैनापुर
   narpa_bhumi:
-    [Narpa Bhumi Gaunpalika, नार्पा भूमि गाउँपालिका, Narpa Bhumi, नार्पा भूमि]
-  nason: [Nason Gaunpalika, नासोँ गाउँपालिका, Nason, नासोँ]
-  naubahini: [Naubahini Gaunpalika, नौबहिनी  गाउँपालिका, Naubahini, नौबहिनी]
-  naugad: [Naugad  Gaunpalika, नौगाड  गाउँपालिका, Naugad, नौगाड]
-  naukunda: [Naukunda Gaunpalika, नौकुण्ड  गाउँपालिका, Naukunda, नौकुण्ड]
-  naumule: [Naumule Gaunpalika, नौमुले  गाउँपालिका, Naumule, नौमुले]
-  nawadurga: [Nawadurga Gaunpalika, नवदुर्गा  गाउँपालिका, Nawadurga, नवदुर्गा]
+    - Narpa Bhumi Gaunpalika
+    - नार्पा भूमि गाउँपालिका
+    - Narpa Bhumi
+    - नार्पा भूमि
+  narphu:
+    - Narphu Gaunpalika
+    - नारफू गाउँपालिका
+    - Narphu
+    - नारफू
+  nashong:
+    - Nashong Gaunpalika
+    - नाशोङ गाउँपालिका
+    - Nashong
+    - नाशोङ
+  nason:
+    - Nason Gaunpalika
+    - नासोँ गाउँपालिका
+    - Nason
+    - नासोँ
+  naubahini:
+    - Naubahini Gaunpalika
+    - नौबहिनी  गाउँपालिका
+    - Naubahini
+    - नौबहिनी
+  naugad:
+    - Naugad  Gaunpalika
+    - नौगाड  गाउँपालिका
+    - Naugad
+    - नौगाड
+  naukunda:
+    - Naukunda Gaunpalika
+    - नौकुण्ड  गाउँपालिका
+    - Naukunda
+    - नौकुण्ड
+  naumule:
+    - Naumule Gaunpalika
+    - नौमुले  गाउँपालिका
+    - Naumule
+    - नौमुले
+  nawadurga:
+    - Nawadurga Gaunpalika
+    - नवदुर्गा  गाउँपालिका
+    - Nawadurga
+    - नवदुर्गा
   nawarajpur:
-    [Nawarajpur Gaunpalika, नवराजपुर  गाउँपालिका, Nawarajpur, नवराजपुर]
+    - Nawarajpur Gaunpalika
+    - नवराजपुर  गाउँपालिका
+    - Nawarajpur
+    - नवराजपुर
   nechasalyan:
-    [
-      Necha Salyan Gaunpalika,
-      नेचासल्यान  गाउँपालिका,
-      Nechasalyan Gaunpalika,
-      Necha Salyan,
-      नेचासल्यान,
-      Nechasalyan,
-    ]
+    - Necha Salyan Gaunpalika
+    - नेचासल्यान  गाउँपालिका
+    - Nechasalyan Gaunpalika
+    - Necha Salyan
+    - नेचासल्यान
+    - Nechasalyan
+  neshyang:
+    - Neshyang Gaunpalika
+    - नेस्याङ गाउँपालिका
+    - Neshyang
+    - नेस्याङ
   netrawati_dabjong:
-    [
-      Netrawati Dabjong Gaunpalika,
-      नेत्रावती  गाउँपालिका,
-      Netrawati Dabjong,
-      नेत्रावती,
-    ]
-  nisdi: [Nisdi Gaunpalika, निस्दी  गाउँपालिका, Nisdi, निस्दी]
-  nisikhola: [Nisikhola Gaunpalika, निसीखोला  गाउँपालिका, Nisikhola, निसीखोला]
-  om_satiya: [Om Satiya Gaunpalika, ओमसतिया  गाउँपालिका, Om Satiya, ओमसतिया]
+    - Netrawati Dabjong Gaunpalika
+    - नेत्रावती  गाउँपालिका
+    - Netrawati Dabjong
+    - नेत्रावती
+    - Netrawati
+    - नेत्रावति गाउँपालिका
+    - नेत्रावति डाबजोङ
+  nisdi:
+    - Nisdi Gaunpalika
+    - निस्दी  गाउँपालिका
+    - Nisdi
+    - निस्दी
+  nisikhola:
+    - Nisikhola Gaunpalika
+    - निसीखोला  गाउँपालिका
+    - Nisikhola
+    - निसीखोला
+  om_satiya:
+    - Om Satiya Gaunpalika
+    - ओमसतिया  गाउँपालिका
+    - Om Satiya
+    - ओमसतिया
   pachal_jharana:
-    [
-      Pachal Jharana Gaunpalika,
-      पचाल झरना  गाउँपालिका,
-      Pachal Jharana,
-      पचाल झरना,
-    ]
-  pachaljharana:
-    [Pachaljharana Gaunpalika, पचाल झरना गाउँपालिका, Pachaljharana, पचाल झरना]
-  paiyu: [Paiyu Gaunpalika, पैयुं  गाउँपालिका, Paiyu, पैयुं]
+    - Pachal Jharana Gaunpalika
+    - पचाल झरना  गाउँपालिका
+    - Pachal Jharana
+    - पचाल झरना
+    - Pachaljharana Gaunpalika
+    - पचाल झरना गाउँपालिका
+    - Pachaljharana
+  painyu:
+    - Painyu Gaunpalika
+    - पैयूं गाउँपालिका
+    - Painyu
+    - पैयूं
+  paiyu:
+    - Paiyu Gaunpalika
+    - पैयुं  गाउँपालिका
+    - Paiyu
+    - पैयुं
   pakaha_mainpur:
-    [
-      Pakaha Mainpur Gaunpalika,
-      पकाहा मैनपुर  गाउँपालिका,
-      Pakaha Mainpur,
-      पकाहा मैनपुर,
-    ]
-  palata: [Palata Gaunpalika, पलाता  गाउँपालिका, Palata, पलाता]
+    - Pakaha Mainpur Gaunpalika
+    - पकाहा मैनपुर  गाउँपालिका
+    - Pakaha Mainpur
+    - पकाहा मैनपुर
+  palata:
+    - Palata Gaunpalika
+    - पलाता  गाउँपालिका
+    - Palata
+    - पलाता
   palhinandan:
-    [Palhinandan Gaunpalika, पाल्हीनन्दन  गाउँपालिका, Palhinandan, पाल्हीनन्दन]
+    - Palhinandan Gaunpalika
+    - पाल्हीनन्दन  गाउँपालिका
+    - Palhinandan
+    - पाल्हीनन्दन
+    - Palhi Nandan
   panchakanya:
-    [Panchakanya Gaunpalika, पन्चकन्या  गाउँपालिका, Panchakanya, पन्चकन्या]
+    - Panchakanya Gaunpalika
+    - पन्चकन्या  गाउँपालिका
+    - Panchakanya
+    - पन्चकन्या
+  pancheshwar:
+    - Pancheshwar Gaunpalika
+    - पञ्चेश्वर गाउँपालिका
+    - Pancheshwar
+    - पञ्चेश्वर
   pancheshwor:
-    [Pancheshwor Gaunpalika, पन्चेश्वर  गाउँपालिका, Pancheshwor, पन्चेश्वर]
+    - Pancheshwor Gaunpalika
+    - पन्चेश्वर  गाउँपालिका
+    - Pancheshwor
+    - पन्चेश्वर
   panchpokhari_thangpal:
-    [
-      Panchpokhari Thangpal Gaunpalika,
-      पाँचपोखरी थाड०पाल  गाउँपालिका,
-      Panchpokhari Thangpal,
-      पाँचपोखरी थाड०पाल,
-    ]
-  panini: [Panini Gaunpalika, पाणिनी  गाउँपालिका, Panini, पाणिनी]
+    - Panchpokhari Thangpal Gaunpalika
+    - पाँचपोखरी थाड०पाल  गाउँपालिका
+    - Panchpokhari Thangpal
+    - पाँचपोखरी थाड०पाल
+  pandav_gupha:
+    - Pandav Gupha Gaunpalika
+    - पाण्डव गुफा गाउँपालिका
+    - Pandav Gupha
+    - पाण्डव गुफा
+  panini:
+    - Panini Gaunpalika
+    - पाणिनी  गाउँपालिका
+    - Panini
+    - पाणिनी
   parawanipur:
-    [Parawanipur Gaunpalika, परवानीपुर  गाउँपालिका, Parawanipur, परवानीपुर]
+    - Parawanipur Gaunpalika
+    - परवानीपुर  गाउँपालिका
+    - Parawanipur
+    - परवानीपुर
+    - Parwanipur
+  parbati_kunda:
+    - Parbati Kunda Gaunpalika
+    - पार्वतीकुण्ड गाउँपालिका
+    - Parbati Kunda
+    - पार्वतीकुण्ड
   paribartan:
-    [
-      Paribartan Gaunpalika,
-      परिवर्तन गाउँपालिका,
-      Pariwartan Gaunpalika,
-      दुईखोली  गाउँपालिका,
-      Paribartan,
-      परिवर्तन,
-      Pariwartan,
-      दुईखोली,
-    ]
-  parsa: [Parsa Gaunpalika, पर्सा  गाउँपालिका, Parsa, पर्सा]
-  patarasi: [Patarasi Gaunpalika, पातारासी  गाउँपालिका, Patarasi, पातारासी]
+    - Paribartan Gaunpalika
+    - परिवर्तन गाउँपालिका
+    - Pariwartan Gaunpalika
+    - Paribartan
+    - परिवर्तन
+    - Pariwartan
+  parsa:
+    - Parsa Gaunpalika
+    - पर्सा  गाउँपालिका
+    - Parsa
+    - पर्सा
+  patarasi:
+    - Patarasi Gaunpalika
+    - पातारासी  गाउँपालिका
+    - Patarasi
+    - पातारासी
+    - Patrasi
   paterwa_sugauli:
-    [
-      Paterwa Sugauli Gaunpalika,
-      पटेर्वा सुगौली  गाउँपालिका,
-      Paterwa Sugauli,
-      पटेर्वा सुगौली,
-    ]
+    - Paterwa Sugauli Gaunpalika
+    - पटेर्वा सुगौली  गाउँपालिका
+    - Paterwa Sugauli
+    - पटेर्वा सुगौली
   pathivara_yangwarak:
-    [
-      Pathivara Yangwarak Gaunpalika,
-      याङ्वरक  गाउँपालिका,
-      Pathivara Yangwarak,
-      याङ्वरक,
-    ]
+    - Pathivara Yangwarak Gaunpalika
+    - याङ्वरक  गाउँपालिका
+    - Pathivara Yangwarak
+    - याङ्वरक
   pauwa_dunma:
-    [Pauwa Dunma Gaunpalika, पौवा दुङ्मा  गाउँपालिका, Pauwa Dunma, पौवा दुङ्मा]
-  pauwadungma:
-    [Pauwadungma Gaunpalika, पौवा दुङ्मा  गाउँपालिका, Pauwadungma, पौवा दुङ्मा]
-  phakphokathum:
-    [Phakphokathum Gaunpalika, फाकफोकथुम गाउँपालिका, Phakphokathum, फाकफोकथुम]
+    - Pauwa Dunma Gaunpalika
+    - पौवा दुङ्मा  गाउँपालिका
+    - Pauwa Dunma
+    - पौवा दुङ्मा
+    - Pauwadungma Gaunpalika
+    - Pauwadungma
   phaktanlung:
-    [
-      Phaktanglung Gaunpalika,
-      फक्ताङ्लुङ्ग  गाउँपालिका,
-      Phaktanlung Gaunpalika,
-      Phaktanglung,
-      फक्ताङ्लुङ्ग,
-      Phaktanlung,
-    ]
-  phalelung: [Phalelung Gaunpalika, फालेलुङ्ग  गाउँपालिका, Phalelung, फालेलुङ्ग]
-  phedap: [Phedap Gaunpalika, फेदाप  गाउँपालिका, Phedap, फेदाप]
+    - Phaktanglung Gaunpalika
+    - फक्ताङ्लुङ्ग  गाउँपालिका
+    - Phaktanlung Gaunpalika
+    - Phaktanglung
+    - फक्ताङ्लुङ्ग
+    - Phaktanlung
+  phedap:
+    - Phedap Gaunpalika
+    - फेदाप  गाउँपालिका
+    - Phedap
+    - फेदाप
   phedikhola:
-    [Phedikhola Gaunpalika, फेदीखोला  गाउँपालिका, Phedikhola, फेदीखोला]
-  pheta: [Pheta Gaunpalika, फेटा  गाउँपालिका, Pheta, फेटा]
-  phikkal: [Phikkal Gaunpalika, फिक्कल  गाउँपालिका, Phikkal, फिक्कल]
-  pipara: [Pipara Gaunpalika, पिपरा  गाउँपालिका, Pipara, पिपरा]
-  prasauni: [Prasauni Gaunpalika, प्रसौनी  गाउँपालिका, Prasauni, प्रसौनी]
+    - Phedikhola Gaunpalika
+    - फेदीखोला  गाउँपालिका
+    - Phedikhola
+    - फेदीखोला
+  pheta:
+    - Pheta Gaunpalika
+    - फेटा  गाउँपालिका
+    - Pheta
+    - फेटा
+  phikkal:
+    - Phikkal Gaunpalika
+    - फिक्कल  गाउँपालिका
+    - Phikkal
+    - फिक्कल
+  pipara:
+    - Pipara Gaunpalika
+    - पिपरा  गाउँपालिका
+    - Pipara
+    - पिपरा
+    - Pipra
+  prasauni:
+    - Prasauni Gaunpalika
+    - प्रसौनी  गाउँपालिका
+    - Prasauni
+    - प्रसौनी
   pratapapur:
-    [Pratapapur Gaunpalika, प्रतापपुर  गाउँपालिका, Pratapapur, प्रतापपुर]
+    - Pratapapur Gaunpalika
+    - प्रतापपुर  गाउँपालिका
+    - Pratapapur
+    - प्रतापपुर
+    - Pratappur
   purbakhola:
-    [Purbakhola Gaunpalika, पुर्वखोला  गाउँपालिका, Purbakhola, पुर्वखोला]
+    - Purbakhola Gaunpalika
+    - पुर्वखोला  गाउँपालिका
+    - Purbakhola
+    - पुर्वखोला
   purbichauki:
-    [
-      Purbichauki Gaunpalika,
-      पुर्विचौकी गाउँपालिका,
-      Purbichouki Gaunpalika,
-      Purbichauki,
-      पुर्विचौकी,
-      Purbichouki,
-    ]
+    - Purbichauki Gaunpalika
+    - पुर्विचौकी गाउँपालिका
+    - Purbichouki Gaunpalika
+    - Purbichauki
+    - पुर्विचौकी
+    - Purbichouki
   putha_uttanganga:
-    [
-      Putha Uttanganga Gaunpalika,
-      पुथा उत्तरगंगा  गाउँपालिका,
-      Putha Uttanganga,
-      पुथा उत्तरगंगा,
-    ]
-  raghuganga: [Raghuganga Gaunpalika, रघुगंगा  गाउँपालिका, Raghuganga, रघुगंगा]
+    - Putha Uttanganga Gaunpalika
+    - पुथा उत्तरगंगा  गाउँपालिका
+    - Putha Uttanganga
+    - पुथा उत्तरगंगा
+    - Putha Uttarganga
+  raghuganga:
+    - Raghuganga Gaunpalika
+    - रघुगंगा  गाउँपालिका
+    - Raghuganga
+    - रघुगंगा
   rainadevi_chhahara:
-    [
-      Rainadevi Chhahara Gaunpalika,
-      रैनादेवी छहरा  गाउँपालिका,
-      Rainadevi Chhahara,
-      रैनादेवी छहरा,
-    ]
-  rajgadh: [Rajgadh Gaunpalika, राजगढ गाउँपालिका, Rajgadh, राजगढ]
-  rajpur: [Rajpur Gaunpalika, राजपुर  गाउँपालिका, Rajpur, राजपुर]
+    - Rainadevi Chhahara Gaunpalika
+    - रैनादेवी छहरा  गाउँपालिका
+    - Rainadevi Chhahara
+    - रैनादेवी छहरा
+  rajgadh:
+    - Rajgadh Gaunpalika
+    - राजगढ गाउँपालिका
+    - Rajgadh
+    - राजगढ
+  rajpur:
+    - Rajpur Gaunpalika
+    - राजपुर  गाउँपालिका
+    - Rajpur
+    - राजपुर
   raksirang:
-    [Raksirang Gaunpalika, राक्सिराङ्ग  गाउँपालिका, Raksirang, राक्सिराङ्ग]
+    - Raksirang Gaunpalika
+    - राक्सिराङ्ग  गाउँपालिका
+    - Raksirang
+    - राक्सिराङ्ग
   ramaroshan:
-    [Ramaroshan Gaunpalika, रामारोशन  गाउँपालिका, Ramaroshan, रामारोशन]
-  rambha: [Rambha Gaunpalika, रम्भा  गाउँपालिका, Rambha, रम्भा]
-  ramnagar: [Ramnagar Gaunpalika, रामनगर  गाउँपालिका, Ramnagar, रामनगर]
+    - Ramaroshan Gaunpalika
+    - रामारोशन  गाउँपालिका
+    - Ramaroshan
+    - रामारोशन
+  rambha:
+    - Rambha Gaunpalika
+    - रम्भा  गाउँपालिका
+    - Rambha
+    - रम्भा
+  ramnagar:
+    - Ramnagar Gaunpalika
+    - रामनगर  गाउँपालिका
+    - Ramnagar
+    - रामनगर
   ramprasad_rai:
-    [
-      Ramprasad Rai Gaunpalika,
-      रामप्रसाद राई  गाउँपालिका,
-      Ramprasad Rai,
-      रामप्रसाद राई,
-    ]
-  ramprasadrai:
-    [
-      Ramprasadrai Gaunpalika,
-      रामप्रसाद राई  गाउँपालिका,
-      Ramprasadrai,
-      रामप्रसाद राई,
-    ]
-  rapti: [Rapti Gaunpalika, राप्ती  गाउँपालिका, Rapti, राप्ती]
+    - Ramprasad Rai Gaunpalika
+    - रामप्रसाद राई  गाउँपालिका
+    - Ramprasad Rai
+    - रामप्रसाद राई
+    - Ramprasadrai Gaunpalika
+    - Ramprasadrai
+  rapti:
+    - Rapti Gaunpalika
+    - राप्ती  गाउँपालिका
+    - Rapti
+    - राप्ती
   rapti_sonari:
-    [
-      Rapti Sonari Gaunpalika,
-      राप्ती सोनारी  गाउँपालिका,
-      Rapti Sonari,
-      राप्ती सोनारी,
-    ]
-  rautamai: [Rautamai Gaunpalika, रौतामाई  गाउँपालिका, Rautamai, रौतामाई]
-  rawa_besi: [Rawa Besi Gaunpalika, रावा बेसी गाउँपालिका, Rawa Besi, रावा बेसी]
-  ribdikot: [Ribdikot Gaunpalika, रिब्दीकोट  गाउँपालिका, Ribdikot, रिब्दीकोट]
+    - Rapti Sonari Gaunpalika
+    - राप्ती सोनारी  गाउँपालिका
+    - Rapti Sonari
+    - राप्ती सोनारी
+  rautamai:
+    - Rautamai Gaunpalika
+    - रौतामाई  गाउँपालिका
+    - Rautamai
+    - रौतामाई
+  rawa_besi:
+    - Rawa Besi Gaunpalika
+    - रावा बेसी गाउँपालिका
+    - Rawa Besi
+    - रावा बेसी
+  ribdikot:
+    - Ribdikot Gaunpalika
+    - रिब्दीकोट  गाउँपालिका
+    - Ribdikot
+    - रिब्दीकोट
   rishing:
-    [
-      Rhishing Gaunpalika,
-      ऋषिङ्ग  गाउँपालिका,
-      Rishing Gaunpalika,
-      Rhishing,
-      ऋषिङ्ग,
-      Rishing,
-    ]
-  rohini: [Rohini Gaunpalika, रोहिणी  गाउँपालिका, Rohini, रोहिणी]
-  rong: [Rong Gaunpalika, रोङ  गाउँपालिका, Rong, रोङ]
-  roshi: [Roshi Gaunpalika, रोशी  गाउँपालिका, Roshi, रोशी]
+    - Rhishing Gaunpalika
+    - ऋषिङ्ग  गाउँपालिका
+    - Rishing Gaunpalika
+    - Rhishing
+    - ऋषिङ्ग
+    - Rishing
+  rohini:
+    - Rohini Gaunpalika
+    - रोहिणी  गाउँपालिका
+    - Rohini
+    - रोहिणी
+  rong:
+    - Rong Gaunpalika
+    - रोङ  गाउँपालिका
+    - Rong
+    - रोङ
+  roshi:
+    - Roshi Gaunpalika
+    - रोशी  गाउँपालिका
+    - Roshi
+    - रोशी
   rubi_valley:
-    [Rubi Valley Gaunpalika, रुबी भ्याली  गाउँपालिका, Rubi Valley, रुबी भ्याली]
+    - Rubi Valley Gaunpalika
+    - रुबी भ्याली  गाउँपालिका
+    - Rubi Valley
+    - रुबी भ्याली
   runtigadhi:
-    [Runtigadhi Gaunpalika, रुन्टीगढी  गाउँपालिका, Runtigadhi, रुन्टीगढी]
-  rupa: [Rupa Gaunpalika, रूपा  गाउँपालिका, Rupa, रूपा]
-  rupani: [Rupani Gaunpalika, रुपनी  गाउँपालिका, Rupani, रुपनी]
+    - Runtigadhi Gaunpalika
+    - रुन्टीगढी  गाउँपालिका
+    - Runtigadhi
+    - रुन्टीगढी
+    - Runtigadi
+  rupa:
+    - Rupa Gaunpalika
+    - रूपा  गाउँपालिका
+    - Rupa
+    - रूपा
+  rupani:
+    - Rupani Gaunpalika
+    - रुपनी  गाउँपालिका
+    - Rupani
+    - रुपनी
   ruruchhetra:
-    [Ruruchhetra Gaunpalika, रुरुक्षेत्र गाउँपालिका, Ruruchhetra, रुरुक्षेत्र]
-  saipal: [Saipal Gaunpalika, साइपाल गाउँपालिका, Saipal, साइपाल]
-  sakela: [Sakela Gaunpalika, साकेला  गाउँपालिका, Sakela, साकेला]
+    - Ruruchhetra Gaunpalika
+    - रुरुक्षेत्र गाउँपालिका
+    - Ruruchhetra
+    - रुरुक्षेत्र
+    - Ruru
+    - रुरु गाउँपालिका
+    - Ruru Gaunpalika
+    - रुरु
+  sahid_lakhan:
+    - Sahid Lakhan Gaunpalika
+    - शहिद लखन गाउँपालिका
+    - Sahid Lakhan
+    - शहिद लखन
+  sailung:
+    - Sailung Gaunpalika
+    - शैलुङ्ग गाउँपालिका
+    - Sailung
+    - शैलुङ्ग
+  saipal:
+    - Saipal Gaunpalika
+    - साइपाल गाउँपालिका
+    - Saipal
+    - साइपाल
+  sakela:
+    - Sakela Gaunpalika
+    - साकेला  गाउँपालिका
+    - Sakela
+    - साकेला
   sakhuwa_nankarkatti:
-    [
-      Sakhuwa Nankarkatti Gaunpalika,
-      सखुवानान्कारकट्टी  गाउँपालिका,
-      Sakhuwa Nankarkatti,
-      सखुवानान्कारकट्टी,
-    ]
+    - Sakhuwa Nankarkatti Gaunpalika
+    - सखुवानान्कारकट्टी  गाउँपालिका
+    - Sakhuwa Nankarkatti
+    - सखुवानान्कारकट्टी
   sakhuwa_prasauni:
-    [
-      Sakhuwa Prasauni Gaunpalika,
-      सखुवा प्रसौनी  गाउँपालिका,
-      Sakhuwa Prasauni,
-      सखुवा प्रसौनी,
-    ]
+    - Sakhuwa Prasauni Gaunpalika
+    - सखुवा प्रसौनी  गाउँपालिका
+    - Sakhuwa Prasauni
+    - सखुवा प्रसौनी
   salpasilichho:
-    [
-      Salpa Silichho Gaunpalika,
-      साल्पासिलिछो  गाउँपालिका,
-      Salpasilichho Gaunpalika,
-      Salpa Silichho,
-      साल्पासिलिछो,
-      Salpasilichho,
-    ]
+    - Salpa Silichho Gaunpalika
+    - साल्पासिलिछो  गाउँपालिका
+    - Salpasilichho Gaunpalika
+    - Salpa Silichho
+    - साल्पासिलिछो
+    - Salpasilichho
   sammarimai:
-    [Sammarimai Gaunpalika, सम्मरीमाई  गाउँपालिका, Sammarimai, सम्मरीमाई]
-  samsi: [Samsi Gaunpalika, साम्सी  गाउँपालिका, Samsi, साम्सी]
-  sandakpur: [Sandakpur Gaunpalika, सन्दकपुर  गाउँपालिका, Sandakpur, सन्दकपुर]
+    - Sammarimai Gaunpalika
+    - सम्मरीमाई  गाउँपालिका
+    - Sammarimai
+    - सम्मरीमाई
+  samsi:
+    - Samsi Gaunpalika
+    - साम्सी  गाउँपालिका
+    - Samsi
+    - साम्सी
+  sandakpur:
+    - Sandakpur Gaunpalika
+    - सन्दकपुर  गाउँपालिका
+    - Sandakpur
+    - सन्दकपुर
   sangurigadhi:
-    [Sangurigadhi Gaunpalika, साँगुरीगढी  गाउँपालिका, Sangurigadhi, साँगुरीगढी]
-  sanibheri: [Sanibheri Gaunpalika, सानीभेरी  गाउँपालिका, Sanibheri, सानीभेरी]
+    - Sangurigadhi Gaunpalika
+    - साँगुरीगढी  गाउँपालिका
+    - Sangurigadhi
+    - साँगुरीगढी
+  sanibheri:
+    - Sanibheri Gaunpalika
+    - सानीभेरी  गाउँपालिका
+    - Sanibheri
+    - सानीभेरी
+    - Sani Bheri
   sanni_tribeni:
-    [
-      Sanni Tribeni Gaunpalika,
-      सान्नी त्रिवेणी  गाउँपालिका,
-      Sanni Tribeni,
-      सान्नी त्रिवेणी,
-    ]
-  sarawal: [Sarawal Gaunpalika, सरावल  गाउँपालिका, Sarawal, सरावल]
-  sarkegad: [Sarkegad Gaunpalika, सर्केगाड  गाउँपालिका, Sarkegad, सर्केगाड]
+    - Sanni Tribeni Gaunpalika
+    - सान्नी त्रिवेणी  गाउँपालिका
+    - Sanni Tribeni
+    - सान्नी त्रिवेणी
+  sarawal:
+    - Sarawal Gaunpalika
+    - सरावल  गाउँपालिका
+    - Sarawal
+    - सरावल
+  sarkegad:
+    - Sarkegad Gaunpalika
+    - सर्केगाड  गाउँपालिका
+    - Sarkegad
+    - सर्केगाड
   sarumarani:
-    [Sarumarani Gaunpalika, सरुमारानी  गाउँपालिका, Sarumarani, सरुमारानी]
+    - Sarumarani Gaunpalika
+    - सरुमारानी  गाउँपालिका
+    - Sarumarani
+    - सरुमारानी
   satyawati:
-    [
-      Satyawati Gaunpalika,
-      सत्यवती गाउँपालिका,
-      Satyawoti Gaunpalika,
-      Satyawati,
-      सत्यवती,
-      Satyawoti,
-    ]
+    - Satyawati Gaunpalika
+    - सत्यवती गाउँपालिका
+    - Satyawoti Gaunpalika
+    - Satyawati
+    - सत्यवती
+    - Satyawoti
   savapokhari:
-    [
-      Sabhapokhari Gaunpalika,
-      सभापोखरी  गाउँपालिका,
-      Savapokhari Gaunpalika,
-      Sabhapokhari,
-      सभापोखरी,
-      Savapokhari,
-    ]
-  sayal: [Sayal Gaunpalika, सायल  गाउँपालिका, Sayal, सायल]
+    - Sabhapokhari Gaunpalika
+    - सभापोखरी  गाउँपालिका
+    - Savapokhari Gaunpalika
+    - Sabhapokhari
+    - सभापोखरी
+    - Savapokhari
+  sayal:
+    - Sayal Gaunpalika
+    - सायल  गाउँपालिका
+    - Sayal
+    - सायल
   shahid_lakhan:
-    [Shahid Lakhan Gaunpalika, शहीद लखन  गाउँपालिका, Shahid Lakhan, शहीद लखन]
+    - Shahid Lakhan Gaunpalika
+    - शहीद लखन  गाउँपालिका
+    - Shahid Lakhan
+    - शहीद लखन
   shahidbhumi:
-    [Shahidbhumi Gaunpalika, सहिदभूमि गाउँपालिका, Shahidbhumi, सहिदभूमि]
-  shailung: [Shailung Gaunpalika, शैलुड०  गाउँपालिका, Shailung, शैलुड०]
+    - Shahidbhumi Gaunpalika
+    - सहिदभूमि गाउँपालिका
+    - Shahidbhumi
+    - सहिदभूमि
+    - Khalsa Chhintang Shahidbhumi
+    - खाल्सा छिन्ताङ सहिदभूमि गाउँपालिका
+    - खाल्सा छिन्ताङ
+    - Khalsa Chhintang
+  shailung:
+    - Shailung Gaunpalika
+    - शैलुड०  गाउँपालिका
+    - Shailung
+    - शैलुड०
   shantinagar:
-    [Shantinagar Gaunpalika, शान्तिनगर  गाउँपालिका, Shantinagar, शान्तिनगर]
+    - Shantinagar Gaunpalika
+    - शान्तिनगर  गाउँपालिका
+    - Shantinagar
+    - शान्तिनगर
   shey_phoksundo:
-    [
-      Shey Phoksundo Gaunpalika,
-      शे फोक्सुण्डो  गाउँपालिका,
-      Shey Phoksundo,
-      शे फोक्सुण्डो,
-    ]
-  shivalaya: [Shivalaya Gaunpalika, शिवालय  गाउँपालिका, Shivalaya, शिवालय]
-  shivanath: [Shivanath Gaunpalika, शिवनाथ  गाउँपालिका, Shivanath, शिवनाथ]
-  shivapuri: [Shivapuri Gaunpalika, शिवपुरी  गाउँपालिका, Shivapuri, शिवपुरी]
+    - Shey Phoksundo Gaunpalika
+    - शे फोक्सुण्डो  गाउँपालिका
+    - Shey Phoksundo
+    - शे फोक्सुण्डो
+  shivalaya:
+    - Shivalaya Gaunpalika
+    - शिवालय  गाउँपालिका
+    - Shivalaya
+    - शिवालय
+    - Shiwalaya
+  shivanath:
+    - Shivanath Gaunpalika
+    - शिवनाथ  गाउँपालिका
+    - Shivanath
+    - शिवनाथ
+  shivapuri:
+    - Shivapuri Gaunpalika
+    - शिवपुरी  गाउँपालिका
+    - Shivapuri
+    - शिवपुरी
   shuva_kalika:
-    [Shuva Kalika Gaunpalika, कालिका  गाउँपालिका, Shuva Kalika, कालिका]
+    - Shuva Kalika Gaunpalika
+    - Shuva Kalika
   shuvakalika:
-    [Shuvakalika Gaunpalika, शुभ कालिका गाउँपालिका, Shuvakalika, शुभ कालिका]
+    - Shuvakalika Gaunpalika
+    - शुभ कालिका गाउँपालिका
+    - Shuvakalika
+    - शुभ कालिका
   siddha_kumakh:
-    [
-      Siddha Kumakh Gaunpalika,
-      सिद्ध कुमाख गाउँपालिका,
-      Siddha Kumakh,
-      सिद्ध कुमाख,
-    ]
-  siddhakumakh:
-    [Siddhakumakh Gaunpalika, सिद्ध कुमाख गाउँपालिका, Siddhakumakh, सिद्ध कुमाख]
-  siddhalek: [Siddhalek Gaunpalika, सिद्धलेक  गाउँपालिका, Siddhalek, सिद्धलेक]
+    - Siddha Kumakh Gaunpalika
+    - सिद्ध कुमाख गाउँपालिका
+    - Siddha Kumakh
+    - सिद्ध कुमाख
+    - Siddhakumakh Gaunpalika
+    - Siddhakumakh
+  siddhalek:
+    - Siddhalek Gaunpalika
+    - सिद्धलेक  गाउँपालिका
+    - Siddhalek
+    - सिद्धलेक
   sidingba:
-    [
-      Sidingba Gaunpalika,
-      सिदिङ्गवा  गाउँपालिका,
-      Sidingwa Gaunpalika,
-      Sidingba,
-      सिदिङ्गवा,
-      Sidingwa,
-    ]
-  sigas: [Sigas Gaunpalika, सिगास  गाउँपालिका, Sigas, सिगास]
-  silichong: [Silichong Gaunpalika, सिलीचोङ  गाउँपालिका, Silichong, सिलीचोङ]
-  simkot: [Simkot Gaunpalika, सिमकोट  गाउँपालिका, Simkot, सिमकोट]
-  simta: [Simta Gaunpalika, सिम्ता  गाउँपालिका, Simta, सिम्ता]
-  sinja: [Sinja Gaunpalika, सिंजा  गाउँपालिका, Sinja, सिंजा]
+    - Sidingba Gaunpalika
+    - सिदिङ्गवा  गाउँपालिका
+    - Sidingwa Gaunpalika
+    - Sidingba
+    - सिदिङ्गवा
+    - Sidingwa
+  sigas:
+    - Sigas Gaunpalika
+    - सिगास  गाउँपालिका
+    - Sigas
+    - सिगास
+  silichong:
+    - Silichong Gaunpalika
+    - सिलीचोङ  गाउँपालिका
+    - Silichong
+    - सिलीचोङ
+  simkot:
+    - Simkot Gaunpalika
+    - सिमकोट  गाउँपालिका
+    - Simkot
+    - सिमकोट
+  simta:
+    - Simta Gaunpalika
+    - सिम्ता  गाउँपालिका
+    - Simta
+    - सिम्ता
+  sinja:
+    - Sinja Gaunpalika
+    - सिंजा  गाउँपालिका
+    - Sinja
+    - सिंजा
   siranchowk:
-    [Siranchowk Gaunpalika, सिरानचोक  गाउँपालिका, Siranchowk, सिरानचोक]
+    - Siranchowk Gaunpalika
+    - सिरानचोक  गाउँपालिका
+    - Siranchowk
+    - सिरानचोक
+    - Siranchok
   sirijanga:
-    [
-      Sirijanga Gaunpalika,
-      सिरीजङ्गा गाउंपालिका,
-      Sirijangha Gaunpalika,
-      Sirijanga,
-      Sirijangha,
-    ]
-  sisne: [Sisne Gaunpalika, सिस्ने  गाउँपालिका, Sisne, सिस्ने]
-  siyari: [Siyari Gaunpalika, सियारी  गाउँपालिका, Siyari, सियारी]
-  sonama: [Sonama Gaunpalika, सोनमा  गाउँपालिका, Sonama, सोनमा]
-  soru: [Soru Gaunpalika, सोरु  गाउँपालिका, Soru, सोरु]
-  sotang: [Sotang Gaunpalika, सोताङ  गाउँपालिका, Sotang, सोताङ]
+    - Sirijanga Gaunpalika
+    - सिरीजङ्गा गाउंपालिका
+    - Sirijangha Gaunpalika
+    - Sirijanga
+    - Sirijangha
+  sisne:
+    - Sisne Gaunpalika
+    - सिस्ने  गाउँपालिका
+    - Sisne
+    - सिस्ने
+  siyari:
+    - Siyari Gaunpalika
+    - सियारी  गाउँपालिका
+    - Siyari
+    - सियारी
+  sonama:
+    - Sonama Gaunpalika
+    - सोनमा  गाउँपालिका
+    - Sonama
+    - सोनमा
+  soru:
+    - Soru Gaunpalika
+    - सोरु  गाउँपालिका
+    - Soru
+    - सोरु
+  sotang:
+    - Sotang Gaunpalika
+    - सोताङ  गाउँपालिका
+    - Sotang
+    - सोताङ
   subarna:
-    [
-      Subarna Gaunpalika,
-      सुवर्ण  गाउँपालिका,
-      Suwarna Gaunpalika,
-      Subarna,
-      सुवर्ण,
-      Suwarna,
-    ]
+    - Subarna Gaunpalika
+    - सुवर्ण  गाउँपालिका
+    - Suwarna Gaunpalika
+    - Subarna
+    - सुवर्ण
+    - Suwarna
   suddhodhan:
-    [
-      Shuddhodhan Gaunpalika,
-      शुद्धोधन  गाउँपालिका,
-      Suddhodhan Gaunpalika,
-      सुद्धोधन  गाउँपालिका,
-      Shuddhodhan,
-      शुद्धोधन,
-      Suddhodhan,
-      सुद्धोधन,
-    ]
-  sunapati: [Sunapati Gaunpalika, सुनापती  गाउँपालिका, Sunapati, सुनापती]
+    - Shuddhodhan Gaunpalika
+    - शुद्धोधन  गाउँपालिका
+    - Suddhodhan Gaunpalika
+    - सुद्धोधन  गाउँपालिका
+    - Shuddhodhan
+    - शुद्धोधन
+    - Suddhodhan
+    - सुद्धोधन
+    - Sudhdhodhan
+  sukidaha:
+    - Sukidaha Gaunpalika
+    - सुकिदह गाउँपालिका
+    - Sukidaha
+    - सुकिदह
+  sunapati:
+    - Sunapati Gaunpalika
+    - सुनापती  गाउँपालिका
+    - Sunapati
+    - सुनापती
   sunchhahari:
-    [Sunchhahari Gaunpalika, सुनछहरी  गाउँपालिका, Sunchhahari, सुनछहरी]
+    - Sunchhahari Gaunpalika
+    - सुनछहरी  गाउँपालिका
+    - Sunchhahari
+    - सुनछहरी
   sunil_smriti:
-    [
-      Sunil Smriti Gaunpalika,
-      सुनिल स्मृति गाउँपालिका,
-      Sunil Smriti,
-      सुनिल स्मृति,
-    ]
-  sunkoshi: [Sunkoshi Gaunpalika, सुनकोशी  गाउँपालिका, Sunkoshi, सुनकोशी]
-  surma: [Surma Gaunpalika, सूर्मा  गाउँपालिका, Surma, सूर्मा]
-  surnaya: [Surnaya Gaunpalika, सुर्नया  गाउँपालिका, Surnaya, सुर्नया]
+    - Sunil Smriti Gaunpalika
+    - सुनिल स्मृति गाउँपालिका
+    - Sunil Smriti
+    - सुनिल स्मृति
+  sunkoshi:
+    - Sunkoshi Gaunpalika
+    - सुनकोशी  गाउँपालिका
+    - Sunkoshi
+    - सुनकोशी
+  surma:
+    - Surma Gaunpalika
+    - सूर्मा  गाउँपालिका
+    - Surma
+    - सूर्मा
+  surnaya:
+    - Surnaya Gaunpalika
+    - सुर्नया  गाउँपालिका
+    - Surnaya
+    - सुर्नया
   suryagadhi:
-    [Suryagadhi Gaunpalika, सुर्यगढी  गाउँपालिका, Suryagadhi, सुर्यगढी]
-  susta: [Susta Gaunpalika, सुस्ता  गाउँपालिका, Susta, सुस्ता]
+    - Suryagadhi Gaunpalika
+    - सुर्यगढी  गाउँपालिका
+    - Suryagadhi
+    - सुर्यगढी
+  susta:
+    - Susta Gaunpalika
+    - सुस्ता  गाउँपालिका
+    - Susta
+    - सुस्ता
+  suwarnabati:
+    - Suwarnabati Gaunpalika
+    - सुवर्णावती गाउँपालिका
+    - Suwarnabati
+    - सुवर्णावती
   swami_kartik_khapar:
-    [
-      Swami Kartik Khapar Gaunpalika,
-      स्वामीकार्तिक खापर गाउँपालिका,
-      Swami Kartik Khapar,
-      स्वामीकार्तिक खापर,
-    ]
+    - Swami Kartik Khapar Gaunpalika
+    - स्वामीकार्तिक खापर गाउँपालिका
+    - Swami Kartik Khapar
+    - स्वामीकार्तिक खापर
+    - Swami Kartik
   swamikartik_khapar:
-    [
-      Swamikartik Khapar Gaunpalika,
-      स्वामी कार्तिक  गाउँपालिका,
-      Swamikartik Khapar,
-      स्वामी कार्तिक,
-    ]
-  tadi: [Tadi Gaunpalika, तादी  गाउँपालिका, Tadi, तादी]
-  talkot: [Talkot Gaunpalika, तालकोट  गाउँपालिका, Talkot, तालकोट]
-  tamakoshi: [Tamakoshi Gaunpalika, तामाकोशी  गाउँपालिका, Tamakoshi, तामाकोशी]
+    - Swamikartik Khapar Gaunpalika
+    - स्वामी कार्तिक  गाउँपालिका
+    - Swamikartik Khapar
+    - स्वामी कार्तिक
+  tadi:
+    - Tadi Gaunpalika
+    - तादी  गाउँपालिका
+    - Tadi
+    - तादी
+  talkot:
+    - Talkot Gaunpalika
+    - तालकोट  गाउँपालिका
+    - Talkot
+    - तालकोट
+  tamakoshi:
+    - Tamakoshi Gaunpalika
+    - तामाकोशी  गाउँपालिका
+    - Tamakoshi
+    - तामाकोशी
   tamankhola:
-    [Tamankhola Gaunpalika, तमानखोला  गाउँपालिका, Tamankhola, तमानखोला]
-  tanjakot: [Tanjakot Gaunpalika, ताँजाकोट  गाउँपालिका, Tanjakot, ताँजाकोट]
-  tapli: [Tapli Gaunpalika, ताप्ली  गाउँपालिका, Tapli, ताप्ली]
+    - Tamankhola Gaunpalika
+    - तमानखोला  गाउँपालिका
+    - Tamankhola
+    - तमानखोला
+    - Taman Khola
+  tanjakot:
+    - Tanjakot Gaunpalika
+    - ताँजाकोट  गाउँपालिका
+    - Tanjakot
+    - ताँजाकोट
+  tapli:
+    - Tapli Gaunpalika
+    - ताप्ली  गाउँपालिका
+    - Tapli
+    - ताप्ली
   tarakeshwor:
-    [Tarakeshwor Gaunpalika, तारकेश्वर  गाउँपालिका, Tarakeshwor, तारकेश्वर]
-  tarakhola: [Tarakhola Gaunpalika, ताराखोला  गाउँपालिका, Tarakhola, ताराखोला]
-  tatopani: [Tatopani Gaunpalika, तातोपानी  गाउँपालिका, Tatopani, तातोपानी]
-  temal: [Temal Gaunpalika, तेमाल  गाउँपालिका, Temal, तेमाल]
+    - Tarakeshwor Gaunpalika
+    - तारकेश्वर  गाउँपालिका
+    - Tarakeshwor
+    - तारकेश्वर
+    - Tarkeshwar
+  tarakhola:
+    - Tarakhola Gaunpalika
+    - ताराखोला  गाउँपालिका
+    - Tarakhola
+    - ताराखोला
+    - Tara Khola
+  tatopani:
+    - Tatopani Gaunpalika
+    - तातोपानी  गाउँपालिका
+    - Tatopani
+    - तातोपानी
+  temal:
+    - Temal Gaunpalika
+    - तेमाल  गाउँपालिका
+    - Temal
+    - तेमाल
   temkemaiyum:
-    [
-      Temkemaiyum Gaunpalika,
-      ट्याम्के मैयुम  गाउँपालिका,
-      Temkemaiyung Gaunpalika,
-      टेम्केमैयुङ गाउँपालिका,
-      Temkemaiyum,
-      ट्याम्के मैयुम,
-      Temkemaiyung,
-      टेम्केमैयुङ,
-    ]
-  thakre: [Thakre Gaunpalika, थाक्रे  गाउँपालिका, Thakre, थाक्रे]
-  thalara: [Thalara Gaunpalika, थलारा  गाउँपालिका, Thalara, थलारा]
+    - Temkemaiyum Gaunpalika
+    - ट्याम्के मैयुम  गाउँपालिका
+    - Temkemaiyung Gaunpalika
+    - टेम्केमैयुङ गाउँपालिका
+    - Temkemaiyum
+    - ट्याम्के मैयुम
+    - Temkemaiyung
+    - टेम्केमैयुङ
+    - Tyamkemaiyung
+  thakre:
+    - Thakre Gaunpalika
+    - थाक्रे  गाउँपालिका
+    - Thakre
+    - थाक्रे
+  thalara:
+    - Thalara Gaunpalika
+    - थलारा  गाउँपालिका
+    - Thalara
+    - थलारा
   thantikandh:
-    [Thantikandh Gaunpalika, ठाँटीकाँध  गाउँपालिका, Thantikandh, ठाँटीकाँध]
+    - Thantikandh Gaunpalika
+    - ठाँटीकाँध  गाउँपालिका
+    - Thantikandh
+    - ठाँटीकाँध
   thasang:
-    [
-      Thasang Gaunpalika,
-      थासाङ  गाउँपालिका,
-      Thawang Gaunpalika,
-      थबाङ्ग  गाउँपालिका,
-      Thasang,
-      थासाङ,
-      Thawang,
-      थबाङ्ग,
-    ]
+    - Thasang Gaunpalika
+    - थासाङ  गाउँपालिका
+    - Thawang Gaunpalika
+    - थबाङ्ग  गाउँपालिका
+    - Thasang
+    - थासाङ
+    - Thawang
+    - थबाङ्ग
   thori:
-    [Thori Gaunpalika, ठोरी (सुवर्णपुर)  गाउँपालिका, Thori, ठोरी (सुवर्णपुर)]
+    - Thori Gaunpalika
+    - ठोरी (सुवर्णपुर)  गाउँपालिका
+    - Thori
+    - ठोरी (सुवर्णपुर)
+    - सुवर्णपुर
+    - Suwarnapur
+    - Suwarnapur Gaunpalika
   thulung_dudhkoshi:
-    [
-      Thulung Dudhkoshi Gaunpalika,
-      थुलुङ दुधकोशी गाउँपालिका,
-      Thulung Dudhkoshi,
-      थुलुङ दुधकोशी,
-    ]
-  tila: [Tila Gaunpalika, तिला  गाउँपालिका, Tila, तिला]
+    - Thulung Dudhkoshi Gaunpalika
+    - थुलुङ दुधकोशी गाउँपालिका
+    - Thulung Dudhkoshi
+    - थुलुङ दुधकोशी
+  tila:
+    - Tila Gaunpalika
+    - तिला  गाउँपालिका
+    - Tila
+    - तिला
   tilathi_koiladi:
-    [
-      Tilathi Koiladi Gaunpalika,
-      तिलाठी कोईलाडी  गाउँपालिका,
-      Tilathi Koiladi,
-      तिलाठी कोईलाडी,
-    ]
-  tinau: [Tinau Gaunpalika, तिनाउ  गाउँपालिका, Tinau, तिनाउ]
-  tinpatan: [Tinpatan Gaunpalika, तीनपाटन  गाउँपालिका, Tinpatan, तीनपाटन]
-  tirahut: [Tirahut Gaunpalika, तिरहुत  गाउँपालिका, Tirahut, तिरहुत]
-  tribeni: [Tribeni Gaunpalika, त्रिवेणी  गाउँपालिका, Tribeni, त्रिवेणी]
+    - Tilathi Koiladi Gaunpalika
+    - तिलाठी कोईलाडी  गाउँपालिका
+    - Tilathi Koiladi
+    - तिलाठी कोईलाडी
+  tinau:
+    - Tinau Gaunpalika
+    - तिनाउ  गाउँपालिका
+    - Tinau
+    - तिनाउ
+  tinpatan:
+    - Tinpatan Gaunpalika
+    - तीनपाटन  गाउँपालिका
+    - Tinpatan
+    - तीनपाटन
+  tirahut:
+    - Tirahut Gaunpalika
+    - तिरहुत  गाउँपालिका
+    - Tirahut
+    - तिरहुत
+  tribeni:
+    - Tribeni Gaunpalika
+    - त्रिवेणी  गाउँपालिका
+    - Tribeni
+    - त्रिवेणी
   tripurasundari:
-    [
-      Tripurasundari Gaunpalika,
-      त्रिपुरासुन्दरी  गाउँपालिका,
-      Tripurasundari,
-      त्रिपुरासुन्दरी,
-    ]
-  tumbewa: [Tumbewa Gaunpalika, तुम्बेवा  गाउँपालिका, Tumbewa, तुम्बेवा]
+    - Tripurasundari Gaunpalika
+    - त्रिपुरासुन्दरी  गाउँपालिका
+    - Tripurasundari
+    - त्रिपुरासुन्दरी
+    - Tripura Sundari
+  tumbewa:
+    - Tumbewa Gaunpalika
+    - तुम्बेवा  गाउँपालिका
+    - Tumbewa
+    - तुम्बेवा
   turmakhand:
-    [Turmakhand Gaunpalika, तुर्माखाँद  गाउँपालिका, Turmakhand, तुर्माखाँद]
+    - Turmakhand Gaunpalika
+    - तुर्माखाँद  गाउँपालिका
+    - Turmakhand
+    - तुर्माखाँद
+    - Turmakhad
   udayapurgadhi:
-    [Udayapurgadhi Gaunpalika, उदयपुरगढी  गाउँपालिका, Udayapurgadhi, उदयपुरगढी]
-  umakunda: [Umakunda Gaunpalika, उमाकुण्ड  गाउँपालिका, Umakunda, उमाकुण्ड]
-  uttargaya: [Uttargaya Gaunpalika, उत्तरगया  गाउँपालिका, Uttargaya, उत्तरगया]
+    - Udayapurgadhi Gaunpalika
+    - उदयपुरगढी  गाउँपालिका
+    - Udayapurgadhi
+    - उदयपुरगढी
+  umakunda:
+    - Umakunda Gaunpalika
+    - उमाकुण्ड  गाउँपालिका
+    - Umakunda
+    - उमाकुण्ड
+  uttargaya:
+    - Uttargaya Gaunpalika
+    - उत्तरगया  गाउँपालिका
+    - Uttargaya
+    - उत्तरगया
   varagung_muktichhetra:
-    [
-      Varagung Muktichhetra Gaunpalika,
-      वारागुङ मुक्तिक्षेत्र गाउँपालिका,
-      Varagung Muktichhetra,
-      वारागुङ मुक्तिक्षेत्र,
-    ]
-  vyas: [Vyas Gaunpalika, ब्याँस गाउँपालिका, Vyas, ब्याँस]
-  yamunamai: [Yamunamai Gaunpalika, यमुनामाई  गाउँपालिका, Yamunamai, यमुनामाई]
+    - Varagung Muktichhetra Gaunpalika
+    - वारागुङ मुक्तिक्षेत्र गाउँपालिका
+    - Varagung Muktichhetra
+    - वारागुङ मुक्तिक्षेत्र
+  yamunamai:
+    - Yamunamai Gaunpalika
+    - यमुनामाई  गाउँपालिका
+    - Yamunamai
+    - यमुनामाई
+    - Yemunamai
   yangbarak:
-    [
-      Yangbarak Gaunpalika,
-      याङवरक  गाउँपालिका,
-      Yangwarak Gaunpalika,
-      Yangbarak,
-      याङवरक,
-      Yangwarak,
-    ]
-  yasodhara: [Yasodhara Gaunpalika, यसोधरा  गाउँपालिका, Yasodhara, यसोधरा]
+    - Yangbarak Gaunpalika
+    - याङवरक  गाउँपालिका
+    - Yangwarak Gaunpalika
+    - Yangbarak
+    - याङवरक
+    - Yangwarak
+  yasodhara:
+    - Yasodhara Gaunpalika
+    - यसोधरा  गाउँपालिका
+    - Yasodhara
+    - यसोधरा
+    - Yashodhara
+municipality:
+  aathbis:
+    - Aathbis Municipality
+    - आठबीस नगरपालिका
+    - Aathbis
+    - आठबीस
+    - Aathabis
+  aathbiskot:
+    - Aathabisakot Municipality
+    - आठबिसकोट नगरपालिका
+    - Aathbiskot Municipality
+    - Aathabisakot
+    - आठबिसकोट
+    - Aathbiskot
+  amargadhi:
+    - Amargadhi Municipality
+    - अमरगढी नगरपालिका
+    - Amargadhi
+    - अमरगढी
+  arjundhara:
+    - Arjundhara Municipality
+    - अर्जुनधारा नगरपालिका
+    - Arjundhara
+    - अर्जुनधारा
+  aurahi:
+    - Aurahi Municipality
+    - औरही नगरपालिका
+    - Aurahi
+    - औरही
+  badimalika:
+    - Badimalika Municipality
+    - बडिमालिका नगरपालिका
+    - Badimalika
+    - बडिमालिका
+  bagachour:
+    - Bagachour Municipality
+    - बागचौर नगरपालिका
+    - Bagachour
+    - बागचौर
+    - Bagchaur Municipality
+    - Bagchaur
+  baglung:
+    - Baglung Municipality
+    - बाग्लुङ्ग नगरपालिका
+    - Baglung
+    - बाग्लुङ्ग
+  bagmati:
+    - Bagmati Municipality
+    - बागमती नगरपालिका
+    - Bagmati
+    - बागमती
+  bahrabise:
+    - Bahrabise Municipality
+    - बाह्रबिसे नगरपालिका
+    - Bahrabise
+    - बाह्रबिसे
+  bahudarmai:
+    - Bahudarmai Municipality
+    - बहुदरमाई नगरपालिका
+    - Bahudarmai
+    - बहुदरमाई
+    - Bahudaramai
+  balara:
+    - Balara Municipality
+    - बलरा नगरपालिका
+    - Balara
+    - बलरा
+  balawa:
+    - Balawa Municipality
+    - बलवा नगरपालिका
+    - Balawa
+    - बलवा
+    - Balwa
+  banagad_kupinde:
+    - Banagad Kupinde Municipality
+    - बनगाड कुपिण्डे नगरपालिका
+    - Banagad Kupinde
+    - बनगाड कुपिण्डे
+    - Bangad Kupinde
+  banepa:
+    - Banepa Municipality
+    - बनेपा नगरपालिका
+    - Banepa
+    - बनेपा
+  banganga:
+    - Banganga Municipality
+    - बाणगंगा नगरपालिका
+    - Banganga
+    - बाणगंगा
+  bansgadhi:
+    - Bansgadhi Municipality
+    - बाँसगढी नगरपालिका
+    - Bansgadhi
+    - बाँसगढी
+    - Bansagadhi
+  barahachhetra:
+    - Barahachhetra Municipality
+    - बराह नगरपालिका
+    - Barahachhetra
+    - बराह
+    - Barah
+  barahathawa:
+    - Barahathawa Municipality
+    - बरहथवा नगरपालिका
+    - Barahathawa
+    - बरहथवा
+  barbardiya:
+    - Barbardiya Municipality
+    - बारबर्दिया नगरपालिका
+    - Barbardiya
+    - बारबर्दिया
+  bardaghat:
+    - Bardaghat Municipality
+    - बर्दघाट नगरपालिका
+    - Bardaghat
+    - बर्दघाट
+  bardibas:
+    - Bardibas Municipality
+    - बर्दिबास नगरपालिका
+    - Bardibas
+    - बर्दिबास
+  barhabise:
+    - Barhabise Municipality
+    - बाह्रविसे नगरपालिका
+    - Barhabise
+    - बाह्रविसे
+  bedkot:
+    - Bedkot Municipality
+    - बेदकोट नगरपालिका
+    - Bedkot
+    - बेदकोट
+  belaka:
+    - Belaka Municipality
+    - बेलका नगरपालिका
+    - Belaka
+    - बेलका
+  belbari:
+    - Belbari Municipality
+    - बेलबारी नगरपालिका
+    - Belbari
+    - बेलबारी
+  belkotgadhi:
+    - Belkotgadhi Municipality
+    - बेलकोटगढी नगरपालिका
+    - Belkotgadhi
+    - बेलकोटगढी
+  belouri:
+    - Belouri Municipality
+    - बेलौरी नगरपालिका
+    - Belouri
+    - बेलौरी
+    - Belauri
+  beni:
+    - Beni Municipality
+    - बेनी नगरपालिका
+    - Beni
+    - बेनी
+  bensishahar:
+    - Bensishahar Municipality
+    - बेंसीशहर नगरापालिका
+    - Bensishahar
+  besishahar:
+    - Besishahar Municipality
+    - बेसीशहर नगरपालिका
+    - Besishahar
+    - बेसीशहर
+  bhadrapur:
+    - Bhadrapur Municipality
+    - भद्रपुर नगरपालिका
+    - Bhadrapur
+    - भद्रपुर
+  bhajani:
+    - Bhajani Municipality
+    - भजनी नगरपालिका
+    - Bhajani
+    - भजनी
+  bhaktapur:
+    - Bhaktapur Municipality
+    - भक्तपुर नगरपालिका
+    - Bhaktapur
+    - भक्तपुर
+  bhangaha:
+    - Bhangaha Municipality
+    - भँगाहा नगरपालिका
+    - Bhangaha
+    - भँगाहा
+  bhanu:
+    - Bhanu Municipality
+    - भानु नगरपालिका
+    - Bhanu
+    - भानु
+  bheerkot:
+    - Bheerkot Municipality
+    - भीरकोट नगरपालिका
+    - Bheerkot
+    - भीरकोट
+    - Bhirkot Municipality
+    - Bhirkot
+  bheri:
+    - Bheri Municipality
+    - भेरी नगरपालिका
+    - Bheri
+    - भेरी
+  bheri_malika:
+    - Bheri Malika Municipality
+    - भेरीमालिका नगरपालिका
+    - Bheri Malika
+    - भेरीमालिका
+  bheriganga:
+    - Bheriganga Municipality
+    - भेरीगंगा नगरपालिका
+    - Bheriganga
+    - भेरीगंगा
+  bhimad:
+    - Bhimad Municipality
+    - भिमाद नगरपालिका
+    - Bhimad
+    - भिमाद
+  bhimdatta:
+    - Bhimdatta Municipality
+    - भिमदत्त नगरपालिका
+    - Bhimdatta
+    - भिमदत्त
+  bhimeshwor:
+    - Bhimeshwor Municipality
+    - भिमेश्वर नगरपालिका
+    - Bhimeshwor
+    - भिमेश्वर
+  bhojpur:
+    - Bhojpur Municipality
+    - भोजपुर नगरपालिका
+    - Bhojpur
+    - भोजपुर
+  bhumekasthan:
+    - Bhumekasthan Municipality
+    - भूमिकास्थान नगरपालिका
+    - Bhumekasthan
+    - भूमिकास्थान
+  bhumikasthan:
+    - Bhumikasthan Municipality
+    - भुमिकास्थान नगरपालिका
+    - Bhumikasthan
+    - भुमिकास्थान
+  bideha:
+    - Bideha Municipality
+    - बिदेह नगरपालिकागाउँपालिका
+    - Bideha
+  bidur:
+    - Bidur Municipality
+    - बिदुर नगरपालिका
+    - Bidur
+    - बिदुर
+  birendranagar:
+    - Birendranagar Municipality
+    - बीरेन्द्रनगर नगरपालिका
+    - Birendranagar
+    - बीरेन्द्रनगर
+  birtamod:
+    - Birtamod Municipality
+    - बिर्तामोड नगरपालिका
+    - Birtamod
+    - बिर्तामोड
+  bode_barsain:
+    - Bode Barsain Municipality
+    - बोदेबरसाईन नगरपालिका
+    - Bode Barsain
+    - बोदेबरसाईन
+    - Bodebarsain Municipality
+    - Bodebarsain
+  boudhimai:
+    - Boudhimai Municipality
+    - बौधीमाई नगरपालिका
+    - Boudhimai
+    - बौधीमाई
+    - Baudhimai
+  brindaban:
+    - Brindaban Municipality
+    - बृन्दावन नगरपालिका
+    - Brindaban
+    - बृन्दावन
+  buddhabhumi:
+    - Buddhabhumi Municipality
+    - बुद्धभूमी नगरपालिका
+    - Buddhabhumi
+    - बुद्धभूमी
+  budhanilkhantha:
+    - Budhanilkhantha Municipality
+    - बुढानिलकण्ठ नगरपालिका
+    - Budhanilkhantha
+    - बुढानिलकण्ठ
+    - Budhanilakantha
+  budhiganga:
+    - Budhiganga Municipality
+    - बुढीगंगा नगरपालिका
+    - Budhiganga
+    - बुढीगंगा
+  budhinanda:
+    - Budhinanda Municipality
+    - बुढीनन्दा नगरपालिका
+    - Budhinanda
+    - बुढीनन्दा
+  bungal:
+    - Bungal Municipality
+    - बुंगल नगरपालिका
+    - Bungal
+    - बुंगल
+  byas:
+    - Byas Municipality
+    - ब्यास नगरपालिका
+    - Byas
+    - ब्यास
+    - Vyas Municipality
+    - Vyas
+  chainapur:
+    - Chainapur Municipality
+    - चैनपुर नगरपालिका
+    - Chainapur
+    - चैनपुर
+    - Chainpur
+  chamunda_bindrasaini:
+    - Chamunda Bindrasaini Municipality
+    - चामुण्डा बिन्द्रासैनी नगरपालिका
+    - Chamunda Bindrasaini
+    - चामुण्डा बिन्द्रासैनी
+  chandannath:
+    - Chandannath Municipality
+    - चन्दननाथ नगरपालिका
+    - Chandannath
+    - चन्दननाथ
+  chandragiri:
+    - Chandragiri Municipality
+    - चन्द्रागिरी नगरपालिका
+    - Chandragiri
+    - चन्द्रागिरी
+  chandrapur:
+    - Chandrapur Municipality
+    - चन्द्रपुर नगरपालिका
+    - Chandrapur
+    - चन्द्रपुर
+  changunarayan:
+    - Changunarayan Municipality
+    - चाँगुनारायण नगरपालिका
+    - Changunarayan
+    - चाँगुनारायण
+  chapakot:
+    - Chapakot Municipality
+    - चापाकोट नगरपालिका
+    - Chapakot
+    - चापाकोट
+  chaudandigadhi:
+    - Chaudandigadhi Municipality
+    - चौदण्डीगढी नगरपालिका
+    - Chaudandigadhi
+    - चौदण्डीगढी
+  chaurjahari:
+    - Chaurjahari Municipality
+    - चौरजहारी नगरपालिका
+    - Chaurjahari
+    - चौरजहारी
+  chhayanath_rara:
+    - Chhayanath Rara Municipality
+    - छायाँनाथ रारा नगरपालिका
+    - Chhayanath Rara
+    - छायाँनाथ रारा
+  chhedagad:
+    - Chhedagad Municipality
+    - छेडागाड नगरपालिका
+    - Chhedagad
+    - छेडागाड
+  chhireshwornath:
+    - Chhireshwornath Municipality
+    - क्षिरेश्वरनाथ नगरपालिका
+    - Kshireshwornath Municipality
+    - Chhireshwornath
+    - क्षिरेश्वरनाथ
+    - Kshireshwornath
+  choutara_sangachowkgadhi:
+    - Choutara Sangachowkgadhi Municipality
+    - चौतारा साँगाचोकगढी नगरपालिका
+    - Choutara Sangachowkgadhi
+    - चौतारा साँगाचोकगढी
+    - Chautara SangachokGadhi
+  dakneshwori:
+    - Dakneshwori Municipality
+    - डाक्नेश्वरी नगरपालिका
+    - Dakneshwori
+    - डाक्नेश्वरी
+  dakshinkali:
+    - Dakshinkali Municipality
+    - दक्षिणकाली नगरपालिका
+    - Dakshinkali
+    - दक्षिणकाली
+  damak:
+    - Damak Municipality
+    - दमक नगरपालिका
+    - Damak
+    - दमक
+  dasharathchand:
+    - Dasharathchand Municipality
+    - दशरथचन्द नगरपालिका
+    - Dasharathchand
+    - दशरथचन्द
+    - Dasharathchanda
+  deumai:
+    - Deumai Municipality
+    - देउमाई नगरपालिका
+    - Deumai
+    - देउमाई
+  devchuli:
+    - Devchuli Municipality
+    - देवचुली नगरपालिका
+    - Devchuli
+    - देवचुली
+  devdaha:
+    - Devdaha Municipality
+    - देबदह नगरपालिका
+    - Devdaha
+    - देबदह
+  dewahi_gonahi:
+    - Dewahi Gonahi Municipality
+    - देवाही गोनाही नगरपालिका
+    - Dewahi Gonahi
+    - देवाही गोनाही
+    - Dewahhi Gonahi
+  dhangadhimai:
+    - Dhangadhimai Municipality
+    - धनगढीमाई नगरपालिका
+    - Dhangadhimai
+    - धनगढीमाई
+  dhankuta:
+    - Dhankuta Municipality
+    - धनकुटा नगरपालिका
+    - Dhankuta
+    - धनकुटा
+  dhanushadham:
+    - Dhanushadham Municipality
+    - धनुषाधाम नगरपालिका
+    - Dhanushadham
+    - धनुषाधाम
+    - Dhanusadham
+  dharmadevi:
+    - Dharmadevi Municipality
+    - धर्मदेवी नगरपालिका
+    - Dharmadevi
+    - धर्मदेवी
+  dhorpatan:
+    - Dhorpatan Municipality
+    - ढोरपाटन नगरपालिका
+    - Dhorpatan
+    - ढोरपाटन
+  dhulikhel:
+    - Dhulikhel Municipality
+    - धुलिखेल नगरपालिका
+    - Dhulikhel
+    - धुलिखेल
+  dhunibenshi:
+    - Dhunibenshi Municipality
+    - धुनीबेंशी नगरपालिका
+    - Dhunibenshi
+    - धुनीबेंशी
+    - Dhunibesi
+  diktel_rupakot_majhuwagadhi:
+    - Diktel Rupakot Majhuwagadhi Municipality
+    - दिक्तेल रुपाकोट मझुवागढी नगरपालिका
+    - Diktel Rupakot Majhuwagadhi
+    - दिक्तेल रुपाकोट मझुवागढी
+    - Rupakot Majhuwagadhi
+    - रुपाकोट मझुवागढी नगरपालिका
+    - रुपाकोट मझुवागढी
+    - Rupakot Majhuwagadhi Municipality
+  dipayal_silgadhi:
+    - Dipayal Silgadhi Municipality
+    - दिपायल सिलगढी नगरपालिका
+    - Dipayal Silgadhi
+    - दिपायल सिलगढी
+    - Dipayal Silgadi
+  dodhara_chandani:
+    - Dodhara Chandani Municipality
+    - दोधारा चाँदनी नगरपालिका
+    - Dodhara Chandani
+    - दोधारा चाँदनी
+  dudhouli:
+    - Dudhouli Municipality
+    - दुधौली नगरपालिका
+    - Dudhouli
+    - दुधौली
+  duhabi:
+    - Duhabi Municipality
+    - दुहबी नगरपालिका
+    - Duhabi
+    - दुहबी
+  dullu:
+    - Dullu Municipality
+    - दुल्लु नगरपालिका
+    - Dullu
+    - दुल्लु
+  gadhimai:
+    - Gadhimai Municipality
+    - गढीमाई नगरपालिका
+    - Gadhimai
+    - गढीमाई
+  gaidakot:
+    - Gaidakot Municipality
+    - गैडाकोट नगरपालिका
+    - Gaidakot
+    - गैडाकोट
+  galkot:
+    - Galkot Municipality
+    - गल्कोट नगरपालिका
+    - Galkot
+    - गल्कोट
+  galyang:
+    - Galyang Municipality
+    - गल्याङ नगरपालिका
+    - Galyang
+    - गल्याङ
+  ganeshman_charnath:
+    - Ganeshman Charnath Municipality
+    - गणेशमान चारनाथ नगरपालिका
+    - Ganeshman Charnath
+    - गणेशमान चारनाथ
+  garuda:
+    - Garuda Municipality
+    - गरुडा नगरपालिका
+    - Garuda
+    - गरुडा
+  gaur:
+    - Gaur Municipality
+    - गौर नगरपालिका
+    - Gaur
+    - गौर
+  gauradaha:
+    - Gauradaha Municipality
+    - गौरादह नगरपालिका
+    - Gauradaha
+    - गौरादह
+    - Gauradhaha
+  gauriganga:
+    - Gauriganga Municipality
+    - गौरीगंगा नगरपालिका
+    - Gauriganga
+    - गौरीगंगा
+  gaushala:
+    - Gaushala Municipality
+    - गौशाला नगरपालिका
+    - Gaushala
+    - गौशाला
+  ghodaghodi:
+    - Ghodaghodi Municipality
+    - घोडाघोडी नगरपालिका
+    - Ghodaghodi
+    - घोडाघोडी
+  godaita:
+    - Godaita Municipality
+    - गोडैटा नगरपालिका
+    - Godaita
+    - गोडैटा
+  godawari:
+    - Godawari Municipality
+    - गोदावरी नगरपालिका
+    - Godawari
+    - गोदावरी
+  gokarneshwor:
+    - Gokarneshwor Municipality
+    - गोकर्णेश्वर नगरपालिका
+    - Gokarneshwor
+    - गोकर्णेश्वर
+  golbazar:
+    - Golbazar Municipality
+    - गोलबजार नगरपालिका
+    - Golbazar
+    - गोलबजार
+  gorkha:
+    - Gorkha Municipality
+    - गोरखा नगरपालिका
+    - Gorkha
+    - गोरखा
+  gujara:
+    - Gujara Municipality
+    - गुजरा नगरपालिका
+    - Gujara
+    - गुजरा
+  gulariya:
+    - Gulariya Municipality
+    - गुलरीया नगरपालिका
+    - Gulariya
+    - गुलरीया
+  gurbhakot:
+    - Gurbhakot Municipality
+    - गुर्भाकोट नगरपालिका
+    - Gurbhakot
+    - गुर्भाकोट
+  halesi_tuwachung:
+    - Halesi Tuwachung Municipality
+    - हलेसी तुवाचुङ नगरपालिका
+    - Halesi Tuwachung
+    - हलेसी तुवाचुङ
+  hansapur:
+    - Hansapur Municipality
+    - हंसपुर नगरपालिका
+    - Hansapur
+    - हंसपुर
+  hanumannagar_kankalini:
+    - Hanumannagar Kankalini Municipality
+    - हनुमाननगर कङ्कालिनी नगरपालिका
+    - Hanumannagar Kankalini
+    - हनुमाननगर कङ्कालिनी
+  haripur:
+    - Haripur Municipality
+    - हरिपुर नगरपालिका
+    - Haripurwa Municipality
+    - हरिपुर्वा नगरपालिका
+    - Haripur
+    - हरिपुर
+    - Haripurwa
+    - हरिपुर्वा
+  hariwan:
+    - Hariwan Municipality
+    - हरिवन नगरपालिका
+    - Hariwan
+    - हरिवन
+  ilam:
+    - Ilam Municipality
+    - ईलाम नगरपालिका
+    - Illam Municipality
+    - Ilam
+    - ईलाम
+    - Illam
+  inaruwa:
+    - Inaruwa Municipality
+    - इनरुवा नगरपालिका
+    - Inaruwa
+    - इनरुवा
+  ishanath:
+    - Ishanath Municipality
+    - ईशनाथ नगरपालिका
+    - Ishanath
+    - ईशनाथ
+  ishworpur:
+    - Ishworpur Municipality
+    - ईश्वरपुर नगरपालिका
+    - Ishworpur
+    - ईश्वरपुर
+  jaimuni:
+    - Jaimuni Municipality
+    - जैमुनी नगरपालिका
+    - Jaimuni
+    - जैमुनी
+  jaleshwor:
+    - Jaleshwor Municipality
+    - जलेश्वर नगरपालिका
+    - Jaleshwor
+    - जलेश्वर
+    - Jaleswor
+  jayaprithbi:
+    - Jayaprithbi Municipality
+    - जयपृथ्वी नगरपालिका
+    - Jayaprithbi
+    - जयपृथ्वी
+    - JayaPrithivi
+  jiri:
+    - Jiri Municipality
+    - जिरी नगरपालिका
+    - Jiri
+    - जिरी
+  kabilashi:
+    - Kabilashi Municipality
+    - कविलासी नगरपालिका
+    - Kabilashi
+    - कविलासी
+    - Kabilasi
+  kageshwori_manahara:
+    - Kageshwori Manahara Municipality
+    - कागेश्वरी मनहरा नगरपालिका
+    - Kageshwori Manahara
+    - कागेश्वरी मनहरा
+    - Kageshwori Manahora
+    - Kageshwori Manahora Municipality
+    - कागेश्वरी मनोहरा नगरपालिका
+    - कागेश्वरी मनोहरा
+  kalika:
+    - Kalika Municipality
+    - कालिका नगरपालिका
+    - Kalika
+    - कालिका
+  kalyanpur:
+    - Kalyanpur Municipality
+    - कल्याणपुर नगरपालिका
+    - Kalyanpur
+    - कल्याणपुर
+  kamal_bazar:
+    - Kamal bazar Municipality
+    - कमलबजार नगरपालिका
+    - Kamal bazar
+    - कमलबजार
+  kamala:
+    - Kamala Municipality
+    - कमला नगरपालिका
+    - Kamala
+    - कमला
+  kamalamai:
+    - Kamalamai Municipality
+    - कमलामाई नगरपालिका
+    - Kamalamai
+    - कमलामाई
+  kanchanrup:
+    - Kanchanrup Municipality
+    - कन्चनरुप नगरपालिका
+    - Kanchanrup
+    - कन्चनरुप
+  kankai:
+    - Kanakai Municipality
+    - कन्काई नगरपालिका
+    - Kankai Municipality
+    - Kanakai
+    - कन्काई
+    - Kankai
+  kapilbastu:
+    - Kapilbastu Municipality
+    - कपिलबस्तु नगरपालिका
+    - Kapilvastu Municipality
+    - Kapilbastu
+    - कपिलबस्तु
+    - Kapilvastu
+  karjanha:
+    - Karjanha Municipality
+    - कर्जन्हा नगरपालिका
+    - Karjanha
+    - कर्जन्हा
+  katahariya:
+    - Katahariya Municipality
+    - कटहरिया नगरपालिका
+    - Katahariya
+    - कटहरिया
+  katari:
+    - Katari Municipality
+    - कटारी नगरपालिका
+    - Katari
+    - कटारी
+  kawasoti:
+    - Kawasoti Municipality
+    - कावासोती नगरपालिका
+    - Kawasoti
+    - कावासोती
+  khadak:
+    - Khadak Municipality
+    - खडक नगरपालिका
+    - Khadak
+    - खडक
+  khairahani:
+    - Khairahani Municipality
+    - खैरहनी नगरपालिका
+    - Khairahani
+    - खैरहनी
+  khandachakra:
+    - Khandachakra Municipality
+    - खाँडाचक्र नगरपालिका
+    - Khandachakra
+    - खाँडाचक्र
+  khandbari:
+    - Khandabari Municipality
+    - खाँदबारी नगरपालिका
+    - Khandbari Municipality
+    - Khandabari
+    - खाँदबारी
+    - Khandbari
+  kirtipur:
+    - Kirtipur Municipality
+    - किर्तिपुर नगरपालिका
+    - Kirtipur
+    - किर्तिपुर
+  kohalpur:
+    - Kohalpur Municipality
+    - कोहलपुर नगरपालिका
+    - Kohalpur
+    - कोहलपुर
+  kolhabi:
+    - Kolhabi Municipality
+    - कोल्हवी नगरपालिका
+    - Kolhabi
+    - कोल्हवी
+  krishnanagar:
+    - Krishnanagar Municipality
+    - कृष्णनगर नगरपालिका
+    - Krishnanagar
+    - कृष्णनगर
+  krishnapur:
+    - Krishnapur Municipality
+    - कृष्णपुर नगरपालिका
+    - Krishnapur
+    - कृष्णपुर
+  kushma:
+    - Kushma Municipality
+    - कुश्मा नगरपालिका
+    - Kushma
+    - कुश्मा
+  lahan:
+    - Lahan Municipality
+    - लहान नगरपालिका
+    - Lahan
+    - लहान
+  lalbandi:
+    - Lalbandi Municipality
+    - लालबन्दी नगरपालिका
+    - Lalbandi
+    - लालबन्दी
+  laligurans:
+    - Laligurans Municipality
+    - लालीगुराँस नगरपालिका
+    - Laligurans
+    - लालीगुराँस
+  lamahi:
+    - Lamahi Municipality
+    - लमही नगरपालिका
+    - Lamahi
+    - लमही
+  lamki_chuha:
+    - Lamki Chuha Municipality
+    - लम्कि चुहा नगरपालिका
+    - Lamki Chuha
+    - लम्कि चुहा
+  lekabeshi:
+    - Lekabeshi Municipality
+    - लेकबेशी नगरपालिका
+    - Lekabeshi
+    - लेकबेशी
+  lekbeshi:
+    - Lekbeshi Municipality
+    - लेकवेशी नगरपालिका
+    - Lekbeshi
+    - लेकवेशी
+  letang:
+    - Letang Municipality
+    - लेटाङ नगरपालिका
+    - Letang
+    - लेटाङ
+  loharpatti:
+    - Loharpatti Municipality
+    - लोहरपट्टी नगरपालिका
+    - Loharpatti
+    - लोहरपट्टी
+  lumbini_cultural:
+    - Lumbini Cultural Municipality
+    - लुम्बिनी साँस्कृतिक नगरपालिका
+    - Lumbini Cultural
+    - लुम्बिनी साँस्कृतिक
+    - Lumbini Sanskritik Municipality
+    - Lumbini Sanskritik
+  madhav_narayan:
+    - Madhav Narayan Municipality
+    - माधव नारायण नगरपालिका
+    - Madhav Narayan
+    - माधव नारायण
+  madhuwan:
+    - Madhuwan Municipality
+    - मधुवन नगरपालिका
+    - Madhuwan
+    - मधुवन
+  madhya_bindu:
+    - Madhya Bindu Municipality
+    - मध्यबिन्दु नगरपालिका
+    - Madhya Bindu
+    - मध्यबिन्दु
+    - Madhyabindu Municipality
+    - Madhyabindu
+  madhya_nepal:
+    - Madhya Nepal Municipality
+    - मध्यनेपाल नगरपालिका
+    - Madhya Nepal
+    - मध्यनेपाल
+  madhyapur_thimi:
+    - Madhyapur Thimi Municipality
+    - मध्यपुर थिमी नगरपालिका
+    - Madhyapur Thimi
+    - मध्यपुर थिमी
+  mahagadhimai:
+    - Mahagadhimai Municipality
+    - महागढीमाई नगरपालिका
+    - Mahagadhimai
+    - महागढीमाई
+  mahakali:
+    - Mahakali Municipality
+    - महाकाली नगरपालिका
+    - Mahakali
+    - महाकाली
+  mahalaxmi:
+    - Mahalaxmi Municipality
+    - महालक्ष्मी नगरपालिका
+    - Mahalaxmi
+    - महालक्ष्मी
+  maharajganj:
+    - Maharajganj Municipality
+    - महाराजगन्ज नगरपालिका
+    - Maharajganj
+    - महाराजगन्ज
+  maharajgunj:
+    - Maharajgunj Municipality
+    - महाराजगंज नगरपालिका
+    - Maharajgunj
+    - महाराजगंज
+  mai:
+    - Madi Municipality
+    - मादी नगरपालिका
+    - Mai Municipality
+    - माई नगरपालिका
+    - Madi
+    - मादी
+    - Mai
+    - माई
+  malangawa:
+    - Malangawa Municipality
+    - मलंगवा नगरपालिका
+    - Malangawa
+    - मलंगवा
+  malikarjun:
+    - Malikarjun Municipality
+    - मालिकार्जुन गाउँपालिका
+    - Malikarjun
+  manarashisawa:
+    - Manara Shisawa Municipality
+    - मनरा शिसवा नगरपालिका
+    - Manarashisawa Municipality
+    - Manara Shisawa
+    - मनरा शिसवा
+    - Manarashisawa
+    - Manra Siswa
+  mandan_deupur:
+    - Mandan Deupur Municipality
+    - मण्डन देउपुर नगरपालिका
+    - Mandan Deupur
+    - मण्डन देउपुर
+    - Mandandeupur Municipality
+    - Mandandeupur
+  mangalsen:
+    - Mangalsen Municipality
+    - मंगलसेन नगरपालिका
+    - Mangalsen
+    - मंगलसेन
+  manthali:
+    - Manthali  Municipality
+    - मन्थली नगरपालिका
+    - Manthali
+    - मन्थली
+  matihani:
+    - Matihani Municipality
+    - मटिहानी नगरपालिका
+    - Matihani
+    - मटिहानी
+  maulapur:
+    - Maulapur Municipality
+    - मौलापुर नगरपालिका
+    - Maulapur
+    - मौलापुर
+  mechinagar:
+    - Mechinagar Municipality
+    - मेचीनगर नगरपालिका
+    - Mechinagar
+    - मेचीनगर
+  melanchi:
+    - Melanchi Municipality
+    - मेलम्ची नगरपालिका
+    - Melanchi
+    - मेलम्ची
+    - Melamchi
+  melauli:
+    - Melauli Municipality
+    - मेलौली नगरपालिका
+    - Melauli
+    - मेलौली
+  mirchaiya:
+    - Mirchaiya Municipality
+    - मिर्चेया नगरपालिका
+    - Mirchaiya
+    - मिर्चेया
+  mithila:
+    - Mithila Municipality
+    - मिथिला नगरपालिका
+    - Mithila
+    - मिथिला
+  mithila_bihari:
+    - Mithila Bihari Municipality
+    - मिथिला बिहारी नगरपालिका
+    - Mithila Bihari
+    - मिथिला बिहारी
+  musikot:
+    - Musikot Municipality
+    - मुसिकोट नगरपालिका
+    - Musikot
+    - मुसिकोट
+  myanglung:
+    - Myanglung Municipality
+    - म्याङ्गलुङ्ग नगरपालिका
+    - Myanglung
+    - म्याङ्गलुङ्ग
+  nagarain:
+    - Nagarain Municipality
+    - नगराइन नगरपालिका
+    - Nagarain
+    - नगराइन
+  nagarjun:
+    - Nagarjun Municipality
+    - नागार्जुन नगरपालिका
+    - Nagarjun
+    - नागार्जुन
+  nalgad:
+    - Nalgad Municipality
+    - नलगाड नगरपालिका
+    - Nalgad
+    - नलगाड
+  namobuddha:
+    - Namobuddha Municipality
+    - नमोबुद्ध नगरपालिका
+    - Namobuddha
+    - नमोबुद्ध
+  narayan:
+    - Narayan Municipality
+    - नारायण नगरपालिका
+    - Narayan
+    - नारायण
+  nijagadh:
+    - Nijagadh Municipality
+    - निजगढ नगरपालिका
+    - Nijagadh
+    - निजगढ
+    - Nijgadh
+  nilakantha:
+    - Nilakantha Municipality
+    - निलकण्ठ नगरपालिका
+    - Nilakantha
+    - निलकण्ठ
+  nilkhantha:
+    - Neelkhantha Municipality
+    - नीलकण्ठ नगरपालिका
+    - Nilkhantha Municipality
+    - Neelkhantha
+    - नीलकण्ठ
+    - Nilkhantha
+  pacharauta:
+    - Pacharauta Municipality
+    - पचरौता नगरपालिका
+    - Pacharauta
+    - पचरौता
+  pakhribas:
+    - Pakhribas Municipality
+    - पाख्रिबास नगरपालिका
+    - Pakhribas
+    - पाख्रिबास
+  palungtar:
+    - Palungtar Municipality
+    - पालुङ्गटार नगरपालिका
+    - Palungtar
+    - पालुङ्गटार
+  panauti:
+    - Panauti Municipality
+    - पनौती नगरपालिका
+    - Panauti
+    - पनौती
+  panchadewal_binayak:
+    - Panchadewal Binayak Municipality
+    - पन्चदेवल विनायक नगरपालिका
+    - Panchadewal Binayak
+    - पन्चदेवल विनायक
+  panchapuri:
+    - Panchapuri Municipality
+    - पञ्चपुरी नगरपालिका
+    - Panchapuri
+    - पञ्चपुरी
+    - Panchpuri
+  panchdebal_binayak:
+    - Panchdebal Binayak Municipality
+    - पंचदेवल बिनायक नगरपालिका
+    - Panchdewal Binayak Municipality
+    - Panchdebal Binayak
+    - पंचदेवल बिनायक
+    - Panchdewal Binayak
+  panchkhal:
+    - Panchkhal Municipality
+    - पाँचखाल नगरपालिका
+    - Panchkhal
+    - पाँचखाल
+  panchkhapan:
+    - Panchakhapan Municipality
+    - पाँचखपन नगरपालिका
+    - Panchkhapan Municipality
+    - Panchakhapan
+    - पाँचखपन
+    - Panchkhapan
+  paroha:
+    - Paroha Municipality
+    - परोहा नगरपालिका
+    - Paroha
+    - परोहा
+  parsagadhi:
+    - Parsagadhi Municipality
+    - पर्सागढी नगरपालिका
+    - Parsagadhi
+    - पर्सागढी
+  parshuram:
+    - Parashuram Municipality
+    - परशुराम नगरपालिका
+    - Parshuram Municipality
+    - Parashuram
+    - परशुराम
+    - Parshuram
+  patan:
+    - Patan Municipality
+    - पाटन नगरपालिका
+    - Patan
+    - पाटन
+  pathari_shanishchare:
+    - Pathari Shanishchare Municipality
+    - पथरी शनिश्चरे नगरपालिका
+    - Pathari Shanishchare
+    - पथरी शनिश्चरे
+    - Patahrishanishchare
+  phalebas:
+    - Phalebas Municipality
+    - फलेबास नगरपालिका
+    - Phalebas
+    - फलेबास
+  phatuwa_bijayapur:
+    - Phatuwa Bijayapur Municipality
+    - फतुवा बिजयपुर नगरपालिका
+    - Phatuwa Bijayapur
+    - फतुवा बिजयपुर
+  phidim:
+    - Phidim Municipality
+    - फिदिम नगरपालिका
+    - Phidim
+    - फिदिम
+  phungling:
+    - Phungling Municipality
+    - फुङलिङ्ग नगरपालिका
+    - Phungling
+    - फुङलिङ्ग
+  pokhariya:
+    - Pokhariya Municipality
+    - पोखरिया नगरपालिका
+    - Pokhariya
+    - पोखरिया
+  puchaundi:
+    - Puchaundi Municipality
+    - पुचौंडी नगरपालिका
+    - Purchaundi Municipality
+    - Puchaundi
+    - पुचौंडी
+    - Purchaundi
+  punarbas:
+    - Punarbas Municipality
+    - पुनर्वास नगरपालिका
+    - Punarbas
+    - पुनर्वास
+  purchaudi:
+    - Purchaudi Municipality
+    - पुर्चौडी नगरपालिका
+    - Purchaudi
+    - पुर्चौडी
+  putalibazar:
+    - Putalibazar Municipality
+    - पुतलीबजार नगरपालिका
+    - Putalibazar
+    - पुतलीबजार
+  pyuthan:
+    - Pyuthan Municipality
+    - प्यूठान नगरपालिका
+    - Pyuthan
+    - प्यूठान
+  rainas:
+    - Rainas Municipality
+    - राईनास नगरपालिका
+    - Rainas
+    - राईनास
+  rajbiraj:
+    - Rajbiraj Municipality
+    - राजविराज नगरपालिका
+    - Rajbiraj
+    - राजविराज
+  rajdevi:
+    - Rajdevi Municipality
+    - राजदेवी नगरपालिका
+    - Rajdevi
+    - राजदेवी
+  rajpur:
+    - Rajapur Municipality
+    - राजापुर नगरपालिका
+    - Rajpur Municipality
+    - राजपुर नगरपालिका
+    - Rajapur
+    - राजापुर
+    - Rajpur
+    - राजपुर
+  ram_gopalpur:
+    - Ram Gopalpur Municipality
+    - राम गोपालपुर नगरपालिका
+    - Ram Gopalpur
+    - राम गोपालपुर
+    - Ramgopalpur Municipality
+    - Ramgopalpur
+  ramdhuni:
+    - Ramdhuni Municipality
+    - रामधुनी नगरपालिका
+    - Ramdhuni
+    - रामधुनी
+  ramechhap:
+    - Ramechhap Municipality
+    - रामेछाप नगरपालिका
+    - Ramechhap
+    - रामेछाप
+  ramgram:
+    - Ramgram Municipality
+    - रामग्राम नगरपालिका
+    - Ramgram
+    - रामग्राम
+  rampur:
+    - Rampur Municipality
+    - रामपुर नगरपालिका
+    - Rampur
+    - रामपुर
+  rangeli:
+    - Rangeli Municipality
+    - रंगेली नगरपालिका
+    - Rangeli
+    - रंगेली
+  rapti:
+    - Rapti Municipality
+    - राप्ती नगरपालिका
+    - Rapti
+    - राप्ती
+  raskot:
+    - Raskot Municipality
+    - रास्कोट नगरपालिका
+    - Raskot
+    - रास्कोट
+  ratnanagar:
+    - Ratnanagar Municipality
+    - रत्ननगर नगरपालिका
+    - Ratnanagar
+    - रत्ननगर
+  ratuwamai:
+    - Ratuwamai Municipality
+    - रतुवामाई नगरपालिका
+    - Ratuwamai
+    - रतुवामाई
+  resunga:
+    - Resunga Municipality
+    - रेसुङ्गा नगरपालिका
+    - Resunga
+    - रेसुङ्गा
+  rolpa:
+    - Rolpa Municipality
+    - रोल्पा नगरपालिका
+    - Rolpa
+    - रोल्पा
+  sabaila:
+    - Sabaila Municipality
+    - सबैला नगरपालिका
+    - Sabaila
+    - सबैला
+  sainamaina:
+    - Sainamaina Municipality
+    - सैनामैना नगरपालिका
+    - Sainamaina
+    - सैनामैना
+  sandhikharka:
+    - Sandhikharka Municipality
+    - सन्धिखर्क नगरपालिका
+    - Sandhikharka
+    - सन्धिखर्क
+  sanphebagar:
+    - Sanphebagar Municipality
+    - साँफेबगर नगरपालिका
+    - Sanphebagar
+    - साँफेबगर
+  saptakoshi:
+    - Saptakoshi Municipality
+    - सप्तकोशी नगरपालिका
+    - Saptakoshi
+    - सप्तकोशी
+    - Saptakoshi Gaunpalika
+  shadananda:
+    - Shadananda Municipality
+    - षडानन्द नगरपालिका
+    - Shadananda
+    - षडानन्द
+  shahidnagar:
+    - Shahidnagar Municipality
+    - शहीदनगर नगरपालिका
+    - Shahidnagar
+    - शहीदनगर
+    - Sahidnagar
+  shailyashikhar:
+    - Shailyashikhar Municipality
+    - शैल्यशिखर नगरपालिका
+    - Shailyashikhar
+    - शैल्यशिखर
+  shambhunath:
+    - Shambhunath Municipality
+    - शम्भुनाथ नगरपालिका
+    - Shambhunath
+    - शम्भुनाथ
+  shankharapur:
+    - Shankharapur Municipality
+    - शंङ्खरापुर नगरपालिका
+    - Shankharapur
+    - शंङ्खरापुर
+  sharada:
+    - Sharada Municipality
+    - शारदा नगरपालिका
+    - Sharada
+    - शारदा
+  shikhar:
+    - Shikhar Municipality
+    - शिखर नगरपालिका
+    - Shikhar
+    - शिखर
+  shitaganga:
+    - Shitaganga Municipality
+    - शितगंगा नगरपालिका
+    - Shitaganga
+    - शितगंगा
+    - Sitganga
+  shivaraj:
+    - Shivaraj Municipality
+    - शिवराज नगरपालिका
+    - Shivaraj
+    - शिवराज
+  shivasatakshi:
+    - Shivasatakshi Municipality
+    - शिवसताक्षी नगरपालिका
+    - Shivasatakshi
+    - शिवसताक्षी
+    - Shivasataxi
+    - शिवशताक्षी
+    - Shivasataxi Municipality
+    - शिवशताक्षी नगरपालिका
+  shuklagandaki:
+    - Shuklagandaki Municipality
+    - शुक्लागण्डकी नगरपालिका
+    - Shuklagandaki
+    - शुक्लागण्डकी
+  shuklaphanta:
+    - Shuklaphanta Municipality
+    - शुक्लाफाँटा नगरपालिका
+    - Shuklaphanta
+    - शुक्लाफाँटा
+  siddharthanagar:
+    - Siddharthanagar Municipality
+    - सिद्धार्थनगर नगरपालिका
+    - Siddharthanagar
+    - सिद्धार्थनगर
+  siddhicharan:
+    - Siddhicharan Municipality
+    - सिद्धिचरण नगरपालिका
+    - Siddhicharan
+    - सिद्धिचरण
+  simroungadh:
+    - Simroungadh Municipality
+    - सिम्रौनगढ नगरपालिका
+    - Simroungadh
+    - सिम्रौनगढ
+    - Simraungadh
+  siraha:
+    - Siraha Municipality
+    - सिराहा नगरपालिका
+    - Siraha
+    - सिराहा
+  solu_dhudhakunda:
+    - Solu Dhudhakunda Municipality
+    - सोलुदुधकुण्ड नगरपालिका
+    - Solu Dhudhakunda
+    - सोलुदुधकुण्ड
+    - Soludhudhakunda Municipality
+    - Soludhudhakunda
+    - Solududhakunda
+  sukhipur:
+    - Sukhipur Municipality
+    - सुखीपुर नगरपालिका
+    - Sukhipur
+    - सुखीपुर
+  sunawal:
+    - Sunawal Municipality
+    - सुनवल नगरपालिका
+    - Sunawal
+    - सुनवल
+    - Sunwal
+  sundarbazar:
+    - Sundarbazar Municipality
+    - सुन्दरबजार नगरपालिका
+    - Sundarbazar
+    - सुन्दरबजार
+  sundarharaicha:
+    - Sundarharaicha Municipality
+    - सुन्दरहरैंचा नगरपालिका
+    - Sundarharaicha
+    - सुन्दरहरैंचा
+  sunwarshi:
+    - Sunwarshi Municipality
+    - सुनवर्षी नगरपालिका
+    - Sunwarshi
+    - सुनवर्षी
+  surunga:
+    - Surunga Municipality
+    - सुरुङ्गा नगरपालिका
+    - Surunga
+    - सुरुङ्गा
+  suryabinayak:
+    - Suryabinayak Municipality
+    - सूर्यविनायक नगरपालिका
+    - Suryabinayak
+    - सूर्यविनायक
+  suryodaya:
+    - Suryodaya Municipality
+    - सूर्योदय नगरपालिका
+    - Suryodaya
+    - सूर्योदय
+  swargadwari:
+    - Swargadwari Municipality
+    - स्वर्गद्धारी नगरपालिका
+    - Sworgadwari Municipality
+    - Swargadwari
+    - स्वर्गद्धारी
+    - Sworgadwari
+    - Sworgadwary
+    - Sworgadwary Municipality
+    - स्वर्गद्वारी नगरपालिका
+    - स्वर्गद्वारी
+  tansen:
+    - Tansen Municipality
+    - तानसेन नगरपालिका
+    - Tansen
+    - तानसेन
+  tarakeshwor:
+    - Tarakeshwor Municipality
+    - तारकेश्वर नगरपालिका
+    - Tarakeshwor
+    - तारकेश्वर
+  thaha:
+    - Thaha Municipality
+    - थाहा नगरपालिका
+    - Thaha
+    - थाहा
+  thakurbaba:
+    - Thakurbaba Municipality
+    - ठाकुरबाबा नगरपालिका
+    - Thakurbaba
+    - ठाकुरबाबा
+  thulibheri:
+    - Thulibheri Municipality
+    - ठुलीभेरी नगरपालिका
+    - Thulibheri
+    - ठुलीभेरी
+    - Thuli Bheri
+  tikapur:
+    - Tikapur Municipality
+    - टिकापुर नगरपालिका
+    - Tikapur
+    - टिकापुर
+  tilagupha:
+    - Tilagupha Municipality
+    - तिलागुफा नगरपालिका
+    - Tilagupha
+    - तिलागुफा
+    - Tilagufa
+  tilottama:
+    - Tilottama Municipality
+    - तिलोत्तमा नगरपालिका
+    - Tilottama
+    - तिलोत्तमा
+    - Tillotama
+  tokha:
+    - Tokha Municipality
+    - टोखा नगरपालिका
+    - Tokha
+    - टोखा
+  tribeni:
+    - Tribeni Municipality
+    - त्रिवेणी नगरपालिका
+    - Tribeni
+    - त्रिवेणी
+  tribeni_nalagad:
+    - Tribeni Nalagad Municipality
+    - त्रिवेणी नलगाड नगरपालिका
+    - Tribeni Nalagad
+    - त्रिवेणी नलगाड
+  tripurasundari:
+    - Tripurasundari Municipality
+    - त्रिपुरासुन्दरी नगरपालिका
+    - Tripurasundari
+    - त्रिपुरासुन्दरी
+  triyuga:
+    - Triyuga Municipality
+    - त्रियुगा नगरपालिका
+    - Triyuga
+    - त्रियुगा
+  urlabari:
+    - Urlabari Municipality
+    - उर्लाबारी नगरपालिका
+    - Urlabari
+    - उर्लाबारी
+    - Uralabari
+    - Uralabari Municipality
+    - उर्लावारी नगरपालिका
+    - उर्लावारी
+  waling:
+    - Waling Municipality
+    - वालिङ नगरपालिका
+    - Waling
+    - वालिङ
+  walling:
+    - Walling Municipality
+    - वालिङ्ग नगरपालिका
+    - Walling
+    - वालिङ्ग
+sub_metropolitan_city:
+  butwal:
+    - Butwal Sub-Metropolitian City
+    - बुटवल उपमहानगरपालिका
+    - Butwal
+    - बुटवल
+  dhangadhi:
+    - Dhangadhi Sub-Metropolitian City
+    - धनगढी उपमहानगरपालिका
+    - Dhangadhi
+    - धनगढी
+  dharan:
+    - Dharan Sub-Metropolitian City
+    - धरान उपमहानगरपालिका
+    - Dharan
+    - धरान
+  ghorahi:
+    - Ghorahi Sub-Metropolitian City
+    - घोराही उपमहानगरपालिका
+    - Ghorahi
+    - घोराही
+  hetauda:
+    - Hetauda Sub-Metropolitian City
+    - हेटौडा उपमहानगरपालिका
+    - Hetauda
+    - हेटौडा
+  itahari:
+    - Itahari Sub-Metropolitian City
+    - ईटहरी उपमहानगरपालिका
+    - Itahari
+    - ईटहरी
+  janakpurdham:
+    - Janakpurdham Sub-Metropolitian City
+    - जनकपुर उपमहानगरपालिका
+    - Janakpurdham
+    - जनकपुर
+    - Janakpur
+  jitpur_simara:
+    - Jitpur Simara Sub-Metropolitian City
+    - जीतपुर सिमरा उपमहानगरपालिका
+    - Jitpur Simara
+    - जीतपुर सिमरा
+  kalaiya:
+    - Kalaiya Sub-Metropolitian City
+    - कलैया उपमहानगरपालिका
+    - Kalaiya
+    - कलैया
+  nepalganj:
+    - Nepalganj Sub-Metropolitian City
+    - नेपालगञ्ज उपमहानगरपालिका
+    - Nepalganj
+    - नेपालगञ्ज
+    - Nepalgunj
+  tulsipur:
+    - Tulsipur Sub-Metropolitian City
+    - तुल्सीपुर उपमहानगरपालिका
+    - Tulsipur
+    - तुल्सीपुर
 metropolitan_city:
   bharatpur:
-    [Bharatpur Metropolitian City, भरतपुर महानगरपालिका, Bharatpur, भरतपुर]
+    - Bharatpur Metropolitian City
+    - भरतपुर महानगरपालिका
+    - Bharatpur
+    - भरतपुर
   biratnagar:
-    [Biratnagar Metropolitian City, बिराटनगर महानगरपालिका, Biratnagar, बिराटनगर]
-  birgunj: [Birgunj Metropolitian City, बिरगन्ज महानगरपालिका, Birgunj, बिरगन्ज]
+    - Biratnagar Metropolitian City
+    - बिराटनगर महानगरपालिका
+    - Biratnagar
+    - बिराटनगर
+  birgunj:
+    - Birgunj Metropolitian City
+    - बिरगन्ज महानगरपालिका
+    - Birgunj
+    - बिरगन्ज
   kathmandu:
-    [Kathmandu Metropolitian City, काठमाण्डौ महानगरपालिका, Kathmandu, काठमाण्डौ]
+    - Kathmandu Metropolitian City
+    - काठमाण्डौ महानगरपालिका
+    - Kathmandu
+    - काठमाण्डौ
   lalitpur:
-    [Lalitpur Metropolitian City, ललितपुर महानगरपालिका, Lalitpur, ललितपुर]
-  pokhara: [Pokhara Metropolitian City, पोखरा महानगरपालिका, Pokhara, पोखरा]
-municipality:
-  aathbis: [Aathbis Municipality, आठबीस नगरपालिका, Aathbis, आठबीस]
-  aathbiskot:
-    [
-      Aathabisakot Municipality,
-      आठबिसकोट नगरपालिका,
-      Aathbiskot Municipality,
-      Aathabisakot,
-      आठबिसकोट,
-      Aathbiskot,
-    ]
-  amargadhi: [Amargadhi Municipality, अमरगढी नगरपालिका, Amargadhi, अमरगढी]
-  arjundhara:
-    [Arjundhara Municipality, अर्जुनधारा नगरपालिका, Arjundhara, अर्जुनधारा]
-  aurahi: [Aurahi Municipality, औरही नगरपालिका, Aurahi, औरही]
-  badimalika:
-    [Badimalika Municipality, बडिमालिका नगरपालिका, Badimalika, बडिमालिका]
-  bagachour: [Bagachour Municipality, बागचौर नगरपालिका, Bagachour, बागचौर]
-  bagchaur: [Bagchaur Municipality, बागचौर नगरपालिका, Bagchaur, बागचौर]
-  baglung: [Baglung Municipality, बाग्लुङ्ग नगरपालिका, Baglung, बाग्लुङ्ग]
-  bagmati: [Bagmati Municipality, बागमती नगरपालिका, Bagmati, बागमती]
-  bahrabise: [Bahrabise Municipality, बाह्रबिसे नगरपालिका, Bahrabise, बाह्रबिसे]
-  bahudarmai:
-    [Bahudarmai Municipality, बहुदरमाई नगरपालिका, Bahudarmai, बहुदरमाई]
-  balara: [Balara Municipality, बलरा नगरपालिका, Balara, बलरा]
-  balawa: [Balawa Municipality, बलवा नगरपालिका, Balawa, बलवा]
-  banagad_kupinde:
-    [
-      Banagad Kupinde Municipality,
-      बनगाड कुपिण्डे नगरपालिका,
-      Banagad Kupinde,
-      बनगाड कुपिण्डे,
-    ]
-  banepa: [Banepa Municipality, बनेपा नगरपालिका, Banepa, बनेपा]
-  banganga: [Banganga Municipality, बाणगंगा नगरपालिका, Banganga, बाणगंगा]
-  bansgadhi: [Bansgadhi Municipality, बाँसगढी नगरपालिका, Bansgadhi, बाँसगढी]
-  barahachhetra:
-    [Barahachhetra Municipality, बराह नगरपालिका, Barahachhetra, बराह]
-  barahathawa: [Barahathawa Municipality, बरहथवा नगरपालिका, Barahathawa, बरहथवा]
-  barbardiya:
-    [Barbardiya Municipality, बारबर्दिया नगरपालिका, Barbardiya, बारबर्दिया]
-  bardaghat: [Bardaghat Municipality, बर्दघाट नगरपालिका, Bardaghat, बर्दघाट]
-  bardibas: [Bardibas Municipality, बर्दिबास नगरपालिका, Bardibas, बर्दिबास]
-  bedkot: [Bedkot Municipality, बेदकोट नगरपालिका, Bedkot, बेदकोट]
-  belaka: [Belaka Municipality, बेलका नगरपालिका, Belaka, बेलका]
-  belbari: [Belbari Municipality, बेलबारी नगरपालिका, Belbari, बेलबारी]
-  belkotgadhi:
-    [Belkotgadhi Municipality, बेलकोटगढी नगरपालिका, Belkotgadhi, बेलकोटगढी]
-  belouri: [Belouri Municipality, बेलौरी नगरपालिका, Belouri, बेलौरी]
-  beni: [Beni Municipality, बेनी नगरपालिका, Beni, बेनी]
-  bensishahar: [Bensishahar Municipality, बेंसीशहर नगरापालिका, Bensishahar]
-  bhadrapur: [Bhadrapur Municipality, भद्रपुर नगरपालिका, Bhadrapur, भद्रपुर]
-  bhajani: [Bhajani Municipality, भजनी नगरपालिका, Bhajani, भजनी]
-  bhaktapur: [Bhaktapur Municipality, भक्तपुर नगरपालिका, Bhaktapur, भक्तपुर]
-  bhangaha: [Bhangaha Municipality, भँगाहा नगरपालिका, Bhangaha, भँगाहा]
-  bhanu: [Bhanu Municipality, भानु नगरपालिका, Bhanu, भानु]
-  bheerkot: [Bheerkot Municipality, भीरकोट नगरपालिका, Bheerkot, भीरकोट]
-  bheri: [Bheri Municipality, भेरी नगरपालिका, Bheri, भेरी]
-  bheri_malika:
-    [Bheri Malika Municipality, भेरीमालिका नगरपालिका, Bheri Malika, भेरीमालिका]
-  bheriganga:
-    [Bheriganga Municipality, भेरीगंगा नगरपालिका, Bheriganga, भेरीगंगा]
-  bhimad: [Bhimad Municipality, भिमाद नगरपालिका, Bhimad, भिमाद]
-  bhimdatta: [Bhimdatta Municipality, भिमदत्त नगरपालिका, Bhimdatta, भिमदत्त]
-  bhimeshwor:
-    [Bhimeshwor Municipality, भिमेश्वर नगरपालिका, Bhimeshwor, भिमेश्वर]
-  bhirkot: [Bhirkot Municipality, भीरकोट नगरपालिका, Bhirkot, भीरकोट]
-  bhojpur: [Bhojpur Municipality, भोजपुर नगरपालिका, Bhojpur, भोजपुर]
-  bhumikasthan:
-    [
-      Bhumikasthan Municipality,
-      भुमिकास्थान नगरपालिका,
-      Bhumikasthan,
-      भुमिकास्थान,
-    ]
-  bideha: [Bideha Municipality, बिदेह नगरपालिकागाउँपालिका, Bideha]
-  bidur: [Bidur Municipality, बिदुर नगरपालिका, Bidur, बिदुर]
-  birendranagar:
-    [
-      Birendranagar Municipality,
-      बीरेन्द्रनगर नगरपालिका,
-      Birendranagar,
-      बीरेन्द्रनगर,
-    ]
-  birtamod: [Birtamod Municipality, बिर्तामोड नगरपालिका, Birtamod, बिर्तामोड]
-  bode_barsain:
-    [Bode Barsain Municipality, बोदेबरसाईन नगरपालिका, Bode Barsain, बोदेबरसाईन]
-  bodebarsain:
-    [Bodebarsain Municipality, बोदेबरसाईन नगरपालिका, Bodebarsain, बोदेबरसाईन]
-  boudhimai: [Boudhimai Municipality, बौधीमाई नगरपालिका, Boudhimai, बौधीमाई]
-  brindaban: [Brindaban Municipality, बृन्दावन नगरपालिका, Brindaban, बृन्दावन]
-  buddhabhumi:
-    [Buddhabhumi Municipality, बुद्धभूमी नगरपालिका, Buddhabhumi, बुद्धभूमी]
-  budhanilkhantha:
-    [
-      Budhanilkhantha Municipality,
-      बुढानिलकण्ठ नगरपालिका,
-      Budhanilkhantha,
-      बुढानिलकण्ठ,
-    ]
-  budhiganga:
-    [Budhiganga Municipality, बुढीगंगा नगरपालिका, Budhiganga, बुढीगंगा]
-  budhinanda:
-    [Budhinanda Municipality, बुढीनन्दा नगरपालिका, Budhinanda, बुढीनन्दा]
-  bungal: [Bungal Municipality, बुंगल नगरपालिका, Bungal, बुंगल]
-  byas: [Byas Municipality, ब्यास नगरपालिका, Byas, ब्यास]
-  chainapur: [Chainapur Municipality, चैनपुर नगरपालिका, Chainapur, चैनपुर]
-  chamunda_bindrasaini:
-    [
-      Chamunda Bindrasaini Municipality,
-      चामुण्डा बिन्द्रासैनी नगरपालिका,
-      Chamunda Bindrasaini,
-      चामुण्डा बिन्द्रासैनी,
-    ]
-  chandannath:
-    [Chandannath Municipality, चन्दननाथ नगरपालिका, Chandannath, चन्दननाथ]
-  chandragiri:
-    [Chandragiri Municipality, चन्द्रागिरी नगरपालिका, Chandragiri, चन्द्रागिरी]
-  chandrapur:
-    [Chandrapur Municipality, चन्द्रपुर नगरपालिका, Chandrapur, चन्द्रपुर]
-  changunarayan:
-    [
-      Changunarayan Municipality,
-      चाँगुनारायण नगरपालिका,
-      Changunarayan,
-      चाँगुनारायण,
-    ]
-  chapakot: [Chapakot Municipality, चापाकोट नगरपालिका, Chapakot, चापाकोट]
-  chaudandigadhi:
-    [
-      Chaudandigadhi Municipality,
-      चौदण्डीगढी नगरपालिका,
-      Chaudandigadhi,
-      चौदण्डीगढी,
-    ]
-  chaurjahari:
-    [Chaurjahari Municipality, चौरजहारी नगरपालिका, Chaurjahari, चौरजहारी]
-  chhayanath_rara:
-    [
-      Chhayanath Rara Municipality,
-      छायाँनाथ रारा नगरपालिका,
-      Chhayanath Rara,
-      छायाँनाथ रारा,
-    ]
-  chhedagad: [Chhedagad Municipality, छेडागाड नगरपालिका, Chhedagad, छेडागाड]
-  chhireshwornath:
-    [
-      Chhireshwornath Municipality,
-      क्षिरेश्वरनाथ नगरपालिका,
-      Kshireshwornath Municipality,
-      Chhireshwornath,
-      क्षिरेश्वरनाथ,
-      Kshireshwornath,
-    ]
-  choutara_sangachowkgadhi:
-    [
-      Choutara Sangachowkgadhi Municipality,
-      चौतारा साँगाचोकगढी नगरपालिका,
-      Choutara Sangachowkgadhi,
-      चौतारा साँगाचोकगढी,
-    ]
-  dakneshwori:
-    [Dakneshwori Municipality, डाक्नेश्वरी नगरपालिका, Dakneshwori, डाक्नेश्वरी]
-  dakshinkali:
-    [Dakshinkali Municipality, दक्षिणकाली नगरपालिका, Dakshinkali, दक्षिणकाली]
-  damak: [Damak Municipality, दमक नगरपालिका, Damak, दमक]
-  dasharathchand:
-    [Dasharathchand Municipality, दशरथचन्द नगरपालिका, Dasharathchand, दशरथचन्द]
-  deumai: [Deumai Municipality, देउमाई नगरपालिका, Deumai, देउमाई]
-  devchuli: [Devchuli Municipality, देवचुली नगरपालिका, Devchuli, देवचुली]
-  devdaha: [Devdaha Municipality, देबदह नगरपालिका, Devdaha, देबदह]
-  dewahi_gonahi:
-    [
-      Dewahi Gonahi Municipality,
-      देवाही गोनाही नगरपालिका,
-      Dewahi Gonahi,
-      देवाही गोनाही,
-    ]
-  dhangadhimai:
-    [Dhangadhimai Municipality, धनगढीमाई नगरपालिका, Dhangadhimai, धनगढीमाई]
-  dhankuta: [Dhankuta Municipality, धनकुटा नगरपालिका, Dhankuta, धनकुटा]
-  dhanushadham:
-    [Dhanushadham Municipality, धनुषाधाम नगरपालिका, Dhanushadham, धनुषाधाम]
-  dharmadevi:
-    [Dharmadevi Municipality, धर्मदेवी नगरपालिका, Dharmadevi, धर्मदेवी]
-  dhorpatan: [Dhorpatan Municipality, ढोरपाटन नगरपालिका, Dhorpatan, ढोरपाटन]
-  dhulikhel: [Dhulikhel Municipality, धुलिखेल नगरपालिका, Dhulikhel, धुलिखेल]
-  dhunibenshi:
-    [Dhunibenshi Municipality, धुनीबेंशी नगरपालिका, Dhunibenshi, धुनीबेंशी]
-  diktel_rupakot_majhuwagadhi:
-    [
-      Diktel Rupakot Majhuwagadhi Municipality,
-      दिक्तेल रुपाकोट मझुवागढी नगरपालिका,
-      Diktel Rupakot Majhuwagadhi,
-      दिक्तेल रुपाकोट मझुवागढी,
-    ]
-  dipayal_silgadhi:
-    [
-      Dipayal Silgadhi Municipality,
-      दिपायल सिलगढी नगरपालिका,
-      Dipayal Silgadhi,
-      दिपायल सिलगढी,
-    ]
-  dodhara_chandani:
-    [
-      Dodhara Chandani Municipality,
-      दोधारा चाँदनी नगरपालिका,
-      Dodhara Chandani,
-      दोधारा चाँदनी,
-    ]
-  dudhouli: [Dudhouli Municipality, दुधौली नगरपालिका, Dudhouli, दुधौली]
-  duhabi: [Duhabi Municipality, दुहबी नगरपालिका, Duhabi, दुहबी]
-  dullu: [Dullu Municipality, दुल्लु नगरपालिका, Dullu, दुल्लु]
-  gadhimai: [Gadhimai Municipality, गढीमाई नगरपालिका, Gadhimai, गढीमाई]
-  gaidakot: [Gaidakot Municipality, गैडाकोट नगरपालिका, Gaidakot, गैडाकोट]
-  galkot: [Galkot Municipality, गल्कोट नगरपालिका, Galkot, गल्कोट]
-  galyang: [Galyang Municipality, गल्याङ नगरपालिका, Galyang, गल्याङ]
-  ganeshman_charnath:
-    [
-      Ganeshman Charnath Municipality,
-      गणेशमान चारनाथ नगरपालिका,
-      Ganeshman Charnath,
-      गणेशमान चारनाथ,
-    ]
-  garuda: [Garuda Municipality, गरुडा नगरपालिका, Garuda, गरुडा]
-  gaur: [Gaur Municipality, गौर नगरपालिका, Gaur, गौर]
-  gauradaha: [Gauradaha Municipality, गौरादह नगरपालिका, Gauradaha, गौरादह]
-  gauriganga:
-    [Gauriganga Municipality, गौरीगंगा नगरपालिका, Gauriganga, गौरीगंगा]
-  gaushala: [Gaushala Municipality, गौशाला नगरपालिका, Gaushala, गौशाला]
-  ghodaghodi:
-    [Ghodaghodi Municipality, घोडाघोडी नगरपालिका, Ghodaghodi, घोडाघोडी]
-  godaita: [Godaita Municipality, गोडैटा नगरपालिका, Godaita, गोडैटा]
-  godawari: [Godawari Municipality, गोदावरी नगरपालिका, Godawari, गोदावरी]
-  gokarneshwor:
-    [
-      Gokarneshwor Municipality,
-      गोकर्णेश्वर नगरपालिका,
-      Gokarneshwor,
-      गोकर्णेश्वर,
-    ]
-  golbazar: [Golbazar Municipality, गोलबजार नगरपालिका, Golbazar, गोलबजार]
-  gorkha: [Gorkha Municipality, गोरखा नगरपालिका, Gorkha, गोरखा]
-  gujara: [Gujara Municipality, गुजरा नगरपालिका, Gujara, गुजरा]
-  gulariya: [Gulariya Municipality, गुलरीया नगरपालिका, Gulariya, गुलरीया]
-  gurbhakot: [Gurbhakot Municipality, गुर्भाकोट नगरपालिका, Gurbhakot, गुर्भाकोट]
-  halesi_tuwachung:
-    [
-      Halesi Tuwachung Municipality,
-      हलेसी तुवाचुङ नगरपालिका,
-      Halesi Tuwachung,
-      हलेसी तुवाचुङ,
-    ]
-  hansapur: [Hansapur Municipality, हंसपुर नगरपालिका, Hansapur, हंसपुर]
-  hanumannagar_kankalini:
-    [
-      Hanumannagar Kankalini Municipality,
-      हनुमाननगर कङ्कालिनी नगरपालिका,
-      Hanumannagar Kankalini,
-      हनुमाननगर कङ्कालिनी,
-    ]
-  haripur:
-    [
-      Haripur Municipality,
-      हरिपुर नगरपालिका,
-      Haripurwa Municipality,
-      हरिपुर्वा नगरपालिका,
-      Haripur,
-      हरिपुर,
-      Haripurwa,
-      हरिपुर्वा,
-    ]
-  hariwan: [Hariwan Municipality, हरिवन नगरपालिका, Hariwan, हरिवन]
-  ilam:
-    [Ilam Municipality, ईलाम नगरपालिका, Illam Municipality, Ilam, ईलाम, Illam]
-  inaruwa: [Inaruwa Municipality, इनरुवा नगरपालिका, Inaruwa, इनरुवा]
-  ishanath: [Ishanath Municipality, ईशनाथ नगरपालिका, Ishanath, ईशनाथ]
-  ishworpur: [Ishworpur Municipality, ईश्वरपुर नगरपालिका, Ishworpur, ईश्वरपुर]
-  jaimuni: [Jaimuni Municipality, जैमुनी नगरपालिका, Jaimuni, जैमुनी]
-  jaleshwor: [Jaleshwor Municipality, जलेश्वर नगरपालिका, Jaleshwor, जलेश्वर]
-  jayaprithbi:
-    [Jayaprithbi Municipality, जयपृथ्वी नगरपालिका, Jayaprithbi, जयपृथ्वी]
-  jiri: [Jiri Municipality, जिरी नगरपालिका, Jiri, जिरी]
-  kabilashi: [Kabilashi Municipality, कविलासी नगरपालिका, Kabilashi, कविलासी]
-  kageshwori_manahara:
-    [
-      Kageshwori Manahara Municipality,
-      कागेश्वरी मनहरा नगरपालिका,
-      Kageshwori Manahara,
-      कागेश्वरी मनहरा,
-    ]
-  kalika: [Kalika Municipality, कालिका नगरपालिका, Kalika, कालिका]
-  kalyanpur: [Kalyanpur Municipality, कल्याणपुर नगरपालिका, Kalyanpur, कल्याणपुर]
-  kamal_bazar:
-    [Kamal bazar Municipality, कमलबजार नगरपालिका, Kamal bazar, कमलबजार]
-  kamala: [Kamala Municipality, कमला नगरपालिका, Kamala, कमला]
-  kamalamai: [Kamalamai Municipality, कमलामाई नगरपालिका, Kamalamai, कमलामाई]
-  kanchanrup:
-    [Kanchanrup Municipality, कन्चनरुप नगरपालिका, Kanchanrup, कन्चनरुप]
-  kankai:
-    [
-      Kanakai Municipality,
-      कन्काई नगरपालिका,
-      Kankai Municipality,
-      Kanakai,
-      कन्काई,
-      Kankai,
-    ]
-  kapilbastu:
-    [
-      Kapilbastu Municipality,
-      कपिलबस्तु नगरपालिका,
-      Kapilvastu Municipality,
-      Kapilbastu,
-      कपिलबस्तु,
-      Kapilvastu,
-    ]
-  karjanha: [Karjanha Municipality, कर्जन्हा नगरपालिका, Karjanha, कर्जन्हा]
-  katahariya: [Katahariya Municipality, कटहरिया नगरपालिका, Katahariya, कटहरिया]
-  katari: [Katari Municipality, कटारी नगरपालिका, Katari, कटारी]
-  kawasoti: [Kawasoti Municipality, कावासोती नगरपालिका, Kawasoti, कावासोती]
-  khadak: [Khadak Municipality, खडक नगरपालिका, Khadak, खडक]
-  khairahani: [Khairahani Municipality, खैरहनी नगरपालिका, Khairahani, खैरहनी]
-  khandachakra:
-    [Khandachakra Municipality, खाँडाचक्र नगरपालिका, Khandachakra, खाँडाचक्र]
-  khandbari:
-    [
-      Khandabari Municipality,
-      खाँदबारी नगरपालिका,
-      Khandbari Municipality,
-      Khandabari,
-      खाँदबारी,
-      Khandbari,
-    ]
-  kirtipur: [Kirtipur Municipality, किर्तिपुर नगरपालिका, Kirtipur, किर्तिपुर]
-  kohalpur: [Kohalpur Municipality, कोहलपुर नगरपालिका, Kohalpur, कोहलपुर]
-  kolhabi: [Kolhabi Municipality, कोल्हवी नगरपालिका, Kolhabi, कोल्हवी]
-  krishnanagar:
-    [Krishnanagar Municipality, कृष्णनगर नगरपालिका, Krishnanagar, कृष्णनगर]
-  krishnapur:
-    [Krishnapur Municipality, कृष्णपुर नगरपालिका, Krishnapur, कृष्णपुर]
-  kushma: [Kushma Municipality, कुश्मा नगरपालिका, Kushma, कुश्मा]
-  lahan: [Lahan Municipality, लहान नगरपालिका, Lahan, लहान]
-  lalbandi: [Lalbandi Municipality, लालबन्दी नगरपालिका, Lalbandi, लालबन्दी]
-  laligurans:
-    [Laligurans Municipality, लालीगुराँस नगरपालिका, Laligurans, लालीगुराँस]
-  lamahi: [Lamahi Municipality, लमही नगरपालिका, Lamahi, लमही]
-  lamki_chuha:
-    [Lamki Chuha Municipality, लम्कि चुहा नगरपालिका, Lamki Chuha, लम्कि चुहा]
-  lekabeshi: [Lekabeshi Municipality, लेकबेशी नगरपालिका, Lekabeshi, लेकबेशी]
-  letang: [Letang Municipality, लेटाङ नगरपालिका, Letang, लेटाङ]
-  loharpatti:
-    [Loharpatti Municipality, लोहरपट्टी नगरपालिका, Loharpatti, लोहरपट्टी]
-  lumbini_cultural:
-    [
-      Lumbini Cultural Municipality,
-      लुम्बिनी साँस्कृतिक नगरपालिका,
-      Lumbini Cultural,
-      लुम्बिनी साँस्कृतिक,
-    ]
-  lumbini_sanskritik:
-    [
-      Lumbini Sanskritik Municipality,
-      लुम्बिनी साँस्कृतिक नगरपालिका,
-      Lumbini Sanskritik,
-      लुम्बिनी साँस्कृतिक,
-    ]
-  madhav_narayan:
-    [
-      Madhav Narayan Municipality,
-      माधव नारायण नगरपालिका,
-      Madhav Narayan,
-      माधव नारायण,
-    ]
-  madhuwan: [Madhuwan Municipality, मधुवन नगरपालिका, Madhuwan, मधुवन]
-  madhya_bindu:
-    [Madhya Bindu Municipality, मध्यबिन्दु नगरपालिका, Madhya Bindu, मध्यबिन्दु]
-  madhya_nepal:
-    [Madhya Nepal Municipality, मध्यनेपाल नगरपालिका, Madhya Nepal, मध्यनेपाल]
-  madhyabindu:
-    [Madhyabindu Municipality, मध्यबिन्दु नगरपालिका, Madhyabindu, मध्यबिन्दु]
-  madhyapur_thimi:
-    [
-      Madhyapur Thimi Municipality,
-      मध्यपुर थिमी नगरपालिका,
-      Madhyapur Thimi,
-      मध्यपुर थिमी,
-    ]
-  mahagadhimai:
-    [Mahagadhimai Municipality, महागढीमाई नगरपालिका, Mahagadhimai, महागढीमाई]
-  mahakali: [Mahakali Municipality, महाकाली नगरपालिका, Mahakali, महाकाली]
-  mahalaxmi:
-    [Mahalaxmi Municipality, महालक्ष्मी नगरपालिका, Mahalaxmi, महालक्ष्मी]
-  maharajganj:
-    [Maharajganj Municipality, महाराजगन्ज नगरपालिका, Maharajganj, महाराजगन्ज]
-  mai:
-    [
-      Madi Municipality,
-      मादी नगरपालिका,
-      Mai Municipality,
-      माई नगरपालिका,
-      Madi,
-      मादी,
-      Mai,
-      माई,
-    ]
-  malangawa: [Malangawa Municipality, मलंगवा नगरपालिका, Malangawa, मलंगवा]
-  malikarjun: [Malikarjun Municipality, मालिकार्जुन गाउँपालिका, Malikarjun]
-  manarashisawa:
-    [
-      Manara Shisawa Municipality,
-      मनरा शिसवा नगरपालिका,
-      Manarashisawa Municipality,
-      Manara Shisawa,
-      मनरा शिसवा,
-      Manarashisawa,
-    ]
-  mandan_deupur:
-    [
-      Mandan Deupur Municipality,
-      मण्डन देउपुर नगरपालिका,
-      Mandan Deupur,
-      मण्डन देउपुर,
-    ]
-  mandandeupur:
-    [
-      Mandandeupur Municipality,
-      मण्डन देउपुर नगरपालिका,
-      Mandandeupur,
-      मण्डन देउपुर,
-    ]
-  mangalsen: [Mangalsen Municipality, मंगलसेन नगरपालिका, Mangalsen, मंगलसेन]
-  manthali: [Manthali  Municipality, मन्थली नगरपालिका, Manthali, मन्थली]
-  matihani: [Matihani Municipality, मटिहानी नगरपालिका, Matihani, मटिहानी]
-  maulapur: [Maulapur Municipality, मौलापुर नगरपालिका, Maulapur, मौलापुर]
-  mechinagar: [Mechinagar Municipality, मेचीनगर नगरपालिका, Mechinagar, मेचीनगर]
-  melanchi: [Melanchi Municipality, मेलम्ची नगरपालिका, Melanchi, मेलम्ची]
-  melauli: [Melauli Municipality, मेलौली नगरपालिका, Melauli, मेलौली]
-  mirchaiya: [Mirchaiya Municipality, मिर्चेया नगरपालिका, Mirchaiya, मिर्चेया]
-  mithila: [Mithila Municipality, मिथिला नगरपालिका, Mithila, मिथिला]
-  mithila_bihari:
-    [
-      Mithila Bihari Municipality,
-      मिथिला बिहारी नगरपालिका,
-      Mithila Bihari,
-      मिथिला बिहारी,
-    ]
-  musikot: [Musikot Municipality, मुसिकोट नगरपालिका, Musikot, मुसिकोट]
-  myanglung:
-    [Myanglung Municipality, म्याङ्गलुङ्ग नगरपालिका, Myanglung, म्याङ्गलुङ्ग]
-  nagarain: [Nagarain Municipality, नगराइन नगरपालिका, Nagarain, नगराइन]
-  nagarjun: [Nagarjun Municipality, नागार्जुन नगरपालिका, Nagarjun, नागार्जुन]
-  nalgad: [Nalgad Municipality, नलगाड नगरपालिका, Nalgad, नलगाड]
-  namobuddha:
-    [Namobuddha Municipality, नमोबुद्ध नगरपालिका, Namobuddha, नमोबुद्ध]
-  narayan: [Narayan Municipality, नारायण नगरपालिका, Narayan, नारायण]
-  nijagadh: [Nijagadh Municipality, निजगढ नगरपालिका, Nijagadh, निजगढ]
-  nilkhantha:
-    [
-      Neelkhantha Municipality,
-      नीलकण्ठ नगरपालिका,
-      Nilkhantha Municipality,
-      Neelkhantha,
-      नीलकण्ठ,
-      Nilkhantha,
-    ]
-  pacharauta: [Pacharauta Municipality, पचरौता नगरपालिका, Pacharauta, पचरौता]
-  pakhribas: [Pakhribas Municipality, पाख्रिबास नगरपालिका, Pakhribas, पाख्रिबास]
-  palungtar:
-    [Palungtar Municipality, पालुङ्गटार नगरपालिका, Palungtar, पालुङ्गटार]
-  panauti: [Panauti Municipality, पनौती नगरपालिका, Panauti, पनौती]
-  panchapuri:
-    [Panchapuri Municipality, पञ्चपुरी नगरपालिका, Panchapuri, पञ्चपुरी]
-  panchdebal_binayak:
-    [
-      Panchdebal Binayak Municipality,
-      पंचदेवल बिनायक नगरपालिका,
-      Panchdewal Binayak Municipality,
-      Panchdebal Binayak,
-      पंचदेवल बिनायक,
-      Panchdewal Binayak,
-    ]
-  panchkhal: [Panchkhal Municipality, पाँचखाल नगरपालिका, Panchkhal, पाँचखाल]
-  panchkhapan:
-    [
-      Panchakhapan Municipality,
-      पाँचखपन नगरपालिका,
-      Panchkhapan Municipality,
-      Panchakhapan,
-      पाँचखपन,
-      Panchkhapan,
-    ]
-  paroha: [Paroha Municipality, परोहा नगरपालिका, Paroha, परोहा]
-  parsagadhi:
-    [Parsagadhi Municipality, पर्सागढी नगरपालिका, Parsagadhi, पर्सागढी]
-  parshuram:
-    [
-      Parashuram Municipality,
-      परशुराम नगरपालिका,
-      Parshuram Municipality,
-      Parashuram,
-      परशुराम,
-      Parshuram,
-    ]
-  patan: [Patan Municipality, पाटन नगरपालिका, Patan, पाटन]
-  pathari_shanishchare:
-    [
-      Pathari Shanishchare Municipality,
-      पथरी शनिश्चरे नगरपालिका,
-      Pathari Shanishchare,
-      पथरी शनिश्चरे,
-    ]
-  phalebas: [Phalebas Municipality, फलेबास नगरपालिका, Phalebas, फलेबास]
-  phatuwa_bijayapur:
-    [
-      Phatuwa Bijayapur Municipality,
-      फतुवा बिजयपुर नगरपालिका,
-      Phatuwa Bijayapur,
-      फतुवा बिजयपुर,
-    ]
-  phidim: [Phidim Municipality, फिदिम नगरपालिका, Phidim, फिदिम]
-  phungling: [Phungling Municipality, फुङलिङ्ग नगरपालिका, Phungling, फुङलिङ्ग]
-  pokhariya: [Pokhariya Municipality, पोखरिया नगरपालिका, Pokhariya, पोखरिया]
-  puchaundi:
-    [
-      Puchaundi Municipality,
-      पुचौंडी नगरपालिका,
-      Purchaundi Municipality,
-      Puchaundi,
-      पुचौंडी,
-      Purchaundi,
-    ]
-  punarbas: [Punarbas Municipality, पुनर्वास नगरपालिका, Punarbas, पुनर्वास]
-  putalibazar:
-    [Putalibazar Municipality, पुतलीबजार नगरपालिका, Putalibazar, पुतलीबजार]
-  pyuthan: [Pyuthan Municipality, प्यूठान नगरपालिका, Pyuthan, प्यूठान]
-  rainas: [Rainas Municipality, राईनास नगरपालिका, Rainas, राईनास]
-  rajbiraj: [Rajbiraj Municipality, राजविराज नगरपालिका, Rajbiraj, राजविराज]
-  rajdevi: [Rajdevi Municipality, राजदेवी नगरपालिका, Rajdevi, राजदेवी]
-  rajpur:
-    [
-      Rajapur Municipality,
-      राजापुर नगरपालिका,
-      Rajpur Municipality,
-      राजपुर नगरपालिका,
-      Rajapur,
-      राजापुर,
-      Rajpur,
-      राजपुर,
-    ]
-  ram_gopalpur:
-    [
-      Ram Gopalpur Municipality,
-      राम गोपालपुर नगरपालिका,
-      Ram Gopalpur,
-      राम गोपालपुर,
-    ]
-  ramdhuni: [Ramdhuni Municipality, रामधुनी नगरपालिका, Ramdhuni, रामधुनी]
-  ramechhap: [Ramechhap Municipality, रामेछाप नगरपालिका, Ramechhap, रामेछाप]
-  ramgopalpur:
-    [
-      Ramgopalpur Municipality,
-      राम गोपालपुर नगरपालिका,
-      Ramgopalpur,
-      राम गोपालपुर,
-    ]
-  ramgram: [Ramgram Municipality, रामग्राम नगरपालिका, Ramgram, रामग्राम]
-  rampur: [Rampur Municipality, रामपुर नगरपालिका, Rampur, रामपुर]
-  rangeli: [Rangeli Municipality, रंगेली नगरपालिका, Rangeli, रंगेली]
-  rapti: [Rapti Municipality, राप्ती नगरपालिका, Rapti, राप्ती]
-  raskot: [Raskot Municipality, रास्कोट नगरपालिका, Raskot, रास्कोट]
-  ratnanagar: [Ratnanagar Municipality, रत्ननगर नगरपालिका, Ratnanagar, रत्ननगर]
-  ratuwamai: [Ratuwamai Municipality, रतुवामाई नगरपालिका, Ratuwamai, रतुवामाई]
-  resunga: [Resunga Municipality, रेसुङ्गा नगरपालिका, Resunga, रेसुङ्गा]
-  rolpa: [Rolpa Municipality, रोल्पा नगरपालिका, Rolpa, रोल्पा]
-  sabaila: [Sabaila Municipality, सबैला नगरपालिका, Sabaila, सबैला]
-  sainamaina:
-    [Sainamaina Municipality, सैनामैना नगरपालिका, Sainamaina, सैनामैना]
-  sandhikharka:
-    [Sandhikharka Municipality, सन्धिखर्क नगरपालिका, Sandhikharka, सन्धिखर्क]
-  sanphebagar:
-    [Sanphebagar Municipality, साँफेबगर नगरपालिका, Sanphebagar, साँफेबगर]
-  saptakoshi:
-    [Saptakoshi Municipality, सप्तकोशी नगरपालिका, Saptakoshi, सप्तकोशी]
-  shadananda: [Shadananda Municipality, षडानन्द नगरपालिका, Shadananda, षडानन्द]
-  shahidnagar:
-    [Shahidnagar Municipality, शहीदनगर नगरपालिका, Shahidnagar, शहीदनगर]
-  shailyashikhar:
-    [
-      Shailyashikhar Municipality,
-      शैल्यशिखर नगरपालिका,
-      Shailyashikhar,
-      शैल्यशिखर,
-    ]
-  shambhunath:
-    [Shambhunath Municipality, शम्भुनाथ नगरपालिका, Shambhunath, शम्भुनाथ]
-  shankharapur:
-    [Shankharapur Municipality, शंङ्खरापुर नगरपालिका, Shankharapur, शंङ्खरापुर]
-  sharada: [Sharada Municipality, शारदा नगरपालिका, Sharada, शारदा]
-  shikhar: [Shikhar Municipality, शिखर नगरपालिका, Shikhar, शिखर]
-  shitaganga: [Shitaganga Municipality, शितगंगा नगरपालिका, Shitaganga, शितगंगा]
-  shivaraj: [Shivaraj Municipality, शिवराज नगरपालिका, Shivaraj, शिवराज]
-  shivasatakshi:
-    [
-      Shivasatakshi Municipality,
-      शिवसताक्षी नगरपालिका,
-      Shivasatakshi,
-      शिवसताक्षी,
-    ]
-  shuklagandaki:
-    [
-      Shuklagandaki Municipality,
-      शुक्लागण्डकी नगरपालिका,
-      Shuklagandaki,
-      शुक्लागण्डकी,
-    ]
-  shuklaphanta:
-    [
-      Shuklaphanta Municipality,
-      शुक्लाफाँटा नगरपालिका,
-      Shuklaphanta,
-      शुक्लाफाँटा,
-    ]
-  siddharthanagar:
-    [
-      Siddharthanagar Municipality,
-      सिद्धार्थनगर नगरपालिका,
-      Siddharthanagar,
-      सिद्धार्थनगर,
-    ]
-  siddhicharan:
-    [Siddhicharan Municipality, सिद्धिचरण नगरपालिका, Siddhicharan, सिद्धिचरण]
-  simroungadh:
-    [Simroungadh Municipality, सिम्रौनगढ नगरपालिका, Simroungadh, सिम्रौनगढ]
-  siraha: [Siraha Municipality, सिराहा नगरपालिका, Siraha, सिराहा]
-  solu_dhudhakunda:
-    [
-      Solu Dhudhakunda Municipality,
-      सोलुदुधकुण्ड नगरपालिका,
-      Solu Dhudhakunda,
-      सोलुदुधकुण्ड,
-    ]
-  soludhudhakunda:
-    [
-      Soludhudhakunda Municipality,
-      सोलुदुधकुण्ड नगरपालिका,
-      Soludhudhakunda,
-      सोलुदुधकुण्ड,
-    ]
-  sukhipur: [Sukhipur Municipality, सुखीपुर नगरपालिका, Sukhipur, सुखीपुर]
-  sunawal: [Sunawal Municipality, सुनवल नगरपालिका, Sunawal, सुनवल]
-  sundarbazar:
-    [Sundarbazar Municipality, सुन्दरबजार नगरपालिका, Sundarbazar, सुन्दरबजार]
-  sundarharaicha:
-    [
-      Sundarharaicha Municipality,
-      सुन्दरहरैंचा नगरपालिका,
-      Sundarharaicha,
-      सुन्दरहरैंचा,
-    ]
-  sunwarshi: [Sunwarshi Municipality, सुनवर्षी नगरपालिका, Sunwarshi, सुनवर्षी]
-  surunga: [Surunga Municipality, सुरुङ्गा नगरपालिका, Surunga, सुरुङ्गा]
-  suryabinayak:
-    [
-      Suryabinayak Municipality,
-      सूर्यविनायक नगरपालिका,
-      Suryabinayak,
-      सूर्यविनायक,
-    ]
-  suryodaya: [Suryodaya Municipality, सूर्योदय नगरपालिका, Suryodaya, सूर्योदय]
-  swargadwari:
-    [
-      Swargadwari Municipality,
-      स्वर्गद्धारी नगरपालिका,
-      Sworgadwari Municipality,
-      Swargadwari,
-      स्वर्गद्धारी,
-      Sworgadwari,
-    ]
-  tansen: [Tansen Municipality, तानसेन नगरपालिका, Tansen, तानसेन]
-  tarakeshwor:
-    [Tarakeshwor Municipality, तारकेश्वर नगरपालिका, Tarakeshwor, तारकेश्वर]
-  thaha: [Thaha Municipality, थाहा नगरपालिका, Thaha, थाहा]
-  thakurbaba:
-    [Thakurbaba Municipality, ठाकुरबाबा नगरपालिका, Thakurbaba, ठाकुरबाबा]
-  thulibheri:
-    [Thulibheri Municipality, ठुलीभेरी नगरपालिका, Thulibheri, ठुलीभेरी]
-  tikapur: [Tikapur Municipality, टिकापुर नगरपालिका, Tikapur, टिकापुर]
-  tilagupha: [Tilagupha Municipality, तिलागुफा नगरपालिका, Tilagupha, तिलागुफा]
-  tilottama: [Tilottama Municipality, तिलोत्तमा नगरपालिका, Tilottama, तिलोत्तमा]
-  tokha: [Tokha Municipality, टोखा नगरपालिका, Tokha, टोखा]
-  tribeni: [Tribeni Municipality, त्रिवेणी नगरपालिका, Tribeni, त्रिवेणी]
-  tripurasundari:
-    [
-      Tripurasundari Municipality,
-      त्रिपुरासुन्दरी नगरपालिका,
-      Tripurasundari,
-      त्रिपुरासुन्दरी,
-    ]
-  triyuga: [Triyuga Municipality, त्रियुगा नगरपालिका, Triyuga, त्रियुगा]
-  urlabari: [Urlabari Municipality, उर्लाबारी नगरपालिका, Urlabari, उर्लाबारी]
-  vyas: [Vyas Municipality, ब्यास नगरपालिका, Vyas, ब्यास]
-  walling: [Walling Municipality, वालिङ्ग नगरपालिका, Walling, वालिङ्ग]
-sub_metropolitan_city:
-  butwal: [Butwal Sub-Metropolitian City, बुटवल उपमहानगरपालिका, Butwal, बुटवल]
-  dhangadhi:
-    [Dhangadhi Sub-Metropolitian City, धनगढी उपमहानगरपालिका, Dhangadhi, धनगढी]
-  dharan: [Dharan Sub-Metropolitian City, धरान उपमहानगरपालिका, Dharan, धरान]
-  ghorahi:
-    [Ghorahi Sub-Metropolitian City, घोराही उपमहानगरपालिका, Ghorahi, घोराही]
-  hetauda:
-    [Hetauda Sub-Metropolitian City, हेटौडा उपमहानगरपालिका, Hetauda, हेटौडा]
-  itahari:
-    [Itahari Sub-Metropolitian City, ईटहरी उपमहानगरपालिका, Itahari, ईटहरी]
-  janakpurdham:
-    [
-      Janakpurdham Sub-Metropolitian City,
-      जनकपुर उपमहानगरपालिका,
-      Janakpurdham,
-      जनकपुर,
-    ]
-  jitpur_simara:
-    [
-      Jitpur Simara Sub-Metropolitian City,
-      जीतपुर सिमरा उपमहानगरपालिका,
-      Jitpur Simara,
-      जीतपुर सिमरा,
-    ]
-  kalaiya:
-    [Kalaiya Sub-Metropolitian City, कलैया उपमहानगरपालिका, Kalaiya, कलैया]
-  nepalganj:
-    [
-      Nepalganj Sub-Metropolitian City,
-      नेपालगञ्ज उपमहानगरपालिका,
-      Nepalganj,
-      नेपालगञ्ज,
-    ]
-  tulsipur:
-    [
-      Tulsipur Sub-Metropolitian City,
-      तुल्सीपुर उपमहानगरपालिका,
-      Tulsipur,
-      तुल्सीपुर,
-    ]
+    - Lalitpur Metropolitian City
+    - ललितपुर महानगरपालिका
+    - Lalitpur
+    - ललितपुर
+  pokhara:
+    - Pokhara Metropolitian City
+    - पोखरा महानगरपालिका
+    - Pokhara
+    - पोखरा
+    - Pokhara Lekhnath
+    - Pokhara Lekhnath Metropolitian City
+    - पोखरा लेखनाथ महानगरपालिका
+protected_area:
+  bardiya_national_park:
+    - Bardiya National Park
+  chitawan_national_park:
+    - Chitawan National Park
+  chitwan_national_park:
+    - Chitwan National Park
+  dhorpatan_hunting_reserve:
+    - Dhorpatan Hunting Reserve
+  khaptad_national_park:
+    - Khaptad National Park
+  koshi_tappu_wildlife_reserve:
+    - Koshi Tappu Wildlife Reserve
+  langtang_national_park:
+    - Langtang National Park
+  lumbini_sanskritik_development_area:
+    - Lumbini Sanskritik Development Area
+  parsa_wildlife_reserve:
+    - Parsa Wildlife Reserve
+  shivapuri_watershed_and_wildlife_reserve:
+    - Shivapuri Watershed and Wildlife Reserve
+  shuklaphanta_national_park:
+    - Shuklaphanta National Park
