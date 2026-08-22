@@ -178,6 +178,18 @@ cleanup function.
 - **Fix:** this is exactly what `FieldResolver` already handles — just add
   `"T"` as a known alternate name for `total` in `fields.yaml`. No new tool
   needed, unlike #5 and #6 — just a new entry.
+- **Also seen in payload/category-code column suffixes, not just whole
+  headers (Session 7):** CBS curated CSVs abbreviate category values
+  directly into payload column names, e.g. `a_india`, `b_saarc`,
+  `c_asean`, `d_midleast`, `e_othrasian` — the same 13-item ordering as
+  the `foreign_country_region` category already in `values.yaml`. This is
+  the same short-vs-full problem as the rest of this finding, just
+  appearing inside a column-name suffix instead of the whole header.
+  Because these abbreviations contain recognizable substrings (`india`,
+  `midleast`≈"middle east"), they can be fuzzy/substring-matched against
+  existing `values.yaml` aliases to auto-suggest candidates for human
+  confirmation — unlike the fully opaque abbreviations in #15, which have
+  no shared substring to match against at all.
 
 ### 11. `%` symbol vs. the word "percent"
 
@@ -230,59 +242,6 @@ cleanup function.
   first check — "is this font safe?" — before deciding whether to read the
   page as text or as an image.
 
-## Not yet checked
-
-- Validity (values outside the expected range)
-- Uniqueness (the same thing listed twice under different names)
-
-We haven't gone looking for these on purpose — they'll likely turn up
-naturally once `tlf-collect-csv` starts running against real files. Worth
-adding to this list as they come up, instead of hunting for them by hand
-right now.
-
-## Guessed but not yet confirmed
-
-We're pausing active hunting here — the last few things we found were
-repeats of problems we already knew about, not new kinds, and some sources
-are getting harder to reach reliably (see #7). The two things below are
-**educated guesses**, not confirmed findings, based on patterns we've
-already seen elsewhere. Don't treat these the same as findings #1-12. Each
-one should get checked for real once collector code runs against enough
-files — not searched for by hand right now.
-
-- **Validity (guess):** given how sloppy the formatting already is (commas
-  in numbers, `%` symbols, inconsistent missing-value labels), it's likely
-  some numeric fields have out-of-range values too (a ward number outside
-  1-33, a percentage over 100). Not confirmed yet.
-- **Uniqueness (guess):** given the naming inconsistency we've already
-  found (#1) and header inconsistency even within one municipality (#2),
-  it's likely the same real place (a municipality, a ward) shows up twice
-  under slightly different names somewhere in a bigger combined dataset.
-  Not confirmed yet.
-- **Nepali/English value translation (guess — a "what if," not yet
-  directly seen):** could values like `पुरुष`/`Male`, `महिला`/`Female` show
-  up across Nepali- and English-language sources for the same thing? This
-  is a **different problem** from the place-name question below — don't
-  mix them up:
-  - **This one** (category values like sex, yes/no, urban/rural) is a
-    small, fixed list of options — same shape as finding #5, just also
-    crossing two languages. Belongs in `tlf-core`, as part of
-    `ValueResolver` (e.g. `sex: {male: ["m", "male", "पुरुष"]}`). Small
-    enough to live right alongside `FieldResolver`, not its own package.
-  - **Place names** (district, municipality, ward names, in Devanagari vs.
-    Roman script) is a much bigger problem — hundreds or thousands of
-    names, not a short list. This is a separate topic: an official source
-    already exists for this (COD-AB / Survey Department boundary data) and
-    should be imported wholesale instead of built by hand — likely its own
-    package, `tlf-geo` (not built yet, revisit when needed — see
-    `docs/decisions.md`).
-
-**Next step for both:** revisit once `tlf-collect-csv`/`json`/`pdf` are
-running against a real batch of files. Validity and uniqueness checks are
-much easier to catch automatically inside a running pipeline than to hunt
-for by eye — unlike findings #1-12, which needed manual checking to spot in
-the first place.
-
 ### 13. Wide-format "spine" width isn't fixed across files
 
 - **Where:** CBS curated CSVs on data.nsonepal.gov.np
@@ -315,31 +274,23 @@ sexname, rowtotal` (7 cols) — extra `sex`/`sexname` columns spliced
   before any melt or aggregation runs. Doesn't fit `FieldResolver` or
   `ValueResolver` — needs its own filter step, likely in `tlf-cleaning`.
 
-### 15. Payload header abbreviations split into two genuinely different problem types
+### 15. Opaque payload header abbreviations with no data dictionary
 
 - **Where:** same CBS curated CSVs' payload columns
-- **Example — Type A (opaque, no algorithmic shortcut):**
-  `nua_male`/`nua_feml`, `nea_male`/`nea_feml`, `notstd_male`/`notstd_feml`.
-  No official CBS data dictionary found published alongside the raw
-  CSVs. Best-guess meanings (`nea` = not economically active, `nua` =
-  not usually active, `notstd` = not stated) are plausible but
-  **unconfirmed**.
-  **Example — Type B (fuzzy-matchable):** `a_india`, `b_saarc`,
-  `c_asean`, `d_midleast`, `e_othrasian`, `f_eucntry`, `g_othreuropn`,
-  `h_northamericn`, `i_southamericn`, `j_african`, `k_pacific`,
-  `l_other`, `m_notstd` — same 13-item list, same order, as the
-  `foreign_country_region` category already in `values.yaml`.
-- **Why this matters:** these need different fixes. Type A has no
-  shared substring to fuzzy-match against — Levenshtein/rapidfuzz finds
-  nothing useful against an opaque initialism. Type B's abbreviations
-  contain recognizable substrings (`india`, `midleast`≈"middle east")
-  and CAN be fuzzy-suggested for human confirmation.
-- **Fix:** Type A — one-time manual lookup, then a permanent
-  `fields.yaml` entry, no shortcut possible. Type B — fuzzy/substring
-  match against existing `values.yaml` aliases to auto-suggest
-  candidates, human confirms. CBS's internal category ordering leaking
-  into column names (Type B) is a reusable pattern worth building a
-  lookup table from.
+- **Example:** `nua_male`/`nua_feml`, `nea_male`/`nea_feml`,
+  `notstd_male`/`notstd_feml`. No official CBS data dictionary found
+  published alongside the raw CSVs. Best-guess meanings (`nea` = not
+  economically active, `nua` = not usually active, `notstd` = not
+  stated) are plausible but **unconfirmed**.
+- **Why this matters:** unlike most abbreviation problems on this list,
+  there's no shared substring or recognizable word fragment to match
+  against anything — Levenshtein/rapidfuzz finds nothing useful against
+  an opaque initialism like `nua`. There's no algorithmic shortcut here.
+- **Fix:** one-time manual lookup (confirm the meaning against CBS
+  documentation or context, if it can be found at all), then a
+  permanent `fields.yaml` entry. No shortcut possible — contrast with
+  the CBS region-code abbreviations noted under #10, which DO have
+  matchable substrings and can be fuzzy-suggested.
 
 ### 16. Two incompatible ways of encoding geographic hierarchy across NSO's own xlsx exports
 
@@ -364,22 +315,77 @@ sexname, rowtotal` (7 cols) — extra `sex`/`sexname` columns spliced
   isn't feasible — apply the right tool as each new format is
   encountered.
 
-### 17. An entire expected category can be missing from a source, not just individual entries
+## Not yet checked
 
-- **Where:** censusresults.nsonepal.gov.np's `common` namespace
-  vocabulary (feeding `tlf-geo`'s `places.yaml`)
-- **Example:** the vocabulary capture has ~753 municipalities/
-  gaunpalikas and all 77 districts, but zero entries for Nepal's 7
-  provinces — not misfiled under a different namespace, genuinely
-  absent from the extracted JSON.
-- **Why this matters:** every earlier finding in this list is about
-  individual values being messy; this is about an entire expected
-  slice of data not existing in the source at all. Easy to miss if you
-  only check "does the data I have look clean" rather than "is there
-  data I'd expect that isn't here" — a **completeness**-dimension
-  finding, the first one on this list.
-- **Fix:** for a small, stable, well-known list (only 7 provinces,
-  unchanged since the 2017 restructuring), hand-authoring the missing
-  category is more sensible than chasing why extraction missed it.
-  Worth checking if the province selector routes through a different
-  mechanism than district/municipality dropdowns if this recurs.
+- Validity (values outside the expected range)
+- Uniqueness (the same thing listed twice under different names)
+
+We haven't gone looking for these on purpose — they'll likely turn up
+naturally once `tlf-collect-csv` starts running against real files. Worth
+adding to this list as they come up, instead of hunting for them by hand
+right now.
+
+## Guessed but not yet confirmed
+
+We're pausing active hunting here — the last few things we found were
+repeats of problems we already knew about, not new kinds, and some sources
+are getting harder to reach reliably (see #7). The two things below are
+**educated guesses**, not confirmed findings, based on patterns we've
+already seen elsewhere. Don't treat these the same as findings #1-16. Each
+one should get checked for real once collector code runs against enough
+files — not searched for by hand right now.
+
+- **Validity (guess):** given how sloppy the formatting already is (commas
+  in numbers, `%` symbols, inconsistent missing-value labels), it's likely
+  some numeric fields have out-of-range values too (a ward number outside
+  1-33, a percentage over 100). Not confirmed yet.
+- **Uniqueness (guess):** given the naming inconsistency we've already
+  found (#1) and header inconsistency even within one municipality (#2),
+  it's likely the same real place (a municipality, a ward) shows up twice
+  under slightly different names somewhere in a bigger combined dataset.
+  Not confirmed yet.
+- **Nepali/English value translation (guess — a "what if," not yet
+  directly seen):** could values like `पुरुष`/`Male`, `महिला`/`Female` show
+  up across Nepali- and English-language sources for the same thing? This
+  is a **different problem** from the place-name question below — don't
+  mix them up:
+  - **This one** (category values like sex, yes/no, urban/rural) is a
+    small, fixed list of options — same shape as finding #5, just also
+    crossing two languages. Belongs in `tlf-core`, as part of
+    `ValueResolver` (e.g. `sex: {male: ["m", "male", "पुरुष"]}`). Small
+    enough to live right alongside `FieldResolver`, not its own package.
+  - **Place names** (district, municipality, ward names, in Devanagari vs.
+    Roman script) is a much bigger problem — hundreds or thousands of
+    names, not a short list. This is a separate topic: an official source
+    already exists for this (COD-AB / Survey Department boundary data) and
+    should be imported wholesale instead of built by hand — this became
+    `tlf-geo`, now built (see `packages/tlf-geo`).
+
+**Next step for both:** revisit once `tlf-collect-csv`/`json`/`pdf` are
+running against a real batch of files. Validity and uniqueness checks are
+much easier to catch automatically inside a running pipeline than to hunt
+for by eye — unlike findings #1-16, which needed manual checking to spot in
+the first place.
+
+## Pipeline / tooling lessons (not data-quality findings)
+
+These aren't problems with a source's data — they're lessons about our own
+collection process that are easy to mistake for data-quality findings if
+you're not careful to separate "the government file is messy" from "our
+tool didn't capture everything it could have."
+
+- **A stable, well-documented official category can be absent from a
+  scraped/extracted vocabulary capture, even though the official data
+  itself is fine.** Found while building `tlf-geo`: a JS-devtools
+  vocabulary capture from censusresults.nsonepal.gov.np included all 77
+  districts and ~753 municipalities/gaunpalikas, but zero entries for
+  Nepal's 7 provinces — not misfiled elsewhere, genuinely absent from what
+  the capture method reached. The province data itself is small, stable,
+  and unchanged since the 2017 restructuring — nothing wrong with it as
+  data. The gap was in how our own capture method reached the site (the
+  province selector likely routes through a different mechanism than the
+  district/municipality dropdowns), not in the source. **Lesson:** for a
+  small, stable, well-known list, hand-authoring it directly is more
+  sensible than chasing why one extraction method missed it — and worth
+  checking whether a scraping/extraction approach systematically misses
+  certain UI patterns before assuming a source itself is incomplete.

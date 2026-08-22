@@ -347,20 +347,34 @@ class GeoResolver:
 
     def districts(self, province=None, province_code=None):
         """Return districts as a DataFrame, optionally filtered to one province
-       (by name or code — code takes priority if both given)."""
+       (by name, name_ne, or canonical_key — province_code takes priority if
+       both are given). If a province name is given but doesn't match anything,
+       returns an EMPTY DataFrame rather than silently returning all districts."""
+
         if province_code is None and province is not None:
-            # reuse the province's own name->code lookup the same way we did for districts
-            # (provinces are few and simple, so a quick scan is fine — no dedicated index needed)
             normalized = _normalize(province)
+            matched = False
             for code, info in self._codes_data["provinces"].items():
-                if _normalize(info["name"]) == normalized or _normalize(info["name_ne"]) == normalized:
+                # check canonical_key (e.g. "bagmati") as well as the full
+                # display name and Nepali name — canonical_key is what people
+                # naturally type, and it's already clean/lowercase so no need
+                # to _normalize() it before comparing
+                if (normalized == info["canonical_key"]
+                        or _normalize(info["name"]) == normalized
+                        or _normalize(info["name_ne"]) == normalized):
                     province_code = code
+                    matched = True
                     break
+
+            if not matched:
+                # unknown province name — return nothing, don't silently
+                # fall through to "no filter applied" (that was the bug)
+                return pd.DataFrame()
 
         rows = []
         for code, info in self._codes_data["districts"].items():
             if province_code is not None and info["province_code"] != province_code:
-                continue  # skip districts not in the requested province
+                continue
             rows.append({
                 "code": code,
                 "canonical_key": info["canonical_key"],
@@ -401,9 +415,112 @@ class GeoResolver:
         """Return all protected areas as a DataFrame."""
         return pd.DataFrame(self._codes_data.get("protected_areas", []))
 
+    def get_by_code(self, code):
+        """Look up full metadata for a code — works for local_level, district,
+       or province codes. Returns None if the code isn't recognized (never
+       raises), so this is safe to use inside df["col"].apply(resolver.get_by_code)
+       across a whole column, even with messy/invalid values mixed in."""
+
+        if pd.isna(code):
+            return None
+
+        code_str = str(code).strip()
+
+    # try local_level first — codes there are 5-digit strings like "32902"
+        if code_str in self._codes_data["local_levels"]:
+            return self._codes_data["local_levels"][code_str]
+
+    # try district — codes are small ints, keys in self._districts
+        try:
+            code_int = int(code_str)
+        except ValueError:
+            return None  # not a valid number at all — genuinely unrecognized
+
+        if code_int in self._districts:
+            return self._districts[code_int]
+
+    # try province
+        if code_int in self._codes_data["provinces"]:
+            return self._codes_data["provinces"][code_int]
+
+        return None  # tried all three, nothing matched
+
+    def get_name(self, code, lang="en"):
+        """Return just the display name for a code, in English or Nepali.
+       Returns None if the code isn't recognized."""
+        info = self.get_by_code(code)
+        if info is None:
+            return None
+        return info["name_ne"] if lang == "ne" else info["name"]
+
+    def get_canonical(self, code):
+        """Return just the canonical_key for a code. Returns None if unrecognized."""
+        info = self.get_by_code(code)
+        if info is None:
+            return None
+        return info["canonical_key"]
+
+    def get_wards(self, code):
+        """Return the ward count for a local_level code. Returns None if
+       unrecognized, or if this code is a district/province (which has
+       no wards field at all)."""
+        info = self.get_by_code(code)
+        if info is None:
+            return None
+    # .get(), not [...] — districts/provinces don't have this key
+        return info.get("wards")
+
+    def get_parent(self, code):
+        """Return the parent hierarchy for a code: district_code and
+       province_code for a local_level, or just province_code for a
+       district. Returns None if the code isn't recognized."""
+        info = self.get_by_code(code)
+        if info is None:
+            return None
+
+        parent = {}
+        if "district_code" in info:
+            parent["district_code"] = info["district_code"]
+        if "province_code" in info:
+            parent["province_code"] = info["province_code"]
+        return parent
+
+    def is_valid_code(self, code):
+        """True if this code resolves to a real place (local_level, district,
+       or province). False otherwise. Safe for .apply() across a column."""
+        return self.get_by_code(code) is not None
+
+    def is_valid_name(self, name):
+        """True if this name has at least one real exact/suffix-stripped
+      match in places.yaml — ambiguous still counts as valid, since it
+      matched something real. False if it only fuzzy-matches (a typo
+      guess) or doesn't match anything at all."""
+        if pd.isna(name):
+            return False
+        try:
+            self._get_candidates(name)
+            return True
+        except (FuzzyMatchError, NotFoundError):
+            return False
+
+    def to_choices(self, level, province_code=None, district_code=None):
+        """Return [(code, name), ...] tuples for Django ChoiceField, built
+       from provinces()/districts()/local_levels() depending on `level`."""
+
+        if level == "province":
+            df = self.provinces()
+        elif level == "district":
+            df = self.districts(province_code=province_code)
+        elif level == "local_level":
+            df = self.local_levels(district_code=district_code)
+        else:
+            raise ValueError(f"Unknown level: {level!r}")
+
+        return list(zip(df["code"], df["name"]))
+
 
 resolver = GeoResolver()
-print(resolver.provinces())
-print(resolver.districts(province="bagmati"))
-print(resolver.local_levels(district="rasuwa"))
-print(resolver.protected_areas())
+print(resolver.to_choices(level="province"))
+# just first 3, to keep output short
+print(resolver.to_choices(level="district", province_code=3)[:3])
+print(resolver.to_choices(level="local_level", district_code=29))

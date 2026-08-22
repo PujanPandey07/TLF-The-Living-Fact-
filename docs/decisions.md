@@ -250,3 +250,149 @@ existing contract.
 Alternatives considered: adding a `suggest()`/fuzzy fallback directly
 to `ValueResolver` for convenience — rejected for this version to keep
 the resolver simple and deterministic.
+
+---
+
+## 2026-08-20 — tlf-geo: two-file split, places.yaml vs codes.yaml
+
+Decision: separate name resolution from code lookup into two files.
+`places.yaml` (`level -> canonical_key -> [aliases]`) handles fuzzy/alias
+matching only. `codes.yaml` (provinces/districts/local_levels/
+protected_areas + a `_by_canonical` reverse index) handles deterministic
+code lookup and district-level disambiguation. Canonical keys are never
+district-scoped (no `kalika_rasuwa`) — same name in different districts
+stays one canonical key; disambiguation happens via `codes.yaml`, not by
+inflating the key space.
+
+Why: keeps the two genuinely different jobs — "what did the user mean by
+this messy string" vs. "what is this place's official code" — decoupled,
+so fuzzy-matching logic in `places.yaml` never has to know about district
+codes, and `codes.yaml` never has to guess at spelling variants. Confirmed
+via the crosswalk CSV (775 rows, 753 unique local levels + 21 protected
+areas) that ~30 canonical keys are genuinely ambiguous across districts
+(kalika, sunkoshi, likhu, tribeni, bagmati, godawari, ...), which is
+exactly the case this split is designed to handle cleanly.
+
+Alternatives considered: district-scoped canonical keys — rejected per
+the Session 7 flat-shape decision, would also make `places.yaml` bigger
+and coupled to information it doesn't need.
+
+---
+
+## 2026-08-21 — resolver.py matching strategy: 3-tier ladder, fuzzy always top-3 with no threshold, collision-safe index
+
+Decision: `GeoResolver._get_candidates()` resolves a name through three
+tiers in order — (1) exact match, (2) suffix-stripped match (only retried
+if stripping changed the string), (3) fuzzy match via
+`rapidfuzz.process.extract(scorer=fuzz.ratio, limit=3)`, which always
+returns its top 3 results regardless of how weak the best match is (no
+minimum similarity cutoff). Tier 3 raises `FuzzyMatchError` (candidates as
+`(matched_key, score)` tuples); a genuinely ambiguous exact/suffix match
+raises the separate `AmbiguityError` (candidates as full built dicts) —
+kept as two distinct exception classes because they mean different things
+(typo-suggestion vs. real multi-match) and carry different candidate
+shapes. `_build_places_index` stores a **list** per normalized alias
+(`setdefault(key, []).append(...)`), not a single value, because real data
+confirmed collisions exist even within one alias — e.g. bare "Kalika" is a
+legitimate alias for both a gaunpalika and a municipality; an
+earlier single-value version silently dropped one.
+
+Why: no-threshold fuzzy matching was an explicit call to let the human
+judge weak matches rather than have the library silently decide
+"close enough" or "no match" on the user's behalf. Structurally
+end-anchored suffix stripping (`.endswith()` per suffix, longest/most-
+specific suffix checked first) was chosen over substring replacement as
+safer against partial mid-string matches. The single-value index bug was
+caught by testing against real data, not by design review.
+
+Alternatives considered: a similarity threshold to suppress very weak
+fuzzy suggestions — rejected in favor of always surfacing top 3 and
+letting the caller/human decide.
+
+---
+
+## 2026-08-21 — District name index sourced from codes.yaml only, not merged with places.yaml
+
+Decision: `_build_district_name_index()` builds `normalized_district_name
+-> district_code` from codes.yaml's `districts` section only (both
+`name` and `name_ne`), and is deliberately not merged with the district
+aliases already present in `places.yaml`.
+
+Why: the two sources' district aliases are nearly identical anyway, and
+the fuzzy-matching tier already provides spelling-variant robustness on
+top of this index, so merging added complexity without meaningfully
+improving resolution quality. Each district code has exactly one English
+and one Nepali name with no duplicates, so no collision handling is
+needed here (unlike the places index).
+
+Alternatives considered: merging places.yaml's district aliases into this
+index for a larger alias set — rejected as not worth the complexity given
+near-identical data and the fuzzy safety net.
+
+---
+
+## 2026-08-21 — Package data paths anchored to module location; relative imports during dev
+
+Decision: anchor all bundled YAML loading via `_MODULE_DIR =
+Path(__file__).parent` rather than relative-to-cwd paths, and use
+relative imports (`.exceptions`) inside the package, which requires
+running the module during development as `python -m
+tlf_geo.geo_resolver` from the `src/` directory (not `python
+geo_resolver.py` directly).
+
+Why: `tlf-geo` bundles its own YAML data and must load it correctly once
+pip-installed, regardless of what directory the caller runs from —
+cwd-relative paths would break in that scenario. The dev-time relative-
+import friction is temporary and resolves naturally once the package is
+actually pip-installed and imported normally as `from tlf_geo import
+GeoResolver`.
+
+Alternatives considered: cwd-relative paths (simpler during ad-hoc
+testing, but would break for real installed usage) — rejected.
+
+---
+
+## 2026-08-22 — Protected-area resolution explicitly out of scope for `resolve()`
+
+Decision: `resolve()` will not support looking up protected areas
+(national parks, wildlife reserves, etc.) by name, and this is a
+deliberate scope decision, not an unfixed bug. `protected_areas()` (the
+listing method) still works and is tested — only name-based resolution
+for that category is unsupported. A docstring note flagging this on
+`resolve()` is planned but not yet added.
+
+Why: TLF's real use case is civic/demographic data (census, household
+surveys). Protected areas are a separate conservation/tourism domain that
+only ended up in the same source files by coincidence of the crosswalk
+CSV's structure. Supporting them would require a new
+`_by_canonical.protected_area` bucket plus special-casing in
+`_build_result()` (which currently assumes every resolved code exists in
+`codes_data["local_levels"]`, true for administrative levels but not for
+protected areas) — not worth the complexity for a category that won't
+actually be queried by name in practice. This closes the gap flagged as
+open since Session 11; not to be re-raised as a bug in future sessions.
+
+Alternatives considered: adding the `_by_canonical.protected_area` bucket
+and matching `_build_result()` special-casing to fully support it —
+rejected as complexity not justified by actual use case.
+
+---
+
+## 2026-08-22 — Documentation tier: README-only for tlf-core and tlf-geo
+
+Decision: both `tlf-core` and `tlf-geo` will be documented with a single
+README.md (rendered on both GitHub and PyPI via pyproject.toml's `readme`
+field), not a generated docs site (Sphinx/MkDocs/Read the Docs). The
+README will follow a use-case-walkthrough structure (e.g. for tlf-geo:
+single `resolve()` with disambiguation, batch `resolve_df()`, Django
+`to_choices()` dropdown example) rather than a dry parameter-by-parameter
+reference, mirroring how the two packages' actual working sessions are
+structured.
+
+Why: both packages are small, focused toolkits, not large frameworks with
+big public APIs (unlike Django/pandas/numpy, where a generated docs site
+earns its overhead). A single well-structured README is proportionate and
+keeps documentation effort from becoming its own project.
+
+Alternatives considered: Sphinx/MkDocs for a proper docs site — rejected
+as disproportionate to package size/scope at this stage.
