@@ -168,25 +168,28 @@ class GeoResolver:
 
     def resolve(self, name, district=None, district_code=None, level=None):
         """Resolve a place name to its full metadata. Optionally narrow down
-        ambiguous matches using district (name), district_code, or level.
+       ambiguous matches using district (name), district_code, or level.
       Raises AmbiguityError if multiple candidates remain after filtering,
       NotFoundError/FuzzyMatchError if the name itself doesn't match anything."""
 
-    # Step 1: get raw name-based candidates — may already raise
-    # FuzzyMatchError or NotFoundError if the name itself doesn't match
+    # Step 1: get raw name-based candidates
         candidates = self._get_candidates(name)
 
     # Step 2: resolve a district name into a district_code, if one was given
-    # (district_code takes priority if the caller passed both — it's unambiguous)
         if district_code is None and district is not None:
             district_code = self._district_name_index.get(_normalize(district))
 
-    # Step 3: filter candidates by level, if specified
+    # Step 3: filter by level FIRST, and check RIGHT AWAY whether that
+    # alone already eliminates everything. If so, this is a level problem,
+    # full stop — deliberately not passing district= here even if one was
+    # given, so resolve_df can label this "level_mismatch" and not confuse
+    # it with a genuine district mismatch (Step 4 below).
         if level is not None:
             candidates = [c for c in candidates if c[0] == level]
+            if not candidates:
+                raise NotFoundError(name, level=level)
 
     # Step 4: filter candidates by district, if we have a district_code
-    # (either passed directly, or resolved from a district name above)
         resolved_entries = []
         if district_code is not None:
             for cand_level, canonical_key in candidates:
@@ -195,26 +198,39 @@ class GeoResolver:
                 if entry is not None:
                     resolved_entries.append((cand_level, canonical_key, entry))
         else:
-            # no district filter given — every candidate could still be a match,
-            # so pull its full metadata directly from local_levels using its code,
-            # rather than only from _by_canonical (we don't have a district to check against)
             for cand_level, canonical_key in candidates:
-                entries = self._codes_data.get("_by_canonical", {}).get(
-                    cand_level, {}).get(canonical_key, [])
-                for entry in entries:
-                    resolved_entries.append((cand_level, canonical_key, entry))
+                if cand_level == "district":
+                    for code, info in self._codes_data["districts"].items():
+                        if info["canonical_key"] == canonical_key:
+                            resolved_entries.append(
+                                (cand_level, canonical_key,
+                                 {"code": code, **info})
+                            )
+                elif cand_level == "province":
+                    for code, info in self._codes_data["provinces"].items():
+                        if info["canonical_key"] == canonical_key:
+                            resolved_entries.append(
+                                (cand_level, canonical_key,
+                                 {"code": code, **info})
+                            )
+                else:
+                    entries = self._codes_data.get("_by_canonical", {}).get(
+                        cand_level, {}).get(canonical_key, [])
+                    for entry in entries:
+                        resolved_entries.append(
+                            (cand_level, canonical_key, entry))
 
-    # Step 5: decide what to return based on how many entries survived
+    # Step 5: decide what to return
         if len(resolved_entries) == 1:
             cand_level, canonical_key, entry = resolved_entries[0]
             return self._build_result(cand_level, canonical_key, entry)
 
         if len(resolved_entries) == 0:
-            # name matched something, but the district/level filter eliminated
-            # everything — this is the "invalid_district" case from your design
+            # level-caused failures were already caught and raised above —
+            # reaching here with zero survivors means the district genuinely
+            # doesn't have this place, even though the level does exist for it
             raise NotFoundError(name, district=district, level=level)
 
-    # more than one entry survived — genuinely ambiguous, even after filtering
         full_candidates = [
             self._build_result(cand_level, canonical_key, entry)
             for cand_level, canonical_key, entry in resolved_entries
@@ -222,9 +238,39 @@ class GeoResolver:
         raise AmbiguityError(name, full_candidates)
 
     def _build_result(self, level, canonical_key, entry):
-        """Build the final result dict for a single resolved place, pulling
-      full metadata (name, name_ne, wards, etc.) from local_levels using
-      the code found in the _by_canonical entry."""
+        """Build the final result dict for a single resolved place.
+       Districts and provinces are built directly from their own entry dict
+       (they don't have wards or a parent district). Everything else pulls
+       full metadata from local_levels using the code found in the
+       _by_canonical entry, same as before."""
+
+        if level == "district":
+            return {
+                "code": entry["code"],
+                "canonical_key": canonical_key,
+                "level": level,
+                "name": entry["name"],
+                "name_ne": entry["name_ne"],
+                "district": None,          # a district has no parent district
+                "district_code": entry["code"],
+                "province_code": entry["province_code"],
+                "wards": None,             # districts don't have wards
+            }
+
+        if level == "province":
+            return {
+                "code": entry["code"],
+                "canonical_key": canonical_key,
+                "level": level,
+                "name": entry["name"],
+                "name_ne": entry["name_ne"],
+                "district": None,
+                "district_code": None,
+                "province_code": entry["code"],
+                "wards": None,
+            }
+
+    # unchanged — original local_level logic
         code = entry["code"]
         metadata = self._codes_data["local_levels"][code]
         return {
@@ -239,14 +285,12 @@ class GeoResolver:
             "wards": metadata["wards"],
         }
 
-    import pandas as pd
-
     def resolve_df(self, df, name_col='place_name', name_ne_col=None,
                    district_col=None, district_code_col=None, level_col=None):
         """Batch-resolve a DataFrame of place names. Returns a NEW DataFrame
-       (original untouched) with geo_* columns added — one row per input row,
-       NaN-filled for anything that couldn't be cleanly resolved, with the
-       reason recorded in geo_error_reason for later review."""
+      (original untouched) with geo_* columns added — one row per input row,
+      NaN-filled for anything that couldn't be cleanly resolved, with the
+      reason recorded in geo_error_reason for later review."""
 
         result_df = df.copy()  # never mutate the caller's original DataFrame
 
@@ -258,6 +302,22 @@ class GeoResolver:
 
         for idx, row in df.iterrows():
             name = row[name_col]
+
+            # NEW: guard against a missing/blank place name BEFORE attempting
+            # anything else — a NaN name would otherwise crash inside
+            # _normalize()'s .strip() call, same failure shape as the
+            # district/level NaN bug fixed earlier. This is a distinct
+            # situation from "not_found" (we searched and found nothing) —
+            # here there was nothing to search for at all, which usually
+            # means a data-entry problem in the source, not a matching problem.
+            if pd.isna(name):
+                self._fill_nan_row(geo_codes, geo_names, geo_names_ne, geo_levels,
+                                   geo_canonical_keys, geo_districts, geo_district_codes,
+                                   geo_province_codes, geo_wards)
+                geo_statuses.append("missing_name")
+                geo_error_reasons.append("No place name provided in this row")
+                continue  # nothing to resolve — skip straight to the next row
+
             district = row[district_col] if district_col and pd.notna(
                 row[district_col]) else None
             district_code = row[district_code_col] if district_code_col and pd.notna(
@@ -299,7 +359,12 @@ class GeoResolver:
                 self._fill_nan_row(geo_codes, geo_names, geo_names_ne, geo_levels,
                                    geo_canonical_keys, geo_districts, geo_district_codes,
                                    geo_province_codes, geo_wards)
-                status = "invalid_district" if e.district else "not_found"
+                if e.district:
+                    status = "invalid_district"
+                elif e.level:
+                    status = "level_mismatch"
+                else:
+                    status = "not_found"
                 geo_statuses.append(status)
                 geo_error_reasons.append(str(e))
 
@@ -325,9 +390,11 @@ class GeoResolver:
             lst.append(np.nan)
 
     def _describe_ambiguity(self, e):
-        """Turn an AmbiguityError's candidates into one readable string
-       for the geo_error_reason column."""
-        parts = [f"{c['level']} in {c['district']}" for c in e.candidates]
+        parts = [
+            f"{c['level']} in {c['district']}" if c.get(
+                "district") else f"the {c['level']} level"
+            for c in e.candidates
+        ]
         return f"Ambiguous ({len(e.candidates)}): " + "; ".join(parts)
 
     def _describe_fuzzy(self, e):
@@ -504,14 +571,15 @@ class GeoResolver:
 
     def to_choices(self, level, province_code=None, district_code=None):
         """Return [(code, name), ...] tuples for Django ChoiceField, built
-       from provinces()/districts()/local_levels() depending on `level`."""
+      from provinces()/districts()/local_levels() depending on `level`."""
 
         if level == "province":
             df = self.provinces()
         elif level == "district":
             df = self.districts(province_code=province_code)
         elif level == "local_level":
-            df = self.local_levels(district_code=district_code)
+            df = self.local_levels(district_code=district_code,
+                                   province_code=province_code)
         else:
             raise ValueError(f"Unknown level: {level!r}")
 

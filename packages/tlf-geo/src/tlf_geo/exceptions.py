@@ -20,20 +20,22 @@ class AmbiguityError(Exception):
     resolved without more information (district, district_code, or level)."""
 
     def __init__(self, query, candidates):
-        # the name that was ambiguous
         self.query = query
-
-        # list of dicts — one per match, e.g.
-        # [{"canonical_key": "kalika", "district": "Rasuwa", "code": "29xxx", "level": "gaunpalika"}, ...]
-        # self-contained so a caller never has to re-query codes.yaml to build a menu
         self.candidates = candidates
 
-        # human-readable message — list out the districts so a raw traceback
-        # is actually useful on its own, not just "ambiguous, good luck"
-        district_list = ", ".join(c["district"] for c in candidates)
+        # build a readable label per candidate — fall back to the level
+        # itself when there's no district (district/province-level
+        # candidates legitimately have district=None, since a district
+        # has no parent district to report)
+        labels = [
+            c["district"] if c.get("district") else f"the {c['level']} level"
+            for c in candidates
+        ]
+        district_list = ", ".join(labels)
+
         message = (
             f"'{query}' is ambiguous — matches {len(candidates)} places "
-            f"in districts: {district_list}. Pass district= or district_code= to disambiguate."
+            f"in: {district_list}. Pass district= or district_code= to disambiguate."
         )
 
         super().__init__(message)
