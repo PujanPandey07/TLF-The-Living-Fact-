@@ -1,3 +1,5 @@
+from unicodedata import name
+
 import numpy as np
 import re
 import yaml
@@ -333,7 +335,7 @@ class GeoResolver:
         parts = [f"{name} ({score:.0f}%)" for name, score in e.candidates]
         return "No exact match. Did you mean: " + ", ".join(parts)
 
-    def provinces(self):
+    def provinces(self, as_dict=False):
         """Return all provinces as a DataFrame: code, canonical_key, name, name_ne."""
         rows = []
         for code, info in self._codes_data["provinces"].items():
@@ -343,22 +345,18 @@ class GeoResolver:
                 "name": info["name"],
                 "name_ne": info["name_ne"],
             })
-        return pd.DataFrame(rows)
+        return self._maybe_dict(pd.DataFrame(rows), as_dict)
 
-    def districts(self, province=None, province_code=None):
+    def districts(self, province=None, province_code=None, as_dict=False):
         """Return districts as a DataFrame, optionally filtered to one province
-       (by name, name_ne, or canonical_key — province_code takes priority if
-       both are given). If a province name is given but doesn't match anything,
-       returns an EMPTY DataFrame rather than silently returning all districts."""
+         (by name, name_ne, or canonical_key — province_code takes priority if
+         both are given). If a province name is given but doesn't match anything,
+         returns an EMPTY DataFrame rather than silently returning all districts."""
 
         if province_code is None and province is not None:
             normalized = _normalize(province)
             matched = False
             for code, info in self._codes_data["provinces"].items():
-                # check canonical_key (e.g. "bagmati") as well as the full
-                # display name and Nepali name — canonical_key is what people
-                # naturally type, and it's already clean/lowercase so no need
-                # to _normalize() it before comparing
                 if (normalized == info["canonical_key"]
                         or _normalize(info["name"]) == normalized
                         or _normalize(info["name_ne"]) == normalized):
@@ -367,9 +365,7 @@ class GeoResolver:
                     break
 
             if not matched:
-                # unknown province name — return nothing, don't silently
-                # fall through to "no filter applied" (that was the bug)
-                return pd.DataFrame()
+                return self._maybe_dict(pd.DataFrame(), as_dict)
 
         rows = []
         for code, info in self._codes_data["districts"].items():
@@ -382,11 +378,12 @@ class GeoResolver:
                 "name_ne": info["name_ne"],
                 "province_code": info["province_code"],
             })
-        return pd.DataFrame(rows)
+        return self._maybe_dict(pd.DataFrame(rows), as_dict)
 
-    def local_levels(self, level=None, district=None, district_code=None, province_code=None):
+    def local_levels(self, level=None, district=None, district_code=None,
+                     province_code=None, as_dict=False):
         """Return local levels (gaunpalika/municipality/etc.) as a DataFrame,
-       optionally filtered by level, district (name or code), or province."""
+      optionally filtered by level, district (name or code), or province."""
         if district_code is None and district is not None:
             district_code = self._district_name_index.get(_normalize(district))
 
@@ -409,11 +406,13 @@ class GeoResolver:
                 "province_code": info["province_code"],
                 "wards": info["wards"],
             })
-        return pd.DataFrame(rows)
+        return self._maybe_dict(pd.DataFrame(rows), as_dict)
 
-    def protected_areas(self):
+    def protected_areas(self, as_dict=False):
         """Return all protected areas as a DataFrame."""
-        return pd.DataFrame(self._codes_data.get("protected_areas", []))
+        return self._maybe_dict(
+            pd.DataFrame(self._codes_data.get("protected_areas", [])), as_dict
+        )
 
     def get_by_code(self, code):
         """Look up full metadata for a code — works for local_level, district,
@@ -518,9 +517,30 @@ class GeoResolver:
 
         return list(zip(df["code"], df["name"]))
 
+    def search(self, name, limit=5):
+        """Non-raising lookup for interactive use (autocomplete, "did you mean").
+       Returns a list of (label, score) pairs, best first. label is
+       "canonical_key (level)" so genuinely distinct places sharing a bare
+       name (e.g. Kalika gaunpalika vs. Kalika municipality) aren't collapsed
+       into one entry. score is 100.0 for an exact/suffix-stripped match, or
+       the fuzzy match score (0-100) otherwise. Never raises — returns an
+       empty list if nothing matches at all."""
+        try:
+            candidates = self._get_candidates(name)
+        except FuzzyMatchError as e:
+            return e.candidates[:limit]
+        except NotFoundError:
+            return []
 
-resolver = GeoResolver()
-print(resolver.to_choices(level="province"))
-# just first 3, to keep output short
-print(resolver.to_choices(level="district", province_code=3)[:3])
-print(resolver.to_choices(level="local_level", district_code=29))
+    # exact/suffix-stripped tiers return (level, canonical_key) pairs, not
+    # (label, score) — normalize the shape so search()'s return type is
+    # consistent regardless of which tier matched
+        return [
+            (f"{canonical_key} ({level})", 100.0)
+            for level, canonical_key in candidates
+        ][:limit]
+
+    @staticmethod
+    def _maybe_dict(df, as_dict):
+        """Convert a DataFrame to a list of dictionaries if as_dict is True, otherwise return the DataFrame."""
+        return df.to_dict(orient="records") if as_dict else df
