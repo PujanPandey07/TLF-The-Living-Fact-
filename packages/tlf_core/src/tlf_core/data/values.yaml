@@ -228,7 +228,7 @@ disability_type:
   hemophilia: ["hemophilia", "अनुवंशीय रक्तश्राव (हेमोफेलिया)"]
 
 toilet_type:
- flush_public_sewerage: ["flush toilet", "public sewerage", "फ्लस भएको (सार्वजनिक ढल)"]
+  flush_public_sewerage: ["flush toilet", "public sewerage", "फ्लस भएको (सार्वजनिक ढल)"]
   flush_septic_tank: ["flush toilet", "septic tank", "फ्लस भएको (सेप्टिक ट्याङ्क)"]
   ordinary: ["sadharan", "ordinary", "pit", "साधारण"]
   public: ["sarwajanik", "public", "सार्वजनिक"]

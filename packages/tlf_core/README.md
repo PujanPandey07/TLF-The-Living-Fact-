@@ -7,7 +7,7 @@
 Part of **TLF (The Living Fact)**, Corpola Tech's toolkit for making Nepal's civic and census data interoperable.
 Full project story, data sources, and architecture reasoning: [github.com/PujanPandey07/TLF-The-Living-Fact-](https://github.com/PujanPandey07/TLF-The-Living-Fact-)
 
-> **Status:** Alpha (v0.1.1). Registries grow from real files as they're processed — expect gaps, and see [Contributing](#contributing).
+> **Status:** Alpha (v0.1.2). Registries grow from real files as they're processed — expect gaps, and see [Contributing](#contributing).
 
 ---
 
@@ -23,17 +23,19 @@ pip install tlf-core
 
 ```python
 import pandas as pd
-from tlf_core import ValueResolver, FieldResolver, proposal_queue
+from tlf_core import ValueResolver, FieldResolver, default_registry_path, proposal_queue
 
 df = pd.read_csv("your_file.csv")
 
-# 1. Resolve column headers to canonical field names
-field_resolver = FieldResolver("fields.yaml")
+# 1. Resolve column headers to canonical field names.
+#    No arguments needed — FieldResolver automatically uses its own
+#    bundled fields.yaml unless you pass a different path.
+field_resolver = FieldResolver()
 rename_map, unmapped_fields = field_resolver.resolve_columns(df.columns.tolist())
 df = df.rename(columns=rename_map)
 
 # 2. Resolve cell values within a known column
-value_resolver = ValueResolver("values.yaml")
+value_resolver = ValueResolver(default_registry_path("values.yaml"))
 resolved, unmapped_values = value_resolver.resolve_column(df["sex"], category="sex")
 
 # 3. Whatever didn't resolve, queue it for review instead of losing it
@@ -63,7 +65,12 @@ Every function below is available directly from the top-level package: `from tlf
 
 ```python
 from tlf_core import FieldResolver
-resolver = FieldResolver(registry_path="fields.yaml")
+
+# Uses the bundled fields.yaml automatically — nothing else to configure
+resolver = FieldResolver()
+
+# Or point it at your own copy explicitly (see note below on when this matters)
+resolver = FieldResolver(registry_path="path/to/your/fields.yaml")
 ```
 
 **`resolver.resolve(raw_field_name: str) -> str | None`**
@@ -82,13 +89,15 @@ rename_map, unmapped = resolver.resolve_columns(["c_no", "जिल्ला", "
 # unmapped   == ["???"]
 ```
 
+> **Using `tlf-review` to grow the registry?** Pass an explicit `registry_path` pointing at _your own_ writable copy of `fields.yaml` — don't rely on the no-args default for this. The default reads the copy bundled inside the installed package, which gets overwritten every time you reinstall or upgrade `tlf-core`. The no-args default is meant for read-only lookups (like `tlf-geo-auto`'s use case), not for a workflow that writes approved aliases back into the file.
+
 ---
 
 ### `ValueResolver` — resolves cell values within a column
 
 ```python
-from tlf_core import ValueResolver
-resolver = ValueResolver(registry_path="values.yaml")
+from tlf_core import ValueResolver, default_registry_path
+resolver = ValueResolver(default_registry_path("values.yaml"))
 ```
 
 **`resolver.resolve(value: str, category: str) -> str | None`**
@@ -106,6 +115,8 @@ resolved, unmapped = resolver.resolve_column(["M", "F", "Other"], category="sex"
 # resolved == ["male", "female", "Other"]
 # unmapped == ["Other"]
 ```
+
+> Unlike `FieldResolver`, `ValueResolver` still requires an explicit `registry_path` — there's no bundled-default shortcut for `values.yaml` yet.
 
 ---
 
@@ -138,6 +149,8 @@ from tlf_core import default_registry_path, ValueResolver
 resolver = ValueResolver(default_registry_path("values.yaml"))
 ```
 
+`FieldResolver()` uses this same bundled path automatically when called with no arguments — you only need `default_registry_path` directly for `ValueResolver`, or if you want `FieldResolver`'s underlying path for some other purpose.
+
 ---
 
 ### `proposal_queue.queue_unmapped(...)`
@@ -163,6 +176,8 @@ tlf-review <queue_path> <registry_path> <value|field>
 ```
 
 Walks pending entries interactively, most-frequently-seen first. Type an existing canonical key to add an alias, press enter for a new key, `skip`, or `reject`. Approved entries are written directly into the registry file — nothing merges without you typing something.
+
+**Important:** point `<registry_path>` at your own writable copy of `fields.yaml`/`values.yaml`, not the bundled copy inside the installed package. Changes written into the bundled copy will be lost the next time you reinstall or upgrade `tlf-core`.
 
 ---
 

@@ -20,7 +20,7 @@ from .normalizers import (
 from . import proposal_queue
 from . import review_queue
 
-__version__ = "0.1.1"  # ← bump from 0.1.0, matching your pyproject.toml
+__version__ = "0.1.2"  # ← bump from 0.1.0, matching your pyproject.toml
 
 __all__ = [
     "FieldResolver",

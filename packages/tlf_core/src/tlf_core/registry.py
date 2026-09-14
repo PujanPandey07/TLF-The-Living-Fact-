@@ -1,3 +1,5 @@
+# tlf_core/registry.py
+
 """
 field_registry.py
 -----------------
@@ -12,6 +14,11 @@ import yaml
 
 from .normalizers import normalize_whitespace_artifacts
 
+# Same computation as __init__.py's default_registry_path("fields.yaml") —
+# duplicated deliberately (one line) rather than imported, to avoid a
+# circular import (__init__.py imports FieldResolver from this module).
+_DEFAULT_FIELDS_PATH = Path(__file__).parent / "data" / "fields.yaml"
+
 
 def _clean_header(header: str) -> str:
     """Standardizes header strings for registry lookup (strips hidden Unicode & lowercases)."""
@@ -24,8 +31,9 @@ def _clean_header(header: str) -> str:
 class FieldResolver:
     """Looks up a raw column header name and returns its canonical field name."""
 
-    def __init__(self, registry_path: str | Path):
-        with open(registry_path, encoding="utf-8") as f:
+    def __init__(self, registry_path: str | Path | None = None):
+        path = registry_path or _DEFAULT_FIELDS_PATH
+        with open(path, encoding="utf-8") as f:
             self.registry = yaml.safe_load(f) or {}
 
         # Build reverse lookup: cleaned_alias -> canonical_field_name
