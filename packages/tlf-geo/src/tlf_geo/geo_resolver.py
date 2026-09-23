@@ -71,7 +71,9 @@ def _build_places_index(places_data):
         for canonical_key, aliases in entries.items():
             for alias in aliases:
                 key = _normalize(alias)
-                index.setdefault(key, []).append((level, canonical_key))
+                val = (level, canonical_key)
+                if val not in index.setdefault(key, []):
+                    index[key].append(val)
     return index
 
 
@@ -79,12 +81,15 @@ def _build_district_name_index(codes_data):
     """normalized district name -> district_code (int).
     Built from codes.yaml's districts section only, using BOTH the English
     `name` and Nepali `name_ne` fields, so a query in either language resolves.
-    No collision handling needed here — each district code has exactly one
-    English name and one Nepali name, so there's nothing to accumulate."""
+    Also indexes `aliases` (English) and `aliases_ne` (Nepali) when present."""
     index = {}
     for district_code, info in codes_data["districts"].items():
         index[_normalize(info["name"])] = district_code
         index[_normalize(info["name_ne"])] = district_code
+        for alias in info.get("aliases", []):
+            index[_normalize(alias)] = district_code
+        for alias in info.get("aliases_ne", []):
+            index[_normalize(alias)] = district_code
     return index
 
 

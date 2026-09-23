@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tlf-geo"
-version = "0.1.0"
+version = "0.1.1"
 description = "Fuzzy-matched Nepal administrative boundary resolver for TLF"
 readme = "README.md"
 requires-python = ">=3.10"
